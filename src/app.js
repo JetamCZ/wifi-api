@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
