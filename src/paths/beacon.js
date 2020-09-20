@@ -5,7 +5,7 @@ module.exports = {
         //const model = db.getModel('RSSIInfo')
         //const data = new model({name: "TEST"}).save()
 
-        console.log(req.body)
+        console.log(req)
 
         res.send(req.body)
     }
