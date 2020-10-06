@@ -1,9 +1,9 @@
 const { Schema } = require('mongoose')
 
 const RSIInfoSchema = new Schema({
-    beaconId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Beacon',
+    device_key: {
+        type: String,
+        required: true
     },
     mac: {
         type: String,

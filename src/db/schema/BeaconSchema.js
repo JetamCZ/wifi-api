@@ -5,6 +5,10 @@ const BeaconSchema = new Schema({
         type: String,
         required: true
     },
+    device_key: {
+        type: String,
+        required: true
+    },
     __v: { type: Number, select: false }
 })
 
