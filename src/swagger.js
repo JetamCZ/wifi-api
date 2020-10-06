@@ -1,5 +1,5 @@
 module.exports = {
-    swagger: '2.0',
+    "openapi": "3.0.0",
     basePath: '/',
     info: {
         title: 'Wifi localization API',
@@ -15,16 +15,36 @@ module.exports = {
                 }
             },
             required: ['name']
+        },
+        RSSIInfo: {
+            type: 'object',
+            required: [
+                'rssi', 'mac'
+            ],
+            properties: {
+                name: {
+                    type: 'string',
+                    example: 'Device 2125'
+                },
+                rssi: {
+                    type: 'number',
+                    example: -10
+                },
+                mac: {
+                    type: 'string',
+                    example: 'c0:b6:f9:8e:87:6c'
+                }
+            }
         }
     },
     paths: {
         "/ping": {
-            "get": {
-                "tags": ["test"],
-                "description": "",
-                "summary": "Ping http server",
-                "responses": {
-                    "200": {
+            get: {
+                tags: ["test"],
+                description: "",
+                summary: "Ping http server",
+                responses: {
+                    200: {
                         "description": "pet response",
                         "schema": {
                             "type": "object",
@@ -41,7 +61,32 @@ module.exports = {
         "/beacon": {
             post: {
                 tags: ["data endpoint"],
-                summary: "Entry point for data from beacons"
+                summary: "Entry point for data from beacons",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'device_key'
+                                ],
+                                properties: {
+                                    'device_key': {
+                                        type: 'string',
+                                        example: 'c0:b6:f9:8e:87:6c'
+                                    },
+                                    'devices': {
+                                        type: 'array',
+                                        items: {
+                                            "$ref": "#/definitions/RSSIInfo"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

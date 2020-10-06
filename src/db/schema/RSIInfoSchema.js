@@ -13,6 +13,10 @@ const RSIInfoSchema = new Schema({
         type: Number,
         required: true
     },
+    date: {
+      type: Date,
+        required: true
+    },
     __v: { type: Number, select: false }
 })
 

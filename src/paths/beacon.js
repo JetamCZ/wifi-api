@@ -4,12 +4,16 @@ module.exports = {
     post: async (req, res) => {
         const model = db.getModel('RSSIInfo')
 
-        const data = new model({device_key: "TEST", mac: "abc", rssi: 0}).save()
+        req.body.devices.forEach(device => {
+            new model({
+                date: new Date(),
+                device_key: req.body.device_key,
+                mac: device.mac,
+                rssi: device.rssi
+            }).save()
+        })
 
-        console.log(data);
 
-        console.log(req.body)
-
-        res.send(req.body)
+        res.status(202).send()
     }
 }
