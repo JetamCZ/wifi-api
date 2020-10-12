@@ -1,4 +1,5 @@
 const db = require('../db')
+const oui = require('oui')
 
 class DeviceController {
     constructor() {
@@ -37,11 +38,12 @@ class DeviceController {
     }
 
     async getAllDevices() {
-        const devices = await this.model.find().lean()
+        const devices = await this.model.find().sort({'lastSeenDate': -1}).lean()
         const promises = [];
 
         devices.forEach(device => {
             const promise = new Promise((resolve) => {
+                device.vendor = oui(device.mac)
                 db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
                     device.lastSeens = lastSeens;
                     resolve();
