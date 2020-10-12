@@ -15,12 +15,20 @@ class DeviceController {
             setDefaultsOnInsert: true,
         }).lean()
 
-        await db.getModel('LastSeen').updateOne({mac: device.mac, deviceKey: dKey}, {
+        if(!deviceSave) {
+            console.log('unknown')
+            deviceSave = await  this.model.findOne({mac: device.mac}).lean();
+        }
+
+        await db.getModel('LastSeen').updateOne({deviceId: deviceSave._id, deviceKey: dKey}, {
             deviceId: deviceSave._id,
             date: new Date(),
             rssi: device.rssi,
             deviceKey: dKey,
-        }, {upsert: true, setDefaultsOnInsert: true})
+        }, {
+            upsert: true,
+            setDefaultsOnInsert: true
+        })
     }
 
     async getAllDevices() {
