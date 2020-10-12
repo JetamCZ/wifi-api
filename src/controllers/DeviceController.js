@@ -6,11 +6,16 @@ class DeviceController {
     }
 
     async saveInfo(dKey, device) {
-        let deviceSave = await this.model.findOneAndUpdate({mac: device.mac}, {
-            name: device.name,
+        const deviceData = {
             mac: device.mac,
             lastSeenDate: new Date(),
-        }, {
+        };
+
+        if(device.name) {
+            deviceData.name = device.name;
+        }
+
+        let deviceSave = await this.model.findOneAndUpdate({mac: device.mac}, deviceData, {
             upsert: true,
             setDefaultsOnInsert: true,
         }).lean()
@@ -32,8 +37,21 @@ class DeviceController {
     }
 
     async getAllDevices() {
-        const devices = await this.model.find()
+        const devices = await this.model.find().lean()
+        const promises = [];
 
+        devices.forEach(device => {
+            const promise = new Promise((resolve) => {
+                db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
+                    device.lastSeens = lastSeens;
+                    resolve();
+                })
+            })
+
+            promises.push(promise)
+        })
+
+        await Promise.all(promises);
 
         return devices;
     }
