@@ -17,6 +17,7 @@
     "express-openapi": "^7.0.1",
     "mongoose": "^5.10.6",
     "nodemon": "^2.0.4",
+    "oui": "^11.0.38",
     "swagger-ui-express": "^4.1.4"
   }
 }

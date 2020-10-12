@@ -88,6 +88,23 @@ module.exports = {
                     }
                 }
             }
-        }
+        },
+        "/data/{macAddress}": {
+            get: {
+                tags: ['data endpoint'],
+                summary: "get data for mac address",
+                parameters: [
+                    {
+                        name: "macAddress",
+                        in: "macAddress",
+                        required: true,
+                        description: "The id of the pet to retrieve",
+                        schema: {
+                            type: "string"
+                        }
+                    }
+                ],
+            }
+        },
     }
 }
