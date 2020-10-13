@@ -15,6 +15,10 @@ class BeaconController {
         })
     }
 
+    async getAll() {
+        return this.model.find()
+    }
+
 }
 
 module.exports = new BeaconController()
