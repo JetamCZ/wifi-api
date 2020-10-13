@@ -3,10 +3,14 @@ const { Schema } = require('mongoose')
 const BeaconSchema = new Schema({
     name: {
         type: String,
+        required: false
+    },
+    deviceKey: {
+        type: String,
         required: true
     },
-    device_key: {
-        type: String,
+    lastSeenDate: {
+        type: Date,
         required: true
     },
     __v: { type: Number, select: false }
