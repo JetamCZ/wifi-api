@@ -26,15 +26,17 @@ class DeviceController {
             deviceSave = await  this.model.findOne({mac: device.mac}).lean();
         }
 
-        await db.getModel('LastSeen').updateOne({deviceId: deviceSave._id, deviceKey: dKey}, {
-            deviceId: deviceSave._id,
-            date: new Date(),
-            rssi: device.rssi,
-            deviceKey: dKey,
-        }, {
-            upsert: true,
-            setDefaultsOnInsert: true
-        })
+        if(device.rssi < 0) {
+            await db.getModel('LastSeen').updateOne({deviceId: deviceSave._id, deviceKey: dKey}, {
+                deviceId: deviceSave._id,
+                date: new Date(),
+                rssi: device.rssi,
+                deviceKey: dKey,
+            }, {
+                upsert: true,
+                setDefaultsOnInsert: true
+            })
+        }
     }
 
     async getAllDevices() {
@@ -45,7 +47,7 @@ class DeviceController {
             const promise = new Promise((resolve) => {
                 device.vendor = oui(device.mac)
                 db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
-                    device.lastSeens = lastSeens;
+                    device.lastSeens = lastSeens || [];
                     resolve();
                 })
             })
