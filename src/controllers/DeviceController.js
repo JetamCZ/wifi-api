@@ -59,6 +59,19 @@ class DeviceController {
 
         return devices;
     }
+
+    async cleanupBeforeDay(date) {
+        const devices = await this.model.find({
+            'lastSeenDate': {$lt: date}
+        }).lean()
+
+        const devicesIds = devices.map(device => device._id)
+
+        await db.getModel('LastSeen').deleteMany({deviceId: {$in: devicesIds}});
+        await this.model.deleteMany({'_id': {$in: devicesIds}})
+
+        return devicesIds
+    }
 }
 
 module.exports = new DeviceController()

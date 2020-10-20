@@ -20,7 +20,9 @@ app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-    console.log(req.method, req.path, req.body)
+    if(process.env.ENVIRONMENT === 'local') {
+        console.log(req.method, req.path, req.body)
+    }
 
     next();
 })
