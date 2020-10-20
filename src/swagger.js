@@ -89,7 +89,7 @@ module.exports = {
                 }
             }
         },
-        "/data/{macAddress}": {
+        "/devices/{macAddress}": {
             get: {
                 tags: ['data endpoint'],
                 summary: "get data for mac address",

@@ -60,6 +60,17 @@ class DeviceController {
         return devices;
     }
 
+    async getByMac(mac) {
+        const device = await this.model.findOne({mac}).lean()
+
+        device.vendor = oui(device.mac)
+        await db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
+            device.lastSeens = lastSeens || [];
+        })
+
+        return device;
+    }
+
     async cleanupBeforeDay(date) {
         const devices = await this.model.find({
             'lastSeenDate': {$lt: date}
