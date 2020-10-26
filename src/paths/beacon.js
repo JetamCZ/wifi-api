@@ -1,4 +1,3 @@
-const db = require('../db')
 const DeviceController = require('../controllers/DeviceController')
 const BeaconController = require('../controllers/BeaconController')
 

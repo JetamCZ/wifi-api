@@ -22,7 +22,6 @@ class DeviceController {
         }).lean()
 
         if(!deviceSave) {
-            console.log('unknown')
             deviceSave = await  this.model.findOne({mac: device.mac}).lean();
         }
 
