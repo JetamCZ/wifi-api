@@ -29,7 +29,7 @@ async function init() {
 
     const NonStrictSchema = new Schema({}, { strict: false })
 
-    models.test = getMongoose().model('test', NonStrictSchema)
+    //models.test = getMongoose().model('test', NonStrictSchema)
     models.RSSIInfo = getMongoose().model('RSSIInfo', RSIInfoSchema)
     models.Beacon = getMongoose().model('Beacon', BeaconSchema)
     models.Device = getMongoose().model('Device', DeviceSchema)

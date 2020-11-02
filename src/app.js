@@ -4,6 +4,8 @@ const swaggerUI = require('swagger-ui-express');
 const express = require('express');
 const path = require('path');
 var cors = require('cors')
+const CronJob = require('cron').CronJob;
+const DeviceController = require('./controllers/DeviceController')
 
 const db = require('./db/index')
 db.init()
@@ -37,3 +39,14 @@ initialize({
 app.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
 })
+
+const clearOldDataJob = new CronJob('* */5 * * * *', async () => {
+    const date = new Date();
+    date.setHours(date.getHours() - 1)
+
+    await DeviceController.cleanupBeforeDay(date);
+
+    console.log('Cron cleanup job - tick')
+}, null, true, 'Europe/Prague')
+
+clearOldDataJob.start()
