@@ -40,13 +40,15 @@ app.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
 })
 
-const clearOldDataJob = new CronJob('* */5 * * * *', async () => {
-    const date = new Date();
-    date.setHours(date.getHours() - 1)
+if(process.env.ENVIRONMENT === "dev" || process.env.ENVIRONMENT === "prod") {
+    const clearOldDataJob = new CronJob('* */5 * * * *', async () => {
+        const date = new Date();
+        date.setHours(date.getHours() - 1)
 
-    await DeviceController.cleanupBeforeDay(date);
+        await DeviceController.cleanupBeforeDay(date);
 
-    console.log('Cron cleanup job - tick')
-}, null, true, 'Europe/Prague')
+        console.log('Cron cleanup job - tick')
+    }, null, true, 'Europe/Prague')
 
-clearOldDataJob.start()
+    clearOldDataJob.start()
+}
