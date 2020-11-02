@@ -78,6 +78,7 @@ class DeviceController {
         const devicesIds = devices.map(device => device._id)
 
         await db.getModel('LastSeen').deleteMany({deviceId: {$in: devicesIds}});
+        await db.getModel('LastSeen').deleteMany({date: {$lt: date}});
         await this.model.deleteMany({'_id': {$in: devicesIds}})
 
         return devicesIds
