@@ -17,7 +17,7 @@ class SocketManager {
             socket.on('auth', auth => {
                 if(auth.deviceKey) {
                     this.activeBeacons[socket.id] = auth.deviceKey
-                    console.log('auth', this.activeBeacons)
+                    console.log('auth', socket.id, auth, this.activeBeacons)
                 }
             })
 
