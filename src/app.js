@@ -6,6 +6,8 @@ const path = require('path');
 var cors = require('cors')
 const CronJob = require('cron').CronJob;
 const DeviceController = require('./controllers/DeviceController')
+const http = require('http')
+const SocketManager = require("./controllers/SocketManager")
 
 const db = require('./db/index')
 db.init()
@@ -36,19 +38,20 @@ initialize({
     validateApiDoc: false
 })
 
-app.listen(port, () => {
+const server = http.createServer(app)
+
+SocketManager.init(server)
+
+server.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
 })
 
-if(process.env.ENVIRONMENT === "dev" || process.env.ENVIRONMENT === "prod") {
-    const clearOldDataJob = new CronJob('* */5 * * * *', async () => {
-        const date = new Date();
-        date.setHours(date.getHours() - 1)
+const clearOldDataJob = new CronJob('0 */5 * * * *', async () => {
+    const date = new Date();
+    date.setHours(date.getHours() - 1)
 
-        await DeviceController.cleanupBeforeDay(date);
+    await DeviceController.cleanupBeforeDay(date);
 
-        console.log('Cron cleanup job - tick')
-    }, null, true, 'Europe/Prague')
+}, null, true, 'Europe/Prague')
 
-    clearOldDataJob.start()
-}
+clearOldDataJob.start()

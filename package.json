@@ -20,6 +20,7 @@
     "mongoose": "^5.10.6",
     "nodemon": "^2.0.4",
     "oui": "^11.0.38",
+    "socket.io": "^2.3.0",
     "swagger-ui-express": "^4.1.4"
   }
 }
