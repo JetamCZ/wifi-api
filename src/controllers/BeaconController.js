@@ -19,6 +19,11 @@ class BeaconController {
         return this.model.find()
     }
 
+    async getByDeviceKey(deviceKey) {
+        return this.model.findOne({deviceKey})
+    }
+
+
 }
 
 module.exports = new BeaconController()

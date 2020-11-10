@@ -19,7 +19,9 @@ class MapController {
 
         const beaconsKeys = map.beacons.map(beacon => beacon.deviceKey)
 
-        console.log(beaconsKeys)
+        for (let i = 0; i < map.beacons.length; i++) {
+            map.beacons[i].name = (await BeaconController.getByDeviceKey(map.beacons[i].deviceKey)).name || ""
+        }
 
         map.devices = devices.filter(d => {
             const lsBeacons = d.lastSeens.map(ls => ls.deviceKey)
@@ -38,5 +40,6 @@ class MapController {
 }
 
 const DeviceController = require('./DeviceController')
+const BeaconController = require('./BeaconController')
 
 module.exports = new MapController()

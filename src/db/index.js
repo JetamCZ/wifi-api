@@ -18,7 +18,10 @@ async function init() {
 
     const uristring = process.env.MONGODB_URI
 
-    mongoose.connect(uristring, {useUnifiedTopology: true},function(err, res) {
+    mongoose.connect(uristring, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    },function(err, res) {
         if (err) {
             console.error('ERROR connecting to: ' + uristring + '. ' + err)
         } else {
