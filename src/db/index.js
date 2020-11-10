@@ -8,6 +8,7 @@ const RSIInfoSchema = require('./schema/RSIInfoSchema')
 const BeaconSchema = require('./schema/BeaconSchema')
 const DeviceSchema = require('./schema/DeviceSchema')
 const LastSeenSchema = require('./schema/LastSeenSchema')
+const MapSchema = require('./schema/MapSchema')
 
 async function init() {
     // Resolves deprecated warnings.
@@ -34,7 +35,7 @@ async function init() {
     models.Beacon = getMongoose().model('Beacon', BeaconSchema)
     models.Device = getMongoose().model('Device', DeviceSchema)
     models.LastSeen = getMongoose().model('LastSeen', LastSeenSchema)
-
+    models.Map = getMongoose().model('Map', MapSchema)
 }
 
 

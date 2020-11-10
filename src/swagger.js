@@ -35,6 +35,45 @@ module.exports = {
                     example: 'c0:b6:f9:8e:87:6c'
                 }
             }
+        },
+        Map: {
+            type: 'object',
+            required: [
+                'name', 'beacons'
+            ],
+            properties: {
+                name: {
+                    type: 'string',
+                    example: 'Zahrada'
+                },
+                image: {
+                    type: 'string',
+                    example: '1.png'
+                },
+                beacons: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        required: [
+                            'deviceKey', 'x', 'y'
+                        ],
+                        properties: {
+                            deviceKey: {
+                                type: 'string',
+                                example: '00000000fg5f6f00'
+                            },
+                            x: {
+                                type: 'number',
+                                example: 500
+                            },
+                            y: {
+                                type: 'number',
+                                example: 500
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     paths: {
@@ -106,5 +145,25 @@ module.exports = {
                 ],
             }
         },
+        "/maps": {
+            get: {
+                tags: ['Maps'],
+                summary: "get all maps",
+            },
+            post: {
+                tags: ['Maps'],
+                summary: "create map",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                "$ref": "#/definitions/Map"
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

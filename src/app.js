@@ -3,7 +3,7 @@ const { initialize } = require('express-openapi');
 const swaggerUI = require('swagger-ui-express');
 const express = require('express');
 const path = require('path');
-var cors = require('cors')
+const cors = require('cors')
 const CronJob = require('cron').CronJob;
 const DeviceController = require('./controllers/DeviceController')
 const http = require('http')
@@ -17,17 +17,17 @@ const swaggerDoc = require('./swagger')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 app.use(express.urlencoded());
 app.use(express.json());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-    if(process.env.ENVIRONMENT === 'local') {
-        console.log(req.method, req.path, req.body)
-    }
-
+    console.log(req.method, req.path, req.body)
     next();
 })
 
