@@ -1,4 +1,5 @@
 const db = require('../db')
+const trilateration = require('node-trilateration');
 
 class MapController {
     constructor() {
@@ -32,9 +33,39 @@ class MapController {
             return d.lastSeens.some(ls => beaconsKeys.includes(ls.deviceKey))
         })
 
-        map.devices = map.devices.filter(dev => dev.lastSeens.length >= 3)
+        map.devices = map.devices.filter(dev => {
+            dev.lastSeens = dev.lastSeens.filter((ls) => this.diffInSeconds(new Date(ls.date)) < 30)
+
+            return dev.lastSeens.length >= 3
+        })
+
+        map.devices = map.devices.map(dev => {
+            dev.pos = {x: 0, y: 0}
+
+            const data = []
+
+            dev.lastSeens.forEach(ls => {
+                const pos = map.beacons.find((b) => b.deviceKey === ls.deviceKey)
+
+                if(pos) {
+                    data.push({x: pos.x, y: pos.y, distance: ls.rssi * (-1)})
+                }
+
+            })
+
+
+            dev.pos = trilateration.calculate(data)
+
+            delete dev.lastSeens
+
+            return dev
+        })
 
         return map
+    }
+
+    diffInSeconds(date) {
+        return Math.floor((new Date().getTime() - date.getTime()) / 1000);
     }
 
     async update(id, map) {

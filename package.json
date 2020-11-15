@@ -18,6 +18,7 @@
     "express": "^4.17.1",
     "express-openapi": "^7.0.1",
     "mongoose": "^5.10.6",
+    "node-trilateration": "^1.0.0",
     "nodemon": "^2.0.4",
     "oui": "^11.0.38",
     "socket.io": "^2.3.0",
