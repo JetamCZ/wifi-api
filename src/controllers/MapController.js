@@ -36,6 +36,10 @@ class MapController {
         map.devices = map.devices.filter(dev => {
             dev.lastSeens = dev.lastSeens.filter((ls) => this.diffInSeconds(new Date(ls.date)) < 30)
 
+            if(dev.vendor && dev.vendor.includes('Raspberry Pi Foundation Mitchell Wood House Caldecote Cambridgeshire CB23 7NU United States')) {
+                //return false
+            }
+
             return dev.lastSeens.length >= 3
         })
 
@@ -61,6 +65,8 @@ class MapController {
 
             return dev
         })
+
+        map.devices.filter(dev => dev.pos.x && dev.pos.y)
 
         return map
     }
