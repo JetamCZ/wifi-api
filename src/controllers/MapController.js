@@ -32,6 +32,8 @@ class MapController {
             return d.lastSeens.some(ls => beaconsKeys.includes(ls.deviceKey))
         })
 
+        map.devices = map.devices.filter(dev => dev.lastSeens.length >= 3)
+
         return map
     }
 
