@@ -66,7 +66,7 @@ class MapController {
             return dev
         })
 
-        map.devices.filter(dev => dev.pos.x && dev.pos.y)
+        map.devices = map.devices.filter(dev => dev.pos.x && dev.pos.y)
 
         return map
     }
