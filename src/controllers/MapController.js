@@ -53,6 +53,7 @@ class MapController {
 
             })
 
+            dev.data = data
 
             dev.pos = trilateration.calculate(data)
 
