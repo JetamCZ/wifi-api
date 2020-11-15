@@ -20,7 +20,10 @@ class MapController {
         const beaconsKeys = map.beacons.map(beacon => beacon.deviceKey)
 
         for (let i = 0; i < map.beacons.length; i++) {
-            map.beacons[i].name = (await BeaconController.getByDeviceKey(map.beacons[i].deviceKey)).name || ""
+            const beacon = await BeaconController.getByDeviceKey(map.beacons[i].deviceKey)
+
+            map.beacons[i].name = beacon.name || ""
+            map.beacons[i].lastSeenDate = beacon.lastSeenDate || null
         }
 
         map.devices = devices.filter(d => {
