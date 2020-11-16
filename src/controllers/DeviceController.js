@@ -64,6 +64,11 @@ class DeviceController {
 
         device.vendor = oui(device.mac)
         await db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
+            lastSeens.map(async (ls) => {
+                ls.name = (await BeaconController.getByDeviceKey(ls.deviceKey)).name || "unknown"
+                return ls
+            })
+
             device.lastSeens = lastSeens || [];
         })
 
@@ -84,5 +89,6 @@ class DeviceController {
         return devicesIds
     }
 }
+const BeaconController = require('../controllers/BeaconController')
 
 module.exports = new DeviceController()
