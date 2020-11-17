@@ -58,8 +58,6 @@ class DeviceController {
 
         const names = await db.getModel('DeviceName').find({}).lean()
 
-        console.log(names)
-
         devices = devices.map(dev => {
             if(!dev.name) {
                 const nameObj = names.find(n => n.mac === dev.mac)
