@@ -128,21 +128,50 @@ module.exports = {
                 }
             }
         },
-        "/devices/{macAddress}": {
+        "/devices": {
             get: {
-                tags: ['data endpoint'],
+                tags: ['Devices'],
+                summary: "get all devices",
+            }
+        },
+        "/devices/{macAddress}": {
+            parameters: [
+                {
+                    name: "macAddress",
+                    in: "macAddress",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ['Devices'],
                 summary: "get data for mac address",
-                parameters: [
-                    {
-                        name: "macAddress",
-                        in: "macAddress",
-                        required: true,
-                        description: "The id of the pet to retrieve",
-                        schema: {
-                            type: "string"
+            },
+            post: {
+                tags: ['Devices'],
+                summary: "set device name",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'name'
+                                ],
+                                properties: {
+                                    'name': {
+                                        type: 'string',
+                                        example: 'Ant4'
+                                    },
+                                }
+                            }
                         }
                     }
-                ],
+                }
             }
         },
         "/maps": {

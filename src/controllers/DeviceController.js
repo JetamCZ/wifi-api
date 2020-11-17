@@ -56,6 +56,12 @@ class DeviceController {
 
         await Promise.all(promises);
 
+        for (let i = 0; i < devices.length; i++) {
+            if(!devices[i].name) {
+                devices[i].name = await this.getNameByMac(devices[i].mac)
+            }
+        }
+
         return devices;
     }
 
@@ -63,14 +69,17 @@ class DeviceController {
         const device = await this.model.findOne({mac}).lean()
 
         device.vendor = oui(device.mac)
-        await db.getModel('LastSeen').find({deviceId: device._id}).then((lastSeens) => {
-            lastSeens.map(async (ls) => {
-                ls.name = (await BeaconController.getByDeviceKey(ls.deviceKey)).name || "unknown"
-                return ls
-            })
-
+        await db.getModel('LastSeen').find({deviceId: device._id}).lean().then((lastSeens) => {
             device.lastSeens = lastSeens || [];
         })
+
+        for (let i = 0; i < device.lastSeens.length; i++) {
+            device.lastSeens[i].name = (await BeaconController.getByDeviceKey(device.lastSeens[i].deviceKey)).name
+        }
+
+        if(!device.name) {
+            device.name = await this.getNameByMac(device.mac)
+        }
 
         return device;
     }
@@ -87,6 +96,22 @@ class DeviceController {
         await this.model.deleteMany({'_id': {$in: devicesIds}})
 
         return devicesIds
+    }
+
+    async getNameByMac(mac) {
+        const nameObj = await db.getModel('DeviceName').findOne({mac}).lean()
+
+        return nameObj ? nameObj.name : ""
+    }
+
+    async setNameForMac(mac, name) {
+        await db.getModel('DeviceName').updateOne({mac}, {
+            mac,
+            name
+        }, {
+            upsert: true,
+            setDefaultsOnInsert: true
+        })
     }
 }
 const BeaconController = require('../controllers/BeaconController')

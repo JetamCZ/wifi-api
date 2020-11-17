@@ -27,7 +27,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-    console.log(req.method, req.path, req.body)
+    //console.log(req.method, req.path, req.body)
     next();
 })
 
