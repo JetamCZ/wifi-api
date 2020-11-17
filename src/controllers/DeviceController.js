@@ -39,7 +39,7 @@ class DeviceController {
     }
 
     async getAllDevices() {
-        const devices = await this.model.find().sort({'lastSeenDate': -1}).lean()
+        let devices = await this.model.find().sort({'lastSeenDate': -1}).lean()
         const promises = [];
 
         devices.forEach(device => {
@@ -56,11 +56,18 @@ class DeviceController {
 
         await Promise.all(promises);
 
-        for (let i = 0; i < devices.length; i++) {
-            if(!devices[i].name) {
-                devices[i].name = await this.getNameByMac(devices[i].mac)
+        const names = await db.getModel('DeviceName').find({}).lean()
+
+        console.log(names)
+
+        devices = devices.map(dev => {
+            if(!dev.name) {
+                const nameObj = names.find(n => n.mac === dev.mac)
+                dev.name = nameObj ? nameObj.name : ""
             }
-        }
+
+            return dev
+        })
 
         return devices;
     }
