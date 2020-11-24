@@ -1,5 +1,4 @@
 const db = require('../db')
-const trilateration = require('node-trilateration');
 
 class MapController {
     constructor() {
@@ -27,52 +26,17 @@ class MapController {
             map.beacons[i].lastSeenDate = beacon.lastSeenDate || null
         }
 
+        //GET ONLY devices for this map
         map.devices = devices.filter(d => {
             const lsBeacons = d.lastSeens.map(ls => ls.deviceKey)
-
             return d.lastSeens.some(ls => beaconsKeys.includes(ls.deviceKey))
         })
 
-        map.devices = map.devices.filter(dev => {
-            dev.lastSeens = dev.lastSeens.filter((ls) => this.diffInSeconds(new Date(ls.date)) < 30)
+        map.devices = await CalculatePos.localize(map, map.devices)
 
-            if(dev.vendor && dev.vendor.includes('Raspberry Pi Foundation Mitchell Wood House Caldecote Cambridgeshire CB23 7NU United States')) {
-                //return false
-            }
-
-            return dev.lastSeens.length >= 3
-        })
-
-        map.devices = map.devices.map(dev => {
-            dev.pos = {x: 0, y: 0}
-
-            const data = []
-
-            dev.lastSeens.forEach(ls => {
-                const pos = map.beacons.find((b) => b.deviceKey === ls.deviceKey)
-
-                if(pos) {
-                    data.push({x: pos.x, y: pos.y, distance: ls.rssi * (-1)})
-                }
-
-            })
-
-            dev.data = data
-
-            dev.pos = trilateration.calculate(data)
-
-            delete dev.lastSeens
-
-            return dev
-        })
-
-        map.devices = map.devices.filter(dev => dev.pos.x && dev.pos.y)
+        map.prints = await this.getAllPrints(map._id)
 
         return map
-    }
-
-    diffInSeconds(date) {
-        return Math.floor((new Date().getTime() - date.getTime()) / 1000);
     }
 
     async update(id, map) {
@@ -80,9 +44,25 @@ class MapController {
         return await this.model.findById(id).lean()
     }
 
+    async delete(id) {
+        await this.model.findByIdAndDelete(id)
+    }
+
+    async savePrint(id, print) {
+        await new (db.getModel('Print'))({
+            map: id,
+            ...print
+        }).save()
+    }
+
+    async getAllPrints(id) {
+        return await db.getModel('Print').find({map: id}).lean()
+    }
+
 }
 
 const DeviceController = require('./DeviceController')
 const BeaconController = require('./BeaconController')
+const CalculatePos = require('./CalculatePos')
 
 module.exports = new MapController()

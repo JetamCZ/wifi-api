@@ -5,8 +5,17 @@ const MapSchema = new Schema({
         type: String,
         required: false
     },
-    image: {
-        type: String
+    layers: {
+        type: [{
+            p:  {
+                type: Number,
+                required: true,
+                default: 0
+            },
+            image: {
+                type: String
+            }
+        }]
     },
     beacons: {
         type: [
@@ -23,6 +32,11 @@ const MapSchema = new Schema({
                 y: {
                     type: Number,
                     required: true
+                },
+                p: {
+                    type: Number,
+                    required: true,
+                    default: 0
                 }
             }
         ]
