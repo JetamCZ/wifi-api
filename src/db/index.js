@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+require('dotenv').config()
+const mongoose = require('mongoose');
 const { Schema } = require('mongoose')
-
-let _mongoose
-let models = {}
 
 const RSIInfoSchema = require('./schema/RSIInfoSchema')
 const BeaconSchema = require('./schema/BeaconSchema')
@@ -11,55 +9,60 @@ const LastSeenSchema = require('./schema/LastSeenSchema')
 const MapSchema = require('./schema/MapSchema')
 const DeviceNameSchema = require('./schema/DeviceNameSchema')
 const PrintSchema = require('./schema/PrintSchema')
+const OrganizationSchema = require('./schema/OrganizationSchema')
+const UserSchema = require('./schema/UserSchema')
 
-async function init() {
-    // Resolves deprecated warnings.
-    mongoose.set('useNewUrlParser', true)
-    mongoose.set('useCreateIndex', true)
-    mongoose.set('useFindAndModify', false)
+class DB {
+    constructor() {
+        console.log('Constructor')
 
-    const uristring = process.env.MONGODB_URI
+        this.models = {}
 
-    mongoose.connect(uristring, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    },function(err, res) {
-        if (err) {
-            console.error('ERROR connecting to: ' + uristring + '. ' + err)
-        } else {
-            console.log('Succeeded connected to: ' + uristring)
-        }
-    })
+        this.connect()
 
-    _mongoose = mongoose
+        this.initModels()
+    }
 
-    const NonStrictSchema = new Schema({}, { strict: false })
+    connect() {
+        const uristring = process.env.MONGODB_URI
 
-    //models.test = getMongoose().model('test', NonStrictSchema)
-    models.RSSIInfo = getMongoose().model('RSSIInfo', RSIInfoSchema)
-    models.Beacon = getMongoose().model('Beacon', BeaconSchema)
-    models.Device = getMongoose().model('Device', DeviceSchema)
-    models.LastSeen = getMongoose().model('LastSeen', LastSeenSchema)
-    models.Map = getMongoose().model('Map', MapSchema)
-    models.DeviceName = getMongoose().model('DeviceName', DeviceNameSchema)
-    models.Print = getMongoose().model('Print', PrintSchema)
-}
+        mongoose.connect(uristring, {
+            /*useUnifiedTopology: true,
+            useCreateIndex: true,
+            useNewUrlParser: true,
+            useFindAndModify: false*/
+        }, function(err, res) {
+            if (err) {
+                console.error('ERROR connecting to: ' + uristring + '. ' + err)
 
+            } else {
+                console.log('Succeeded connected to: ' + uristring)
+            }
+        });
+    }
 
-function getMongoose() {
-    if (!_mongoose) init()
-    return _mongoose
-}
+    getMongoose() {
+        return this._ms
+    }
 
-module.exports = {
+    initModels() {
+        const NonStrictSchema = new Schema({}, { strict: false })
+
+        //models.test = getMongoose().model('test', NonStrictSchema)
+        this.models.RSSIInfo = mongoose.model('RSSIInfo', RSIInfoSchema)
+        this.models.Beacon = mongoose.model('Beacon', BeaconSchema)
+        this.models.Device = mongoose.model('Device', DeviceSchema)
+        this.models.LastSeen = mongoose.model('LastSeen', LastSeenSchema)
+        this.models.Map = mongoose.model('Map', MapSchema)
+        this.models.DeviceName = mongoose.model('DeviceName', DeviceNameSchema)
+        this.models.Print = mongoose.model('Print', PrintSchema)
+        this.models.Organization = mongoose.model('Organization', OrganizationSchema)
+        this.models.User = mongoose.model('User', UserSchema)
+    }
+
     getModel(collectionName) {
-        getMongoose()
-        return models[collectionName]
-    },
-    matchId(value, field = '_id') {
-        return { $match: { [field]: mongoose.Types.ObjectId(value) } }
-    },
-    init() {
-        init()
+        return this.models[collectionName]
     }
 }
+
+module.exports = new DB()

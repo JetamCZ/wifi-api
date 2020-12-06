@@ -9,8 +9,9 @@ const DeviceController = require('./controllers/DeviceController')
 const http = require('http')
 const SocketManager = require("./controllers/SocketManager")
 
+const jwt = require('jsonwebtoken')
+
 const db = require('./db/index')
-db.init()
 
 const swaggerDoc = require('./swagger')
 
@@ -26,15 +27,42 @@ app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-    //console.log(req.method, req.path, req.body)
+    console.log(req.method, req.path, req.body)
     next();
+})
+
+app.use((req, res, next) => {
+    req.token = req.headers['authorization'] ? req.headers['authorization'].split(' ')[1] : ""
+    console.log(req.token)
+
+    next()
+})
+
+app.get('/token', (req, res) => {
+    const json = jwt.sign({
+        user: {
+            _id: "123456",
+            username: "Matěj Půhoný",
+        },
+        organization: {
+            name: "Delta SŠIE"
+        }
+    }, process.env.JWT_TOKEN)
+
+    res.json(json)
 })
 
 initialize({
     app: app,
     paths: path.join(__dirname, './paths'),
     apiDoc: path.join(__dirname, 'swagger.js'),
-    validateApiDoc: false
+    validateApiDoc: false,
+    errorMiddleware: (err, req, res, next) => {
+        res.status(err.status || 500).json({
+            message: err.message,
+            errors: err.errors,
+        });
+    }
 })
 
 const server = http.createServer(app)
