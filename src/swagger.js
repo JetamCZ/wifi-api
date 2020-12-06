@@ -36,6 +36,40 @@ module.exports = {
                 }
             }
         },
+        RegisterUser: {
+            type: 'object',
+            required: [
+              "name", "organization", "email", "password", "settings"
+            ],
+            properties: {
+                name: {
+                    type: "string",
+                    example: "Matěj Půhoný"
+                },
+                organization: {
+                    type: "string",
+                    example: "asigduiivhuogialew6f4684656489"
+                },
+                email: {
+                    type: "string",
+                    example: "info@puhony.eu"
+                },
+                password: {
+                    type: "string",
+                    example: "ABCD1234"
+                },
+                settings: {
+                    type: 'object',
+                    required: ["language"],
+                    properties: {
+                        language: {
+                            type: "string",
+                            example: "cs"
+                        }
+                    }
+                },
+            }
+        },
         Map: {
             type: 'object',
             required: [
@@ -188,6 +222,22 @@ module.exports = {
                         "application/json": {
                             schema: {
                                 "$ref": "#/definitions/Map"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            post: {
+                tags: ['Users'],
+                summary: "Create new user",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                "$ref": "#/definitions/RegisterUser"
                             }
                         }
                     }

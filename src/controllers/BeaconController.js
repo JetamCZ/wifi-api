@@ -16,7 +16,7 @@ class BeaconController {
     }
 
     async getAll() {
-        return this.model.find()
+        return this.model.find().lean()
     }
 
     async getByDeviceKey(deviceKey) {

@@ -28,6 +28,10 @@ class MapController {
 
         //GET ONLY devices for this map
         map.devices = devices.filter(d => {
+            return d.mac === 'e0:d0:83:d6:2a:57' || d.mac === '58:00:e3:ca:99:01'
+        })
+
+        map.devices = devices.filter(d => {
             const lsBeacons = d.lastSeens.map(ls => ls.deviceKey)
             return d.lastSeens.some(ls => beaconsKeys.includes(ls.deviceKey))
         })
