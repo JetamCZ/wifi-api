@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors')
 const CronJob = require('cron').CronJob;
-const DeviceController = require('./controllers/DeviceController')
+const MeetController = require('./controllers/MeetController')
 const http = require('http')
 const SocketManager = require("./controllers/SocketManager")
 const rateLimit = require("express-rate-limit");
@@ -100,11 +100,11 @@ server.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
 })
 
+//Cron Every 5minutes
 const clearOldDataJob = new CronJob('0 */5 * * * *', async () => {
     const date = new Date();
     date.setHours(date.getHours() - 1)
-
-    await DeviceController.cleanupBeforeDay(date);
+    await MeetController.cleanupBeforeDay(date);
 
 }, null, true, 'Europe/Prague')
 

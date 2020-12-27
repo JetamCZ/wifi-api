@@ -123,6 +123,18 @@ class OrganizationController {
 
         return orgbeacon
     }
+
+    async deleteOrgBeacon(id) {
+        const orgBeaconModel = db.getModel('OrgBeacon')
+
+        await orgBeaconModel.findByIdAndDelete(id)
+    }
+
+    async getDevices(id) {
+        const deviceModel = db.getModel('UserDevice')
+
+        return await deviceModel.find({organizationId: id}).lean()
+    }
 }
 
 module.exports = new OrganizationController()

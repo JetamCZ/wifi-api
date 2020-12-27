@@ -1,4 +1,3 @@
-const DeviceController = require('../controllers/DeviceController')
 const BeaconController = require('../controllers/BeaconController')
 const MeetController = require('../controllers/MeetController')
 
@@ -10,7 +9,6 @@ module.exports = {
         })
 
         for (let i = 0; i < req.body.devices.length; i++) {
-            //await DeviceController.saveInfo(req.body.device_key, req.body.devices[i])
             await MeetController.saveMeet(req.body.device_key, devices[i].mac, devices[i].rssi)
         }
         

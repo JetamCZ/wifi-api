@@ -16,6 +16,21 @@ class MeetController {
             setDefaultsOnInsert: true
         })
     }
+
+    async getMeetsByBeacon(beaconDeviceKey) {
+        const meets = await this.model.find({deviceKey: beaconDeviceKey}).lean()
+
+        return meets.map(meet => {
+            delete meet._id
+            delete meet.deviceKey
+
+            return meet
+        })
+    }
+
+    async cleanupBeforeDay(date) {
+        await this.model.deleteMany({date: {$lt: date}});
+    }
 }
 
 module.exports = new MeetController()

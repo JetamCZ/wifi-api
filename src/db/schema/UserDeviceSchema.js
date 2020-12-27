@@ -9,6 +9,10 @@ const UserDeviceSchema = new Schema({
         type: String,
         required: true
     },
+    organizationId: {
+        type: String,
+        required: true
+    },
     userId: {
         type: String,
         required: true

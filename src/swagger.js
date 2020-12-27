@@ -222,6 +222,46 @@ module.exports = {
                 }
             }
         },
+        "/organization/person/{id}/device": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            post: {
+                tags: ['Devices'],
+                summary: "Add new device",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'name', 'mac'
+                                ],
+                                properties: {
+                                    'mac': {
+                                        type: 'string',
+                                        example: 'fc:95:40:35:dc:b5',
+                                    },
+                                    'name': {
+                                        type: 'string',
+                                        example: 'telefon',
+                                    },
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/auth/register": {
             post: {
                 tags: ['Users'],

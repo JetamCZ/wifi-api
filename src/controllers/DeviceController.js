@@ -118,6 +118,14 @@ class DeviceController {
             setDefaultsOnInsert: true
         })
     }
+
+    /* NEW */
+    async getLastActivity(mac) {
+        const meetModel = db.getModel('Meet')
+        const meets = await meetModel.find({mac}).sort({date: -1}).lean()
+
+        return meets[0]?.date || null
+    }
 }
 const BeaconController = require('../controllers/BeaconController')
 

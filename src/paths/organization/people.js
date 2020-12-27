@@ -1,24 +1,19 @@
 const OrganizationController = require('../../controllers/OrganizationController')
+const UserController = require('../../controllers/UserController')
 const Random = require("../../utils/Random");
 
 module.exports = {
     get: async (req, res) => {
         const people = await OrganizationController.getAllPeople(req.user.organization._id)
 
-        const formattedPeople = people.map(user => {
+        for(let i = 0; i < people.length; i++) {
+            people[i].lastSeen = await UserController.getLastActivity(people[i]._id)
 
-            let fakeDate = new Date()
-            fakeDate.setSeconds(fakeDate.getSeconds() - Random.randomIntFromInterval(0, 180))
+            delete people[i].settings
+            delete people[i].password
+            delete people[i].organizationId
+        }
 
-            user.lastSeen = fakeDate
-
-            delete user.settings
-            delete user.password
-            delete user.organizationId
-
-            return user
-        })
-
-        res.json(formattedPeople)
+        res.json(people)
     }
 }
