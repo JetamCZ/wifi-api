@@ -34,7 +34,14 @@ app.use(express.json());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-    console.log(req.method, req.path, req.body)
+    if(req.path === '/beacon') {
+        if(process.env.LOG_BEACON_REQUESTS.toString() !== 'false') {
+            console.log(req.method, req.path, process.env.LOG_REQESTS_BODY !== 'false' ? req.body : "-")
+        }
+    } else if(process.env.LOG_REQUESTS.toString() !== 'false') {
+        console.log(req.method, req.path, process.env.LOG_REQESTS_BODY !== 'false' ? req.body : "-")
+    }
+
     next();
 })
 
@@ -70,20 +77,6 @@ app.use((req, res, next) => {
         }
         next()
     }
-})
-
-app.get('/token', (req, res) => {
-    const json = jwt.sign({
-        user: {
-            _id: "123456",
-            username: "Matěj Půhoný",
-        },
-        organization: {
-            name: "Delta SŠIE"
-        }
-    }, process.env.JWT_TOKEN)
-
-    res.json(json)
 })
 
 initialize({
