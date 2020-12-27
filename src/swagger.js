@@ -39,35 +39,29 @@ module.exports = {
         RegisterUser: {
             type: 'object',
             required: [
-              "name", "organization", "email", "password", "settings"
+              "name", "invCode", "email", "password",
             ],
             properties: {
                 name: {
                     type: "string",
-                    example: "Matěj Půhoný"
+                    example: "Matěj Půhoný",
+                    minLength: 3
                 },
-                organization: {
+                invCode: {
                     type: "string",
                     example: "asigduiivhuogialew6f4684656489"
                 },
                 email: {
                     type: "string",
-                    example: "info@puhony.eu"
+                    example: "info@puhony.eu",
+                    format: 'email'
+
                 },
                 password: {
                     type: "string",
-                    example: "ABCD1234"
-                },
-                settings: {
-                    type: 'object',
-                    required: ["language"],
-                    properties: {
-                        language: {
-                            type: "string",
-                            example: "cs"
-                        }
-                    }
-                },
+                    example: "ABCD1234",
+                    minLength: 4
+                }
             }
         },
         Map: {
@@ -238,6 +232,105 @@ module.exports = {
                         "application/json": {
                             schema: {
                                 "$ref": "#/definitions/RegisterUser"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            post: {
+                tags: ['Users'],
+                summary: "User Login",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'email', 'password'
+                                ],
+                                properties: {
+                                    'email': {
+                                        type: 'string',
+                                        example: 'info@puhony.eu',
+                                    },
+                                    'password': {
+                                        type: 'string',
+                                        example: 'priliszlutouckykunupeldabelskeody',
+                                    },
+                                }
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    "200": {
+                        description: "Successfull login",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "string",
+                                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/create-org": {
+            post: {
+                tags: ['Users'],
+                summary: "Create new organization",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'name'
+                                ],
+                                properties: {
+                                    'name': {
+                                        type: 'string',
+                                        example: 'Ant4',
+                                        minLength: 3
+                                    },
+                                }
+                            }
+                        }
+                    }
+                },
+                responses: {
+                    "200": {
+                        description: "Successfull login",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: 'object',
+                                    properties: {
+                                        '_id': {
+                                            type: 'string',
+                                            example: '5fcf53f1af1ccc7390ae45df'
+                                        },
+                                        'name': {
+                                            type: 'string',
+                                            example: 'Ant4',
+                                            minLength: 3
+                                        },
+                                        'invCode': {
+                                            type: 'string',
+                                            example: 'lwxrutbNp4O56TZbbKo',
+                                        },
+                                        'created': {
+                                            type: 'string',
+                                            example: '2020-12-08T10:19:50.244Z',
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

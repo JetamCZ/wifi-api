@@ -5,6 +5,9 @@ const OrganizationSchema = new Schema({
         type: String,
         required: true
     },
+    created: {
+        type: Date,
+    },
     __v: { type: Number, select: false }
 })
 
