@@ -13,6 +13,7 @@ const OrganizationSchema = require('./schema/OrganizationSchema')
 const UserSchema = require('./schema/UserSchema')
 const InvitationSchema = require('./schema/InvitationSchema')
 const OrgBeaconSchema = require('./schema/OrgBeaconSchema')
+const MeetSchema = require('./schema/MeetSchema')
 
 class DB {
     constructor() {
@@ -60,6 +61,7 @@ class DB {
         this.models.User = mongoose.model('User', UserSchema)
         this.models.Invitation = mongoose.model('Invitation', InvitationSchema)
         this.models.OrgBeacon = mongoose.model('OrgBeacon', OrgBeaconSchema)
+        this.models.Meet = mongoose.model('Meet', MeetSchema)
     }
 
     getModel(collectionName) {

@@ -1,15 +1,17 @@
 const DeviceController = require('../controllers/DeviceController')
 const BeaconController = require('../controllers/BeaconController')
+const MeetController = require('../controllers/MeetController')
 
 module.exports = {
     post: async (req, res) => {
-        req.body.devices = req.body.devices.map(dev => {
+        const devices = req.body.devices.map(dev => {
             dev.mac = dev.mac.toLowerCase()
             return dev
         })
 
         for (let i = 0; i < req.body.devices.length; i++) {
-            await DeviceController.saveInfo(req.body.device_key, req.body.devices[i])
+            //await DeviceController.saveInfo(req.body.device_key, req.body.devices[i])
+            await MeetController.saveMeet(req.body.device_key, devices[i].mac, devices[i].rssi)
         }
         
         await BeaconController.updateLastSeen(req.body.device_key)
