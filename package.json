@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "cron": "^1.8.2",
@@ -18,12 +19,14 @@
     "express": "^4.17.1",
     "express-openapi": "^7.0.1",
     "express-openapi-validator": "^4.8.0",
+    "express-rate-limit": "^5.2.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.6",
     "node-trilateration": "^1.0.0",
     "nodemon": "^2.0.4",
     "oui": "^11.0.38",
     "socket.io": "^2.3.0",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uncaught": "0.0.5"
   }
 }

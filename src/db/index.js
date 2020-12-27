@@ -11,11 +11,11 @@ const DeviceNameSchema = require('./schema/DeviceNameSchema')
 const PrintSchema = require('./schema/PrintSchema')
 const OrganizationSchema = require('./schema/OrganizationSchema')
 const UserSchema = require('./schema/UserSchema')
+const InvitationSchema = require('./schema/InvitationSchema')
+const OrgBeaconSchema = require('./schema/OrgBeaconSchema')
 
 class DB {
     constructor() {
-        console.log('Constructor')
-
         this.models = {}
 
         this.connect()
@@ -27,10 +27,10 @@ class DB {
         const uristring = process.env.MONGODB_URI
 
         mongoose.connect(uristring, {
-            /*useUnifiedTopology: true,
+            useUnifiedTopology: true,
             useCreateIndex: true,
             useNewUrlParser: true,
-            useFindAndModify: false*/
+            useFindAndModify: false
         }, function(err, res) {
             if (err) {
                 console.error('ERROR connecting to: ' + uristring + '. ' + err)
@@ -58,6 +58,8 @@ class DB {
         this.models.Print = mongoose.model('Print', PrintSchema)
         this.models.Organization = mongoose.model('Organization', OrganizationSchema)
         this.models.User = mongoose.model('User', UserSchema)
+        this.models.Invitation = mongoose.model('Invitation', InvitationSchema)
+        this.models.OrgBeacon = mongoose.model('OrgBeacon', OrgBeaconSchema)
     }
 
     getModel(collectionName) {

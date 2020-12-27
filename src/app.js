@@ -8,6 +8,13 @@ const CronJob = require('cron').CronJob;
 const DeviceController = require('./controllers/DeviceController')
 const http = require('http')
 const SocketManager = require("./controllers/SocketManager")
+const rateLimit = require("express-rate-limit");
+const uncaught = require('uncaught');
+
+uncaught.start();
+uncaught.addListener(function (error) {
+    console.error('Uncaught error or rejection: ', error.message);
+});
 
 const jwt = require('jsonwebtoken')
 
@@ -31,11 +38,39 @@ app.use((req, res, next) => {
     next();
 })
 
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100
+});
+
+app.use("/auth/login", apiLimiter);
+app.use("/auth/register", apiLimiter);
+app.use("/auth/create-org", apiLimiter);
+
 app.use((req, res, next) => {
     req.token = req.headers['authorization'] ? req.headers['authorization'].split(' ')[1] : ""
-    console.log(req.token)
 
-    next()
+    if(!req.path.includes('/auth')) {
+        if(req.token) {
+            try {
+                const data = jwt.verify(req.token, process.env.JWT_TOKEN)
+                req.user = data
+                next()
+            } catch (err) {
+                res.status(401).json({error: "TOKEN_VALIDATION", message: ""})
+            }
+        } else {
+            res.status(401).json({error: "TOKEN_REQUIRED", message: ""})
+        }
+    } else {
+        try {
+            const data = jwt.verify(req.token, process.env.JWT_TOKEN)
+            req.user = data
+        } catch (err) {
+        }
+        next()
+    }
+
 })
 
 app.get('/token', (req, res) => {
