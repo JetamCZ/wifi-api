@@ -7,8 +7,6 @@ class SocketManager {
     }
 
     init(httpServer) {
-        const port = process.env.PORT || 3000
-
         const io = socketIo(httpServer)
 
         io.on('connection', socket => {

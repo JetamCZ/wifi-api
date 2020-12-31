@@ -1,4 +1,4 @@
-const OrganizationController = require('../../../controllers/OrganizationController')
+const OrganizationController = require('../../controllers/OrganizationController')
 
 module.exports = {
     post: async (req, res) => {

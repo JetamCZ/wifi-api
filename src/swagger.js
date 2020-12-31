@@ -320,6 +320,209 @@ module.exports = {
                 }
             }
         },
+        "/localization": {
+            post: {
+                tags: ['Localization'],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+
+                                ],
+                                properties: {
+                                    name: {
+                                        type: 'string',
+                                        example: 'Testovací lokalizace'
+                                    },
+                                    planId: {
+                                        type: 'string',
+                                        example: '89464e948564784687'
+                                    },
+                                    type: {
+                                        type: 'string',
+                                        example: 'NEAREST_FINGERPRINT'
+                                    },
+                                    beacons: {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                deviceKey: {
+                                                    type: 'string',
+                                                    example: '89464e948564784687'
+                                                },
+                                                x: {
+                                                    type: 'number',
+                                                    example: 0
+                                                },
+                                                y: {
+                                                    type: 'number',
+                                                    example: 0
+                                                },
+                                                f: {
+                                                    type: 'number',
+                                                    example: 0
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/plans": {
+            get: {
+                tags: ['Plans'],
+            },
+            post: {
+                tags: ['Plans'],
+                summary: "Create new plan",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'name', 'floors'
+                                ],
+                                properties: {
+                                    'name': {
+                                        type: 'string',
+                                        example: 'Barák',
+                                    },
+                                    'floors': {
+                                        type: 'array',
+                                        required: [
+                                            'name', 'image', 'floor'
+                                        ],
+                                        items: {
+                                            type: 'object',
+                                            properties: {
+                                                floor: {
+                                                  type: 'number',
+                                                  example: 0
+                                                },
+                                                name: {
+                                                    type: 'string',
+                                                    example: "přízemí"
+                                                },
+                                                image: {
+                                                    type: 'string',
+                                                    example: "/img/map/4.png"
+                                                },
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+        },
+        "/plans/{id}": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ['Plans'],
+            }
+        },
+        "/beacons": {
+            get: {
+                tags: ['Beacons'],
+            },
+            post: {
+                tags: ['Beacons'],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'deviceKey', 'name', 'desc'
+                                ],
+                                properties: {
+                                    'deviceKey': {
+                                        type: 'string',
+                                        example: 'Barák',
+                                    },
+                                    'name': {
+                                        type: 'string',
+                                        example: 'Barák',
+                                    },
+                                    'desc': {
+                                        type: 'string',
+                                        example: 'V kuchyni',
+                                    },
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+        },
+        "/beacons/{id}": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ['Beacons'],
+            },
+            put: {
+                tags: ['Beacons'],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'name', 'desc'
+                                ],
+                                properties: {
+                                    'name': {
+                                        type: 'string',
+                                        example: 'Barák',
+                                    },
+                                    'desc': {
+                                        type: 'string',
+                                        example: 'V kuchyni',
+                                    },
+                                }
+                            }
+                        }
+                    }
+                },
+            },
+            delete: {
+                tags: ['Beacons'],
+            }
+        },
         "/auth/create-org": {
             post: {
                 tags: ['Users'],

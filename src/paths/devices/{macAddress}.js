@@ -10,5 +10,8 @@ module.exports = {
         await DeviceController.setNameForMac(req.params.macAddress ,req.body.name)
 
         res.send()
+    },
+    delete: async (req, res) => {
+
     }
 }

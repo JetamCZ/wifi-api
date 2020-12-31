@@ -20,7 +20,7 @@ class BeaconController {
     }
 
     async getByDeviceKey(deviceKey) {
-        return this.model.findOne({deviceKey})
+        return this.model.findOne({deviceKey}).lean()
     }
 
 

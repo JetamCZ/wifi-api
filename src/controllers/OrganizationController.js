@@ -124,10 +124,34 @@ class OrganizationController {
         return orgbeacon
     }
 
+    async getOrgBeaconByKey(deviceKey) {
+        const orgBeaconModel = db.getModel('OrgBeacon')
+        const beaconModel = db.getModel('Beacon')
+
+        const orgbeacon = await orgBeaconModel.findOne({deviceKey}).lean()
+
+        const beacon = await beaconModel.findOne({deviceKey: orgbeacon.deviceKey})
+
+        orgbeacon.lastSeenDate = beacon ? beacon.lastSeenDate : null
+
+        return orgbeacon
+    }
+
     async deleteOrgBeacon(id) {
         const orgBeaconModel = db.getModel('OrgBeacon')
 
         await orgBeaconModel.findByIdAndDelete(id)
+    }
+
+    async updateOrgBeacon(id, beacon) {
+        const orgBeaconModel = db.getModel('OrgBeacon')
+
+        await orgBeaconModel.findByIdAndUpdate(id, {
+            name: beacon.name,
+            desc: beacon.desc
+        })
+
+        return await orgBeaconModel.findById(id).lean()
     }
 
     async getDevices(id) {

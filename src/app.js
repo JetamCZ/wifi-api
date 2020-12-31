@@ -94,7 +94,7 @@ initialize({
 
 const server = http.createServer(app)
 
-SocketManager.init(server)
+//SocketManager.init(server)
 
 server.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
