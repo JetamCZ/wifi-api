@@ -160,80 +160,7 @@ module.exports = {
             get: {
                 tags: ['Devices'],
                 summary: "get all devices",
-            }
-        },
-        "/devices/{macAddress}": {
-            parameters: [
-                {
-                    name: "macAddress",
-                    in: "macAddress",
-                    required: true,
-                    description: "",
-                    schema: {
-                        type: "string"
-                    }
-                }
-            ],
-            get: {
-                tags: ['Devices'],
-                summary: "get data for mac address",
             },
-            post: {
-                tags: ['Devices'],
-                summary: "set device name",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: 'object',
-                                required: [
-                                    'name'
-                                ],
-                                properties: {
-                                    'name': {
-                                        type: 'string',
-                                        example: 'Ant4'
-                                    },
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/maps": {
-            get: {
-                tags: ['Maps'],
-                summary: "get all maps",
-            },
-            post: {
-                tags: ['Maps'],
-                summary: "create map",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                "$ref": "#/definitions/Map"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/organization/person/{id}/device": {
-            parameters: [
-                {
-                    name: "id",
-                    in: "id",
-                    required: true,
-                    description: "",
-                    schema: {
-                        type: "string"
-                    }
-                }
-            ],
             post: {
                 tags: ['Devices'],
                 summary: "Add new device",
@@ -262,9 +189,29 @@ module.exports = {
                 }
             }
         },
+        "/maps": {
+            get: {
+                tags: ['Maps'],
+                summary: "get all maps",
+            },
+            post: {
+                tags: ['Maps'],
+                summary: "create map",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                "$ref": "#/definitions/Map"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/auth/register": {
             post: {
-                tags: ['Users'],
+                tags: ['Auth'],
                 summary: "Create new user",
                 requestBody: {
                     required: true,
@@ -280,7 +227,7 @@ module.exports = {
         },
         "/auth/login": {
             post: {
-                tags: ['Users'],
+                tags: ['Auth'],
                 summary: "User Login",
                 requestBody: {
                     required: true,
@@ -368,6 +315,75 @@ module.exports = {
                                                 }
                                             }
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            get: {
+                tags: ["Localization"]
+            }
+        },
+        "/localization/{id}": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ['Localization'],
+            }
+        },
+        "/localization/{id}/beacons": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            put: {
+                tags: ['Localization'],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    required: [
+                                        'deviceKey', 'x', 'y', 'f'
+                                    ],
+                                    properties: {
+                                        'deviceKey': {
+                                            type: 'string',
+                                            example: 'Barák',
+                                        },
+                                        'x': {
+                                            type: 'number',
+                                            example: 0,
+                                        },
+                                        'y': {
+                                            type: 'number',
+                                            example: 0,
+                                        },
+                                        'f': {
+                                            type: 'number',
+                                            example: 0,
+                                        },
                                     }
                                 }
                             }
@@ -525,7 +541,7 @@ module.exports = {
         },
         "/auth/create-org": {
             post: {
-                tags: ['Users'],
+                tags: ['Auth'],
                 summary: "Create new organization",
                 requestBody: {
                     required: true,

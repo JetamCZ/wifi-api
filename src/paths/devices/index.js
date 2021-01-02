@@ -3,8 +3,16 @@ const UserController = require('../../controllers/UserController')
 const DeviceController = require('../../controllers/DeviceController')
 
 module.exports = {
+    post: async (req, res) => {
+        try{
+            const device = await UserController.addDevice(req.user.organization._id, req.user.user._id, req.body.mac, req.body.name)
+            res.json(device)
+        } catch (e) {
+            res.status(400).send()
+        }
+    },
     get: async (req, res) => {
-        const devices = await OrganizationController.getDevices(req.user.organization._id)
+        const devices = await DeviceController.getOrgDevices(req.user.organization._id)
 
         for (let i = 0; i < devices.length; i++) {
             const user = await UserController.getUser(devices[i].userId)
