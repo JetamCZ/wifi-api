@@ -40,15 +40,16 @@ module.exports = {
             localizationDevices = await LocalizationController.locationData(beaconIds)
         }
 
-/*
         localization.customLocalizationData = {
             devicesDebugData: localizationDevices
         }
 
- */
-
         if(localization.type === "NEAREST_FINGERPRINT"){
             localization.devices = await NearestFingerPrint.localize(req.params.id, localizationDevices)
+        }
+
+        for (const device of localization.devices) {
+            device.name = (await DeviceController.getDeviceByMac(device.mac))?.name || ""
         }
 
 

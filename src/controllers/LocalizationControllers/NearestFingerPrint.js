@@ -16,18 +16,39 @@ class NearestFingerPrint {
         const successfullyLocatedDevices = []
 
         for(const [key, value] of Object.entries(localizationData)) {
-            console.log(key, value)
-            successfullyLocatedDevices.push({
-                mac: key,
-                x: 0,
-                y: 0,
-                f: 0
+            const fingerPrintsCopy = [...fingerPrints]
+
+            fingerPrints.forEach(print => {
+                print.sum = 0;
+
+                print.beacons.forEach(printmeet => {
+                    const dataSignal = value.meets.find(meet => meet.deviceKey === printmeet.deviceKey)
+
+                    if(dataSignal) {
+                        const diff = Math.abs(dataSignal.rssi - printmeet.rssi)
+                        //console.log(printmeet.deviceKey, dataSignal.rssi, printmeet.rssi, diff)
+                        print.sum += diff
+                    } else {
+                        //console.log(printmeet.deviceKey, "?", printmeet.rssi, "?")
+                    }
+                })
+                //console.log(print, value)
             })
+
+            const nearestPrint = fingerPrintsCopy.sort((a, b) => (a.sum > b.sum) ? 1 : -1)
+
+            if(nearestPrint[0]) {
+                successfullyLocatedDevices.push({
+                    mac: key,
+                    x: nearestPrint[0].x,
+                    y: nearestPrint[0].y,
+                    f: nearestPrint[0].f,
+                    custom: {
+                        fingerPrint: nearestPrint[0]._id
+                    }
+                })
+            }
         }
-
-
-
-        console.log(localizationData, fingerPrints)
 
         return successfullyLocatedDevices
     }

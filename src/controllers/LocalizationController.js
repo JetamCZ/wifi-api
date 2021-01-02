@@ -30,15 +30,15 @@ class LocalizationController {
 
        if(beaconsIds) {
            if(devicesMacs) {
-               return await meetModel.find({deviceKey: {$in: beaconsIds}, mac: {$in: devicesMacs}})
+               return await meetModel.find({deviceKey: {$in: beaconsIds}, mac: {$in: devicesMacs}, date: {$gt: extDate}})
            } else {
-               return await meetModel.find({deviceKey: {$in: beaconsIds}})
+               return await meetModel.find({deviceKey: {$in: beaconsIds}, date: {$gt: extDate}})
            }
        } else {
            if(devicesMacs) {
-               return await meetModel.find({mac: {$in: devicesMacs}})
+               return await meetModel.find({mac: {$in: devicesMacs}, date: {$gt: extDate}})
            } else {
-               return await meetModel.find()
+               return await meetModel.find({date: {$gt: extDate}})
            }
        }
    }
