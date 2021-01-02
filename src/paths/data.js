@@ -3,8 +3,6 @@ const MeetController = require('../controllers/MeetController')
 
 module.exports = {
     post: async (req, res) => {
-        console.log('DATA', req.body.device_key)
-
         await BeaconController.updateLastSeen(req.body.device_key)
 
         const devices = req.body.devices.map(dev => {

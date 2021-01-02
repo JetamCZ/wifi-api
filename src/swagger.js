@@ -156,6 +156,37 @@ module.exports = {
                 }
             }
         },
+        "/data": {
+            post: {
+                tags: ["data endpoint"],
+                summary: "Entry point for data from beacons",
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: [
+                                    'device_key'
+                                ],
+                                properties: {
+                                    'device_key': {
+                                        type: 'string',
+                                        example: 'c0:b6:f9:8e:87:6c'
+                                    },
+                                    'devices': {
+                                        type: 'array',
+                                        items: {
+                                            "$ref": "#/definitions/RSSIInfo"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/devices": {
             get: {
                 tags: ['Devices'],
