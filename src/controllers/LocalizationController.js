@@ -25,6 +25,9 @@ class LocalizationController {
    async _getMeets(beaconsIds, devicesMacs) {
        const meetModel = db.getModel('Meet')
 
+       let extDate = new Date()
+       extDate = extDate.setSeconds(extDate.getSeconds() - process.env.LOCALIZATION_INTERESTING_SEC)
+
        if(beaconsIds) {
            if(devicesMacs) {
                return await meetModel.find({deviceKey: {$in: beaconsIds}, mac: {$in: devicesMacs}})
@@ -83,6 +86,17 @@ class LocalizationController {
 
        return devices
    }
+
+   async saveFingerPrint(localizationId, print) {
+        const fingerprintModel = db.getModel('Fingerprint')
+
+       const newprint = await new fingerprintModel({
+           ...print,
+           localizationId
+       }).save()
+
+       return await fingerprintModel.findById(newprint._id).lean()
+    }
 }
 
 module.exports = new LocalizationController()

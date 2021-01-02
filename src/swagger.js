@@ -373,6 +373,89 @@ module.exports = {
                 tags: ['Localization'],
             }
         },
+        "/localization/{id}/fingerprint/{mac}": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                },
+                {
+                    name: "mac",
+                    in: "mac",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ['Localization'],
+            }
+        },
+        "/localization/{id}/fingerprint": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            post: {
+                tags: ['Localization'],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: 'object',
+                                required: ['mac', 'beacons'],
+                                properties: {
+                                    x: {
+                                        type: 'number',
+                                        example: 0
+                                    },
+                                    y: {
+                                        type: 'number',
+                                        example: 0
+                                    },
+                                    f: {
+                                        type: 'number',
+                                        example: 0
+                                    },
+                                    'beacons': {
+                                        type: 'array',
+                                        items: {
+                                            type: 'object',
+                                            required: ['deviceKey', 'rssi'],
+                                            properties: {
+                                                deviceKey: {
+                                                    type: 'string',
+                                                    example: 'absoihaop989'
+                                                },
+                                                rssi: {
+                                                    type: 'number',
+                                                    example: -95
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/localization/{id}/beacons": {
             parameters: [
                 {

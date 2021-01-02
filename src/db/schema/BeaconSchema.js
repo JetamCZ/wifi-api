@@ -1,10 +1,7 @@
 const { Schema } = require('mongoose')
 
+//Slouží k uložení lastSeenDate beaconu
 const BeaconSchema = new Schema({
-    name: {
-        type: String,
-        required: false
-    },
     deviceKey: {
         type: String,
         required: true

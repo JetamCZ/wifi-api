@@ -1,23 +1,21 @@
 const { Schema } = require('mongoose')
 
-const PrintSchema = new Schema({
-    map: {
+const FingerprintSchema = new Schema({
+    localizationId: {
         type: String,
         required: true
     },
-    pos: {
-       x: {
-           type: Number,
-           required: true,
-       },
-        y: {
-            type: Number,
-            required: true,
-        },
-        p: {
-            type: Number,
-            required: true,
-        }
+    x: {
+        type: Number,
+        required: true,
+    },
+    y: {
+        type: Number,
+        required: true,
+    },
+    f: {
+        type: Number,
+        required: true,
     },
     beacons: {
         required: true,
@@ -37,4 +35,4 @@ const PrintSchema = new Schema({
     __v: { type: Number, select: false }
 })
 
-module.exports = PrintSchema
+module.exports = FingerprintSchema
