@@ -20,6 +20,7 @@ class NearestFingerPrint {
 
             fingerPrints.forEach(print => {
                 print.sum = 0;
+                print.count = 0;
 
                 print.beacons.forEach(printmeet => {
                     const dataSignal = value.meets.find(meet => meet.deviceKey === printmeet.deviceKey)
@@ -28,10 +29,13 @@ class NearestFingerPrint {
                         const diff = Math.abs(dataSignal.rssi - printmeet.rssi)
                         //console.log(printmeet.deviceKey, dataSignal.rssi, printmeet.rssi, diff)
                         print.sum += diff
+                        print.count += 1;
                     } else {
                         //console.log(printmeet.deviceKey, "?", printmeet.rssi, "?")
                     }
                 })
+
+                print.sum = print.sum / print.count
                 //console.log(print, value)
             })
 

@@ -125,37 +125,6 @@ module.exports = {
                 }
             }
         },
-        "/beacon": {
-            post: {
-                tags: ["data endpoint"],
-                summary: "Entry point for data from beacons",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: 'object',
-                                required: [
-                                    'device_key'
-                                ],
-                                properties: {
-                                    'device_key': {
-                                        type: 'string',
-                                        example: 'c0:b6:f9:8e:87:6c'
-                                    },
-                                    'devices': {
-                                        type: 'array',
-                                        items: {
-                                            "$ref": "#/definitions/RSSIInfo"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/data": {
             post: {
                 tags: ["data endpoint"],
@@ -214,26 +183,6 @@ module.exports = {
                                         example: 'telefon',
                                     },
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/maps": {
-            get: {
-                tags: ['Maps'],
-                summary: "get all maps",
-            },
-            post: {
-                tags: ['Maps'],
-                summary: "create map",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                "$ref": "#/definitions/Map"
                             }
                         }
                     }
@@ -370,6 +319,9 @@ module.exports = {
                 }
             ],
             get: {
+                tags: ['Localization'],
+            },
+            delete: {
                 tags: ['Localization'],
             }
         },
@@ -570,6 +522,9 @@ module.exports = {
                 }
             ],
             get: {
+                tags: ['Plans'],
+            },
+            delete: {
                 tags: ['Plans'],
             }
         },

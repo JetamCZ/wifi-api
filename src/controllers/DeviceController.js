@@ -5,7 +5,6 @@ class DeviceController {
         this.model = db.getModel('UserDevice')
     }
 
-    /* NEW */
     async getLastActivity(mac) {
         const meetModel = db.getModel('Meet')
         const meets = await meetModel.find({mac}).sort({date: -1}).lean()

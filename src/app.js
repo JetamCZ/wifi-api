@@ -4,10 +4,8 @@ const swaggerUI = require('swagger-ui-express');
 const express = require('express');
 const path = require('path');
 const cors = require('cors')
-const CronJob = require('cron').CronJob;
-const MeetController = require('./controllers/MeetController')
 const http = require('http')
-const SocketManager = require("./controllers/SocketManager")
+const Crons = require("./utils/crons")
 const rateLimit = require("express-rate-limit");
 const uncaught = require('uncaught');
 
@@ -17,8 +15,6 @@ uncaught.addListener(function (error) {
 });
 
 const jwt = require('jsonwebtoken')
-
-const db = require('./db/index')
 
 const swaggerDoc = require('./swagger')
 
@@ -100,12 +96,3 @@ server.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)
 })
 
-//Cron Every 5minutes
-const clearOldDataJob = new CronJob('0 */5 * * * *', async () => {
-    const date = new Date();
-    date.setHours(date.getHours() - 1)
-    await MeetController.cleanupBeforeDay(date);
-
-}, null, true, 'Europe/Prague')
-
-clearOldDataJob.start()
