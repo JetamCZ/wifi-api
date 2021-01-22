@@ -24,4 +24,5 @@ jobs:
             npm install
             echo "DONE"
             cd /root/wifi-api/src
-            pm2 restart app.js --update-env
+            pm2 restart main_app --update-env
+            pm2 restart com_app --update-env
