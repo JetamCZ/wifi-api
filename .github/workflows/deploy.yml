@@ -19,8 +19,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd wifi-api
+            cd /root/wifi-api
             git pull
             npm install
             echo "DONE"
-            pm2 start ./src/app.js
+            pm2 start /root/wifi-api/src/app.js
