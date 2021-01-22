@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy app to Hicoria
+
+# Controls when the action will run. 
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy NodeJS app
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd wifi-api
+            git pull
+            npm install
+            pm2 stop ./src/app.js
+            pm2 stop ./src/computingNode.js
+            pm2 start app.js
+            pm2 start ./src/computingNode.js
