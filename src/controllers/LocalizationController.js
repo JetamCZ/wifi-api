@@ -209,11 +209,16 @@ class LocalizationController {
         return localization
     }
 
-    async localizeAll() {
+    async localizeAll(socket) {
         const localizations = await this.model.find().lean()
 
         for(let i = 0; i < localizations.length; i++) {
             const localization = await this.localize(localizations[i])
+
+            socket.emit('localization-update', {
+                secretToken: process.env.COMPUTING_NODE_TOKEN,
+                localization
+            })
 
             await CacheController.store("loc."+localization.organizationId+"."+localization._id, localization)
         }

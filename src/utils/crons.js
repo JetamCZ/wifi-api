@@ -3,7 +3,7 @@ const LocalizationController = require('../controllers/LocalizationController')
 const MeetController = require('../controllers/MeetController')
 
 class Crons {
-    init() {
+    init(socket) {
         //Cron Every 5minutes
         const clearOldDataJob = new CronJob('0 */5 * * * *', async () => {
             console.log('CRON', 'CLEANUP')
@@ -21,7 +21,7 @@ class Crons {
             const start = new Date()
             console.log('CRON', 'Compute locations')
 
-            await LocalizationController.localizeAll()
+            await LocalizationController.localizeAll(socket)
 
             console.log('Computed all locations: '+ (new Date() - start)+"ms.")
         }, null, true, 'Europe/Prague')

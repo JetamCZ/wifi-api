@@ -5,9 +5,9 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors')
 const http = require('http')
-const Crons = require("./utils/crons")
 const rateLimit = require("express-rate-limit");
 const uncaught = require('uncaught');
+const SocketManager = require('./controllers/SocketManager')
 
 uncaught.start();
 uncaught.addListener(function (error) {
@@ -90,7 +90,7 @@ initialize({
 
 const server = http.createServer(app)
 
-//SocketManager.init(server)
+SocketManager.init(server)
 
 server.listen(port, () => {
     console.log(`HTTP server listening at http://localhost:${port}`)

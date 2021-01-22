@@ -1,5 +1,7 @@
 require('dotenv').config()
 const socketIo = require('socket.io')
+const jwt = require('jsonwebtoken')
+const LocalizationController = require('./LocalizationController')
 
 class SocketManager {
     constructor() {
@@ -9,38 +11,42 @@ class SocketManager {
     init(httpServer) {
         const io = socketIo(httpServer)
 
-        io.on('connection', socket => {
+        io.on('connection', async socket => {
             socket.emit('handshake', 'Welcome')
 
-            socket.on('auth', auth => {
-                if(auth.deviceKey) {
-                    this.activeBeacons[socket.id] = auth.deviceKey
-                    console.log('auth', socket.id, auth, this.activeBeacons)
+            socket.on('auth', async auth => {
+                let userData = {}
+
+                try {
+                    userData = jwt.verify(auth.token, process.env.JWT_TOKEN)
+                } catch (err) {
+                    console.log(err)
+                    socket.emit('err', 'Cannot verify your token')
+                }
+
+                const localization = await LocalizationController.getById(auth.localizationId)
+
+                if(localization && (localization.organizationId === userData.organization._id)) {
+                    socket.emit('success', 'User verified')
+                    socket.join(localization._id)
+                } else {
+                    socket.emit('err', 'Cannot verify your token')
                 }
             })
 
-            socket.on('data', data => {
-                const key = this.activeBeacons[socket.id]
-                if(key) {
-                    DeviceController.saveInfo(key, {
-                        rssi: data.rssi,
-                        mac: data.mac,
-                        name: data.name
-                    })
-
-                    BeaconController.updateLastSeen(key)
+            socket.on('localization-update', async data => {
+                if(data.secretToken === process.env.COMPUTING_NODE_TOKEN && data.localization) {
+                    socket.emit('success', 'Computing server verified')
+                    io.to(data.localization._id).emit('update', data.localization);
                 }
             })
 
             socket.on('disconnect', (reason) => {
-                delete this.activeBeacons[socket.id]
-                console.log('auth', this.activeBeacons)
+
             });
         });
     }
 
 }
-const DeviceController = require('./DeviceController')
-const BeaconController = require('./BeaconController')
 
 module.exports = new SocketManager()
