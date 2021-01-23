@@ -172,9 +172,7 @@ class LocalizationController {
     }
 
     async populateRooms(localization) {
-        const RoomModel = db.getModel("Room")
-
-        localization.rooms = await RoomModel.getByLocalizationId(localization._id)
+        localization.rooms = await RoomController.getByLocalizationId(localization._id)
 
         return localization
     }
@@ -237,7 +235,7 @@ const PlanController = require("./PlanController")
 const OrganizationController = require("./OrganizationController")
 const DeviceController = require("./DeviceController")
 const CacheController = require("./CacheController")
-const BeaconController = require("./BeaconController")
+const RoomController = require("./RoomController")
 const NearestFingerPrint = require("./LocalizationControllers/NearestFingerPrint")
 
 module.exports = new LocalizationController()

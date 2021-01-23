@@ -7,12 +7,8 @@ console.log("Trying connect to:", "http://localhost:" + process.env.PORT)
 const socket = io("ws://localhost:" + process.env.PORT)
 
 socket.on("handshake", (d) => {
-    console.log(d)
+    //console.log(d)
 })
-
-setTimeout(() => {
-    console.log(socket.connected)
-}, 5000)
 
 uncaught.start()
 uncaught.addListener(function (error) {
