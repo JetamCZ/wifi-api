@@ -1,112 +1,104 @@
-require("dotenv").config();
-const { initialize } = require("express-openapi");
-const swaggerUI = require("swagger-ui-express");
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const http = require("http");
-const rateLimit = require("express-rate-limit");
-const uncaught = require("uncaught");
-const SocketManager = require("./controllers/SocketManager");
+require("dotenv").config()
+const { initialize } = require("express-openapi")
+const swaggerUI = require("swagger-ui-express")
+const express = require("express")
+const path = require("path")
+const cors = require("cors")
+const http = require("http")
+const rateLimit = require("express-rate-limit")
+const uncaught = require("uncaught")
+const SocketManager = require("./controllers/SocketManager")
 
-uncaught.start();
+uncaught.start()
 uncaught.addListener(function (error) {
-  console.error("Uncaught error or rejection: ", error.message);
-});
+    console.error("Uncaught error or rejection: ", error.message)
+})
 
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken")
 
-const swaggerDoc = require("./swagger");
+const swaggerDoc = require("./swagger")
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app = express()
+const server = http.createServer(app)
+const port = process.env.PORT || 3000
 
 app.use(
-  cors({
-    credentials: true,
-  })
-);
-app.use(express.urlencoded());
-app.use(express.json());
+    cors({
+        credentials: true
+    })
+)
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
+app.use(express.urlencoded())
+app.use(express.json())
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next()
+})
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 app.use((req, res, next) => {
-  if (req.path === "/beacon") {
-    if (process.env.LOG_BEACON_REQUESTS.toString() !== "false") {
-      console.log(
-        req.method,
-        req.path,
-        process.env.LOG_REQESTS_BODY !== "false" ? req.body : "-"
-      );
+    if (req.path === "/beacon") {
+        if (process.env.LOG_BEACON_REQUESTS.toString() !== "false") {
+            console.log(req.method, req.path, process.env.LOG_REQESTS_BODY !== "false" ? req.body : "-")
+        }
+    } else if (process.env.LOG_REQUESTS.toString() !== "false") {
+        console.log(req.method, req.path, process.env.LOG_REQESTS_BODY !== "false" ? req.body : "-")
     }
-  } else if (process.env.LOG_REQUESTS.toString() !== "false") {
-    console.log(
-      req.method,
-      req.path,
-      process.env.LOG_REQESTS_BODY !== "false" ? req.body : "-"
-    );
-  }
 
-  next();
-});
+    next()
+})
 
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-});
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100
+})
 
-app.use("/auth/login", apiLimiter);
-app.use("/auth/register", apiLimiter);
-app.use("/auth/create-org", apiLimiter);
+app.use("/auth/login", apiLimiter)
+app.use("/auth/register", apiLimiter)
+app.use("/auth/create-org", apiLimiter)
 
 app.use((req, res, next) => {
-  req.token = req.headers["authorization"]
-    ? req.headers["authorization"].split(" ")[1]
-    : "";
+    req.token = req.headers["authorization"] ? req.headers["authorization"].split(" ")[1] : ""
 
-  if (
-    !req.path.includes("/auth") &&
-    req.path !== "/beacon" &&
-    req.path !== "/data"
-  ) {
-    if (req.token) {
-      try {
-        const data = jwt.verify(req.token, process.env.JWT_TOKEN);
-        req.user = data;
-        next();
-      } catch (err) {
-        res.status(401).json({ error: "TOKEN_VALIDATION", message: "" });
-      }
+    if (!req.path.includes("/auth") && req.path !== "/beacon" && req.path !== "/data") {
+        if (req.token) {
+            try {
+                const data = jwt.verify(req.token, process.env.JWT_TOKEN)
+                req.user = data
+                next()
+            } catch (err) {
+                res.status(401).json({ error: "TOKEN_VALIDATION", message: "" })
+            }
+        } else {
+            res.status(401).json({ error: "TOKEN_REQUIRED", message: "" })
+        }
     } else {
-      res.status(401).json({ error: "TOKEN_REQUIRED", message: "" });
+        try {
+            const data = jwt.verify(req.token, process.env.JWT_TOKEN)
+            req.user = data
+        } catch (err) {}
+        next()
     }
-  } else {
-    try {
-      const data = jwt.verify(req.token, process.env.JWT_TOKEN);
-      req.user = data;
-    } catch (err) {}
-    next();
-  }
-});
+})
 
 initialize({
-  app: app,
-  paths: path.join(__dirname, "./paths"),
-  apiDoc: path.join(__dirname, "swagger.js"),
-  validateApiDoc: false,
-  errorMiddleware: (err, req, res, next) => {
-    res.status(err.status || 500).json({
-      message: err.message,
-      errors: err.errors,
-    });
-  },
-});
+    app: app,
+    paths: path.join(__dirname, "./paths"),
+    apiDoc: path.join(__dirname, "swagger.js"),
+    validateApiDoc: false,
+    errorMiddleware: (err, req, res, next) => {
+        res.status(err.status || 500).json({
+            message: err.message,
+            errors: err.errors
+        })
+    }
+})
 
-const server = http.createServer(app);
-
-SocketManager.init(server);
+SocketManager.init(server)
 
 server.listen(port, () => {
-  console.log(`HTTP server listening at http://localhost:${port}`);
-});
+    console.log(`HTTP server listening at http://localhost:${port}`)
+})

@@ -1,17 +1,14 @@
-const LocalizationController = require("../../controllers/LocalizationController");
+const LocalizationController = require("../../controllers/LocalizationController")
 
 module.exports = {
-  post: async (req, res) => {
-    const localization = await LocalizationController.create(
-      req.user.organization._id,
-      {
-        name: "Where is Waldo?",
-        planId: "waldo",
-        type: "WALDO",
-        beacons: [],
-      }
-    );
+    post: async (req, res) => {
+        const localization = await LocalizationController.create(req.user.organization._id, {
+            name: "Where is Waldo?",
+            planId: "waldo",
+            type: "WALDO",
+            beacons: []
+        })
 
-    res.json(localization);
-  },
-};
+        res.json(localization)
+    }
+}
