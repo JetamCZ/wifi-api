@@ -20,6 +20,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd /root/wifi-api
+            git checkout -- .
             git pull
             npm install
             echo "DONE"
