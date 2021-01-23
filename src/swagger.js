@@ -309,6 +309,51 @@ module.exports = {
                 tags: ["Localization"]
             }
         },
+        "/localization/{id}/room": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "id",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            post: {
+                tags: ["Rooms"],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                required: ["name", "polygon"],
+                                properties: {
+                                    name: {
+                                        type: "string",
+                                        example: "Obývací pokoj"
+                                    },
+                                    polygon: {
+                                        type: "array",
+                                        items: {
+                                            type: "array",
+                                            maxItems: 2,
+                                            minItems: 2,
+                                            items: {
+                                                type: "number",
+                                            },
+                                            example: [0,0]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/localization/{id}/fingerprint/{mac}": {
             parameters: [
                 {

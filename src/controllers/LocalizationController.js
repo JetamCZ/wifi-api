@@ -17,7 +17,7 @@ class LocalizationController {
     }
 
     async getOrgAll(organizationId) {
-        return await this.model.find({ organizationId }).lean()
+        return await this.model.find({organizationId}).lean()
     }
 
     async getById(id) {
@@ -33,24 +33,24 @@ class LocalizationController {
         if (beaconsIds) {
             if (devicesMacs) {
                 return await meetModel.find({
-                    deviceKey: { $in: beaconsIds },
-                    mac: { $in: devicesMacs },
-                    date: { $gt: extDate }
+                    deviceKey: {$in: beaconsIds},
+                    mac: {$in: devicesMacs},
+                    date: {$gt: extDate}
                 })
             } else {
                 return await meetModel.find({
-                    deviceKey: { $in: beaconsIds },
-                    date: { $gt: extDate }
+                    deviceKey: {$in: beaconsIds},
+                    date: {$gt: extDate}
                 })
             }
         } else {
             if (devicesMacs) {
                 return await meetModel.find({
-                    mac: { $in: devicesMacs },
-                    date: { $gt: extDate }
+                    mac: {$in: devicesMacs},
+                    date: {$gt: extDate}
                 })
             } else {
-                return await meetModel.find({ date: { $gt: extDate } })
+                return await meetModel.find({date: {$gt: extDate}})
             }
         }
     }
@@ -111,13 +111,13 @@ class LocalizationController {
     }
 
     async getByPlan(id) {
-        return await this.model.find({ planId: id }).lean()
+        return await this.model.find({planId: id}).lean()
     }
 
     async delete(localizationId) {
         const fingerprintModel = db.getModel("Fingerprint")
 
-        await fingerprintModel.deleteMany({ localizationId })
+        await fingerprintModel.deleteMany({localizationId})
 
         await this.model.findByIdAndRemove(localizationId)
     }
@@ -171,6 +171,14 @@ class LocalizationController {
         return localization
     }
 
+    async populateRooms(localization) {
+        const RoomModel = db.getModel("Room")
+
+        localization.rooms = await RoomModel.getByLocalizationId(localization._id)
+
+        return localization
+    }
+
     async localize(localization) {
         const startTime = new Date()
 
@@ -184,20 +192,12 @@ class LocalizationController {
 
         //populate data
         localization = await this.populatePlan(localization)
-        localization.customLocalizationData.caclulatingTimes.populatePlan =
-            new Date() - startTime - localization.customLocalizationData.caclulatingTimes.total
-        localization.customLocalizationData.caclulatingTimes.total = new Date() - startTime
         localization = await this.populateBeacons(localization)
-        localization.customLocalizationData.caclulatingTimes.populateBeacons =
-            new Date() - startTime - localization.customLocalizationData.caclulatingTimes.total
-        localization.customLocalizationData.caclulatingTimes.total = new Date() - startTime
+        localization = await this.populateRooms(localization)
 
         const beaconIds = localization.beacons.map((beacon) => beacon.deviceKey)
         let localizationDevices = await this.getLocalizationDevicesData(localization, beaconIds)
 
-        localization.customLocalizationData.caclulatingTimes.getDeviceData =
-            new Date() - startTime - localization.customLocalizationData.caclulatingTimes.total
-        localization.customLocalizationData.caclulatingTimes.total = new Date() - startTime
 
         switch (localization.type) {
             case "NEAREST_FINGERPRINT":
@@ -208,16 +208,11 @@ class LocalizationController {
                 break
         }
 
-        localization.customLocalizationData.caclulatingTimes.fingerPrinting =
-            new Date() - startTime - localization.customLocalizationData.caclulatingTimes.total
-        localization.customLocalizationData.caclulatingTimes.total = new Date() - startTime
-
         //populate geted data
         localization = await this.populateDeviceNames(localization)
 
-        localization.customLocalizationData.caclulatingTimes.populateDeviceNames =
-            new Date() - startTime - localization.customLocalizationData.caclulatingTimes.total
         localization.customLocalizationData.caclulatingTimes.total = new Date() - startTime
+        localization.customLocalizationData.caclulatingTimes.date = new Date()
 
         return localization
     }

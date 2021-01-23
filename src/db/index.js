@@ -16,6 +16,7 @@ const UserDeviceSchema = require("./schema/UserDeviceSchema")
 const PlanSchema = require("./schema/PlanSchema")
 const LocalizationSchema = require("./schema/LocalizationSchema")
 const CacheSchema = require("./schema/CacheSchema")
+const RoomSchema = require("./schema/RoomSchema")
 
 class DB {
     constructor() {
@@ -69,6 +70,7 @@ class DB {
         this.models.Plan = mongoose.model("Plan", PlanSchema)
         this.models.Localization = mongoose.model("Localization", LocalizationSchema)
         this.models.Cache = mongoose.model("Cache", CacheSchema)
+        this.models.Room = mongoose.model("Room", RoomSchema)
     }
 
     getModel(collectionName) {
