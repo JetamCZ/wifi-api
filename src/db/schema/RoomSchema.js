@@ -9,6 +9,14 @@ const RoomSchema = new Schema({
         type: String,
         required: true
     },
+    f: {
+        type: Number,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
     polygon: {
         type: Array,
         required: true

@@ -294,7 +294,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -313,7 +313,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -329,7 +329,7 @@ module.exports = {
                         "application/json": {
                             schema: {
                                 type: "object",
-                                required: ["name", "polygon"],
+                                required: ["name", "polygon", "f"],
                                 properties: {
                                     name: {
                                         type: "string",
@@ -346,6 +346,10 @@ module.exports = {
                                             },
                                             example: [0,0]
                                         }
+                                    },
+                                    f: {
+                                        type: "number",
+                                        example: 0
                                     }
                                 }
                             }
@@ -354,11 +358,66 @@ module.exports = {
                 }
             }
         },
+        "/room/{roomId}": {
+            parameters: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    description: "",
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ],
+            get: {
+                tags: ["Rooms"],
+            },
+            delete: {
+                tags: ["Rooms"],
+            },
+            put: {
+                tags: ["Rooms"],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                required: ["name", "polygon", "f"],
+                                properties: {
+                                    name: {
+                                        type: "string",
+                                        example: "Obývací pokoj"
+                                    },
+                                    polygon: {
+                                        type: "array",
+                                        items: {
+                                            type: "array",
+                                            maxItems: 2,
+                                            minItems: 2,
+                                            items: {
+                                                type: "number",
+                                            },
+                                            example: [0,0]
+                                        }
+                                    },
+                                    f: {
+                                        type: "number",
+                                        example: 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        },
         "/localization/{id}/fingerprint/{mac}": {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -367,7 +426,7 @@ module.exports = {
                 },
                 {
                     name: "mac",
-                    in: "mac",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -383,7 +442,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -441,7 +500,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -536,7 +595,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {
@@ -588,7 +647,7 @@ module.exports = {
             parameters: [
                 {
                     name: "id",
-                    in: "id",
+                    in: "path",
                     required: true,
                     description: "",
                     schema: {

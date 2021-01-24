@@ -177,6 +177,14 @@ class LocalizationController {
         return localization
     }
 
+    populateDevicesRooms(devices, rooms) {
+        for (const device of devices) {
+            device.rooms = RoomController.getRoomByPoint(rooms.filter(r => r.f === device.f), [device.x, device.y])
+        }
+
+        return devices
+    }
+
     async localize(localization) {
         const startTime = new Date()
 
@@ -199,12 +207,15 @@ class LocalizationController {
 
         switch (localization.type) {
             case "NEAREST_FINGERPRINT":
-                localization.devices = await NearestFingerPrint.localize(localization._id, localizationDevices)
+                localization.devices = await NearestFingerPrint.localize(localization._id, localizationDevices) || []
                 //localization.customLocalizationData = {devicesDebugData: localizationDevices}
                 break
             default:
                 break
         }
+
+        //Get rooms
+        localization.devices = this.populateDevicesRooms(localization.devices, localization.rooms)
 
         //populate geted data
         localization = await this.populateDeviceNames(localization)
@@ -229,6 +240,8 @@ class LocalizationController {
             await CacheController.store("loc." + localization.organizationId + "." + localization._id, localization)
         }
     }
+
+
 }
 
 const PlanController = require("./PlanController")
