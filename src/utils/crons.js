@@ -5,7 +5,7 @@ const io = require('@pm2/io')
 
 const calcTime = io.metric({
     name: 'Calculation time',
-    unit: 'ms'
+    id: 'app/realtime/calcTime',
 })
 
 class Crons {
@@ -36,8 +36,8 @@ class Crons {
 
                 await LocalizationController.localizeAll(socket)
 
-                console.log("Computed all locations: " + (new Date() - start) + "ms.")
-                calcTime.set((new Date() - start))
+                console.log("Computed all locations: " + parseInt(new Date() - start) + "ms.")
+                calcTime.set(parseInt(new Date() - start))
             },
             null,
             true,
