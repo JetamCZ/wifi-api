@@ -8,6 +8,13 @@ const http = require("http")
 const rateLimit = require("express-rate-limit")
 const uncaught = require("uncaught")
 const SocketManager = require("./controllers/SocketManager")
+const io = require('@pm2/io')
+
+const meter = io.meter({
+    name      : 'req/min',
+    samples   : 1,
+    timeframe : 60
+})
 
 uncaught.start()
 uncaught.addListener(function (error) {
@@ -30,6 +37,11 @@ app.use(
 
 app.use(express.urlencoded())
 app.use(express.json())
+
+app.use((req, res, next) => {
+    meter.mark()
+    next()
+})
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*")

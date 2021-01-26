@@ -13,6 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@pm2/io": "^4.3.5",
         "async": "^3.2.0",
         "basic-ftp": "^4.6.3",
         "bcrypt": "^5.0.0",
@@ -30,7 +31,6 @@
         "node-trilateration": "^1.0.0",
         "nodemon": "^2.0.4",
         "oui": "^11.0.38",
-        "pm2": "^4.5.1",
         "point-in-polygon": "^1.0.1",
         "socket.io": "^2.4.0",
         "socket.io-client": "^2.3.1",
