@@ -1,8 +1,44 @@
 const db = require("../db")
+const Random = require("../utils/Random")
 
 class OrganizationController {
     constructor() {
         this.model = db.getModel("Organization")
+        this.regKeyModel = db.getModel("RegistrationKey")
+    }
+
+    async newRegKey() {
+        const code = Random.randomString(30)
+
+        await new this.regKeyModel({
+            code: code,
+            is_used: false
+        }).save()
+
+        return code
+    }
+
+    async validKey(key) {
+        const regKey = await this.regKeyModel.findOne({code: key, is_used: false}).lean()
+
+        if(!regKey) {
+            throw new Error({type: "INVALID_REG_KEY"})
+        }
+    }
+
+    async useRegKey(key, orgId) {
+        const regKey = await this.regKeyModel.findOne({code: key, is_used: false}).lean()
+
+        if(!regKey) {
+            throw new Error("INVALID_REG_KEY")
+        }
+
+        await this.regKeyModel.findOneAndUpdate({code: key, is_used: false}, {
+            is_used: true,
+            usedDate: new Date(),
+            usedBy: orgId
+        })
+
     }
 
     async gerOrgById(id) {

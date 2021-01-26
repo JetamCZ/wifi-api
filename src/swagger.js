@@ -696,12 +696,16 @@ module.exports = {
                         "application/json": {
                             schema: {
                                 type: "object",
-                                required: ["name"],
+                                required: ["name", "regKey"],
                                 properties: {
                                     name: {
                                         type: "string",
-                                        example: "Ant4",
+                                        example: "Delta SŠIE",
                                         minLength: 3
+                                    },
+                                    regKey: {
+                                        type: "string",
+                                        example: "strfdiqunuhoczcruwez"
                                     }
                                 }
                             }
