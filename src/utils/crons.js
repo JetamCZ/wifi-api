@@ -6,6 +6,7 @@ const io = require('@pm2/io')
 const calcTime = io.metric({
     name: 'Calculation time',
     id: 'app/realtime/calcTime',
+    unit: 'ms'
 })
 
 class Crons {
