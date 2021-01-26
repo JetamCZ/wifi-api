@@ -1,6 +1,12 @@
 const CronJob = require("cron").CronJob
 const LocalizationController = require("../controllers/LocalizationController")
 const MeetController = require("../controllers/MeetController")
+const io = require('@pm2/io')
+
+const calcTime = io.metric({
+    name: 'Calculation time',
+    unit: 'ms'
+})
 
 class Crons {
     init(socket) {
@@ -31,6 +37,7 @@ class Crons {
                 await LocalizationController.localizeAll(socket)
 
                 console.log("Computed all locations: " + (new Date() - start) + "ms.")
+                calcTime.set((new Date() - start))
             },
             null,
             true,
