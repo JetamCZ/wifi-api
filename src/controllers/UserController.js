@@ -78,6 +78,11 @@ class UserController {
             return
         }
 
+        if(!(await this.getUser(userId)).organizationId === organizationId) {
+            throw new Error("User is not in your organization")
+            return
+        }
+
         const newDevice = await new deviceModel({
             organizationId,
             userId,

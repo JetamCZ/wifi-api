@@ -159,7 +159,7 @@ module.exports = {
                         "application/json": {
                             schema: {
                                 type: "object",
-                                required: ["name", "mac"],
+                                required: ["name", "mac", "userId"],
                                 properties: {
                                     mac: {
                                         type: "string",
@@ -168,7 +168,11 @@ module.exports = {
                                     name: {
                                         type: "string",
                                         example: "telefon"
-                                    }
+                                    },
+                                    userId: {
+                                        type: "string",
+                                        example: "5ffcd0626270ec2da06d6586"
+                                    },
                                 }
                             }
                         }
@@ -744,6 +748,24 @@ module.exports = {
                     }
                 }
             }
-        }
+        },
+        "/organization/people": {
+            get: {
+                tags: ["Organization"]
+            }
+        },
+        "/organization/person/{id}": {
+            get: {
+                tags: ["Organization"]
+            },
+            delete: {
+                tags: ["Organization"]
+            }
+        },
+        "/organization/newInvitation": {
+            get: {
+                tags: ["Organization"]
+            }
+        },
     }
 }

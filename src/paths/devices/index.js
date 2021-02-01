@@ -7,13 +7,13 @@ module.exports = {
         try {
             const device = await UserController.addDevice(
                 req.user.organization._id,
-                req.user.user._id,
+                req.body.userId,
                 req.body.mac,
                 req.body.name
             )
             res.json(device)
         } catch (e) {
-            res.status(400).send()
+            res.status(400).json(e.message)
         }
     },
     get: async (req, res) => {
