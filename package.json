@@ -9,7 +9,7 @@
         "start": "node src/app.js",
         "format": "prettier --write .",
         "runComputing": "node src/computingNode.js",
-        "runAutoSwag": "node src/autoSwag.js"
+        "runAutoSwag": "node src/autoSwagger/app.js"
     },
     "author": "",
     "license": "ISC",

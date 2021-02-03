@@ -39,6 +39,10 @@ class fr {
             mainFile.definitions = {...mainFile.definitions, ...f.definitions}
         }
 
+        const fl = require("../autoSwagger/done.json")
+
+        mainFile.paths = {...mainFile.paths, ...fl}
+
         return mainFile
     }
 }
