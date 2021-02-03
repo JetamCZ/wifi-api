@@ -35,5 +35,27 @@ module.exports = {
         get: {
             tags: ["Devices"]
         }
-    }
+    },
+    /*
+    "/localization": {
+        get: {
+            tags: ["Localization"]
+        }
+    },*/
+    "/localization/{id}": {
+        parameters: [
+            {
+                name: "id",
+                in: "path",
+                required: true,
+                description: "",
+                schema: {
+                    type: "string"
+                }
+            }
+        ],
+        get: {
+            tags: ["Localization"],
+        },
+    },
 }

@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1612378332317
+          "example": 1612392581783
          }
         }
        }
@@ -93,7 +93,7 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-01T22:57:41.539Z"
+             "example": "2021-02-03T22:49:39.519Z"
             }
            }
           }
@@ -113,22 +113,22 @@
             },
             "x": {
              "type": "number",
-             "example": 688
+             "example": 449.04315711050174
             },
             "y": {
              "type": "number",
-             "example": 180
+             "example": 571.5625
             },
             "f": {
              "type": "number",
-             "example": 0
+             "example": 1
             },
             "custom": {
              "type": "object",
              "properties": {
               "fingerPrint": {
                "type": "string",
-               "example": "6018281d84a2081728b69fd3"
+               "example": "5ffd92cb78813f498c2dedd6"
               }
              }
             },
@@ -139,19 +139,19 @@
               "properties": {
                "_id": {
                 "type": "string",
-                "example": "600d9e3f9069915cc838811d"
+                "example": "600ccda768a68a5798f6e8dc"
                },
                "name": {
                 "type": "string",
-                "example": "Kuchyň"
+                "example": "WC"
                },
                "f": {
                 "type": "number",
-                "example": 0
+                "example": 1
                },
                "color": {
                 "type": "string",
-                "example": "#3C34E9"
+                "example": "#253791"
                }
               }
              }
@@ -171,11 +171,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 257
+              "example": 219
              },
              "date": {
               "type": "string",
-              "example": "2021-02-03T18:52:10.419Z"
+              "example": "2021-02-03T22:49:40.380Z"
              }
             }
            }
@@ -318,31 +318,31 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5fe77cd25ab0e3710c882943"
+             "example": "5ff9da0c236b1f7080d2fde9"
             },
             "deviceKey": {
              "type": "string",
-             "example": "100000000d456a21"
+             "example": "00000000889cd176"
             },
             "organizationId": {
              "type": "string",
-             "example": "5fe3ea6abdb5d55da09d709b"
+             "example": "5ff9c17a236b1f7080d2fde0"
             },
             "name": {
              "type": "string",
-             "example": "Ant3"
+             "example": "Chodba záchod"
             },
             "desc": {
              "type": "string",
-             "example": "kuchyň - RPI 4GB"
+             "example": ""
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-03T18:52:11.423Z"
+             "example": "2021-02-03T22:49:41.388Z"
             },
             "rssi": {
              "type": "number",
-             "example": -74
+             "example": -86
             }
            }
           }

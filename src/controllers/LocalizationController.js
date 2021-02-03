@@ -202,11 +202,12 @@ class LocalizationController {
         const beaconIds = localization.beacons.map((beacon) => beacon.deviceKey)
         let localizationDevices = await this.getLocalizationDevicesData(localization, beaconIds)
 
-
         switch (localization.type) {
             case "NEAREST_FINGERPRINT":
                 localization.devices = await NearestFingerPrint.localize(localization._id, localizationDevices) || []
-                //localization.customLocalizationData = {devicesDebugData: localizationDevices}
+                break
+            case "TRILATERATION":
+                localization.devices = await Trilateration.localize(localization, localizationDevices) || []
                 break
             default:
                 break
@@ -248,5 +249,6 @@ const DeviceController = require("./DeviceController")
 const CacheController = require("./CacheController")
 const RoomController = require("./RoomController")
 const NearestFingerPrint = require("./LocalizationControllers/NearestFingerPrint")
+const Trilateration = require("./LocalizationControllers/Trilateration")
 
 module.exports = new LocalizationController()
