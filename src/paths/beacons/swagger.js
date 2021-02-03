@@ -1,0 +1,8 @@
+module.exports = {
+    definitions: {
+
+    },
+    paths: {
+
+    }
+}

@@ -34,6 +34,26 @@ module.exports = {
                 }
             }
         },
+        BaseUser: {
+            type: "object",
+            required: ["name", "email"],
+            properties: {
+                name: {
+                    type: "string",
+                    example: "Matěj Půhoný",
+                    minLength: 3
+                },
+                email: {
+                    type: "string",
+                    example: "info@puhony.eu",
+                    format: "email"
+                },
+                organizationId: {
+                    type: "string",
+                    example:  "5ff9c17a236b1f7080d2fde0"
+                }
+            }
+        },
         RegisterUser: {
             type: "object",
             required: ["name", "invCode", "email", "password"],
@@ -103,7 +123,6 @@ module.exports = {
                 summary: "Ping http server",
                 responses: {
                     200: {
-                        description: "pet response",
                         schema: {
                             type: "object",
                             properties: {
@@ -173,63 +192,6 @@ module.exports = {
                                         type: "string",
                                         example: "5ffcd0626270ec2da06d6586"
                                     },
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/auth/register": {
-            post: {
-                tags: ["Auth"],
-                summary: "Create new user",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                $ref: "#/definitions/RegisterUser"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/auth/login": {
-            post: {
-                tags: ["Auth"],
-                summary: "User Login",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["email", "password"],
-                                properties: {
-                                    email: {
-                                        type: "string",
-                                        example: "info@puhony.eu"
-                                    },
-                                    password: {
-                                        type: "string",
-                                        example: "priliszlutouckykunupeldabelskeody"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                responses: {
-                    200: {
-                        description: "Successfull login",
-                        content: {
-                            "application/json": {
-                                schema: {
-                                    type: "string",
-                                    example:
-                                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                                 }
                             }
                         }
@@ -688,65 +650,6 @@ module.exports = {
             },
             delete: {
                 tags: ["Beacons"]
-            }
-        },
-        "/auth/create-org": {
-            post: {
-                tags: ["Auth"],
-                summary: "Create new organization",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["name", "regKey"],
-                                properties: {
-                                    name: {
-                                        type: "string",
-                                        example: "Delta SŠIE",
-                                        minLength: 3
-                                    },
-                                    regKey: {
-                                        type: "string",
-                                        example: "strfdiqunuhoczcruwez"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                responses: {
-                    200: {
-                        description: "Successfull login",
-                        content: {
-                            "application/json": {
-                                schema: {
-                                    type: "object",
-                                    properties: {
-                                        _id: {
-                                            type: "string",
-                                            example: "5fcf53f1af1ccc7390ae45df"
-                                        },
-                                        name: {
-                                            type: "string",
-                                            example: "Ant4",
-                                            minLength: 3
-                                        },
-                                        invCode: {
-                                            type: "string",
-                                            example: "lwxrutbNp4O56TZbbKo"
-                                        },
-                                        created: {
-                                            type: "string",
-                                            example: "2020-12-08T10:19:50.244Z"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         },
         "/organization/people": {

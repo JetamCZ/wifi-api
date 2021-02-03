@@ -23,8 +23,6 @@ uncaught.addListener(function (error) {
 
 const jwt = require("jsonwebtoken")
 
-const swaggerDoc = require("./swagger")
-
 const app = express()
 const server = http.createServer(app)
 const port = process.env.PORT || 3000
@@ -49,7 +47,11 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDoc))
+const swaggerDoc = require("./swagger")
+const fr = require('./utils/fr')
+//console.log(fr.getSwaggerMegaFile())
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(fr.getSwaggerMegaFile()))
 
 app.use((req, res, next) => {
     if (req.path === "/beacon") {
