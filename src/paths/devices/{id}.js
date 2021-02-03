@@ -1,6 +1,7 @@
 const DeviceController = require("../../controllers/DeviceController")
 
 module.exports = {
+    /*
     get: async (req, res) => {
         const device = await DeviceController.getDeviceById(req.params.id)
 
@@ -11,6 +12,7 @@ module.exports = {
 
         res.json(device)
     },
+     */
     delete: async (req, res) => {
         const device = await DeviceController.getDeviceById(req.params.id)
 

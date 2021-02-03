@@ -8,13 +8,15 @@
         "dev": "nodemon src/app.js",
         "start": "node src/app.js",
         "format": "prettier --write .",
-        "runComputing": "node src/computingNode.js"
+        "runComputing": "node src/computingNode.js",
+        "runAutoSwag": "node src/autoSwag.js"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@pm2/io": "^4.3.5",
         "async": "^3.2.0",
+        "axios": "^0.21.1",
         "basic-ftp": "^4.6.3",
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
@@ -26,6 +28,7 @@
         "express-openapi-validator": "^4.8.0",
         "express-rate-limit": "^5.2.3",
         "formidable": "^1.2.2",
+        "get-object-type": "^0.0.2",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.11.13",
         "node-trilateration": "^1.0.0",

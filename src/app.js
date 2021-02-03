@@ -47,10 +47,7 @@ app.use(function (req, res, next) {
     next()
 })
 
-const swaggerDoc = require("./swagger")
 const fr = require('./utils/fr')
-//console.log(fr.getSwaggerMegaFile())
-
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(fr.getSwaggerMegaFile()))
 
 app.use((req, res, next) => {

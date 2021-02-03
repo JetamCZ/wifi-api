@@ -14,19 +14,5 @@ module.exports = {
             res.json(uploadedFile)
             fs.unlinkSync(file.path)
         })
-
-        //const file = await ImageController.upload('test', 'temp')
-
-        /*
-        await fs.readFile('test.jpg', (err,data) => {
-
-        });
-        */
-
-        //            const file = await ImageController.upload('test', 'temp')
-        //
-        //             res.json(data);
-
-        //res.sendFile('test.jpg')
     }
 }

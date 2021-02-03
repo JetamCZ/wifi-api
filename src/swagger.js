@@ -12,6 +12,28 @@ module.exports = {
                 name: {
                     type: "string",
                     example: "Beacon 18645458646"
+                },
+                deviceKey: {
+                    type: "string",
+                    example: "0000000fzugjkln"
+                },
+                organizationId: {
+                    type: "string",
+                    example: "565894516478"
+                },
+                desc: {
+                        type: "string",
+                        example: "desc"
+                },
+                lastSeenDate: {
+                    type: "string",
+                    example: "2021-02-01T22:57:41.539Z"
+                },
+                devices: {
+                    type: "array",
+                    items: {
+
+                    }
                 }
             },
             required: ["name"]
@@ -54,6 +76,40 @@ module.exports = {
                 }
             }
         },
+        UserDefault: {
+            type: "object",
+            properties: {
+                _id: {
+                    type: "string",
+                    example: "5ffd51c84411eb4b040df3f9",
+                    minLength: 3
+                },
+                name: {
+                    type: "string",
+                    example: "Matěj Půhoný",
+                    minLength: 3
+                },
+                email: {
+                    type: "string",
+                    example: "info@puhony.eu",
+                    format: "email"
+                },
+            }
+        },
+        OrganizationDefault: {
+            type: "object",
+            properties: {
+                _id: {
+                    type: "string",
+                    example: "5ffd51c84411eb4b040df3f9",
+                    minLength: 3
+                },
+                name: {
+                    type: "string",
+                    example: "Delta SŠIE",
+                },
+            }
+        },
         RegisterUser: {
             type: "object",
             required: ["name", "invCode", "email", "password"],
@@ -78,252 +134,9 @@ module.exports = {
                     minLength: 4
                 }
             }
-        },
-        Map: {
-            type: "object",
-            required: ["name", "beacons"],
-            properties: {
-                name: {
-                    type: "string",
-                    example: "Zahrada"
-                },
-                image: {
-                    type: "string",
-                    example: "1.png"
-                },
-                beacons: {
-                    type: "array",
-                    items: {
-                        type: "object",
-                        required: ["deviceKey", "x", "y"],
-                        properties: {
-                            deviceKey: {
-                                type: "string",
-                                example: "00000000fg5f6f00"
-                            },
-                            x: {
-                                type: "number",
-                                example: 500
-                            },
-                            y: {
-                                type: "number",
-                                example: 500
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     paths: {
-        "/ping": {
-            get: {
-                tags: ["test"],
-                description: "",
-                summary: "Ping http server",
-                responses: {
-                    200: {
-                        schema: {
-                            type: "object",
-                            properties: {
-                                time: {
-                                    type: "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/data": {
-            post: {
-                tags: ["data endpoint"],
-                summary: "Entry point for data from beacons",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["device_key"],
-                                properties: {
-                                    device_key: {
-                                        type: "string",
-                                        example: "c0:b6:f9:8e:87:6c"
-                                    },
-                                    devices: {
-                                        type: "array",
-                                        items: {
-                                            $ref: "#/definitions/RSSIInfo"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/devices": {
-            get: {
-                tags: ["Devices"],
-                summary: "get all devices"
-            },
-            post: {
-                tags: ["Devices"],
-                summary: "Add new device",
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["name", "mac", "userId"],
-                                properties: {
-                                    mac: {
-                                        type: "string",
-                                        example: "fc:95:40:35:dc:b5"
-                                    },
-                                    name: {
-                                        type: "string",
-                                        example: "telefon"
-                                    },
-                                    userId: {
-                                        type: "string",
-                                        example: "5ffcd0626270ec2da06d6586"
-                                    },
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/localization": {
-            post: {
-                tags: ["Localization"],
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: [],
-                                properties: {
-                                    name: {
-                                        type: "string",
-                                        example: "Testovací lokalizace"
-                                    },
-                                    planId: {
-                                        type: "string",
-                                        example: "89464e948564784687"
-                                    },
-                                    type: {
-                                        type: "string",
-                                        example: "NEAREST_FINGERPRINT"
-                                    },
-                                    beacons: {
-                                        type: "array",
-                                        items: {
-                                            type: "object",
-                                            properties: {
-                                                deviceKey: {
-                                                    type: "string",
-                                                    example: "89464e948564784687"
-                                                },
-                                                x: {
-                                                    type: "number",
-                                                    example: 0
-                                                },
-                                                y: {
-                                                    type: "number",
-                                                    example: 0
-                                                },
-                                                f: {
-                                                    type: "number",
-                                                    example: 0
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            get: {
-                tags: ["Localization"]
-            }
-        },
-        "/localization/{id}": {
-            parameters: [
-                {
-                    name: "id",
-                    in: "path",
-                    required: true,
-                    description: "",
-                    schema: {
-                        type: "string"
-                    }
-                }
-            ],
-            get: {
-                tags: ["Localization"]
-            },
-            delete: {
-                tags: ["Localization"]
-            }
-        },
-        "/localization/{id}/room": {
-            parameters: [
-                {
-                    name: "id",
-                    in: "path",
-                    required: true,
-                    description: "",
-                    schema: {
-                        type: "string"
-                    }
-                }
-            ],
-            post: {
-                tags: ["Rooms"],
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["name", "polygon", "f"],
-                                properties: {
-                                    name: {
-                                        type: "string",
-                                        example: "Obývací pokoj"
-                                    },
-                                    polygon: {
-                                        type: "array",
-                                        items: {
-                                            type: "array",
-                                            maxItems: 2,
-                                            minItems: 2,
-                                            items: {
-                                                type: "number",
-                                            },
-                                            example: [0,0]
-                                        }
-                                    },
-                                    f: {
-                                        type: "number",
-                                        example: 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/room/{roomId}": {
             parameters: [
                 {
@@ -574,82 +387,6 @@ module.exports = {
             },
             delete: {
                 tags: ["Plans"]
-            }
-        },
-        "/beacons": {
-            get: {
-                tags: ["Beacons"]
-            },
-            post: {
-                tags: ["Beacons"],
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["deviceKey", "name", "desc"],
-                                properties: {
-                                    deviceKey: {
-                                        type: "string",
-                                        example: "Barák"
-                                    },
-                                    name: {
-                                        type: "string",
-                                        example: "Barák"
-                                    },
-                                    desc: {
-                                        type: "string",
-                                        example: "V kuchyni"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/beacons/{id}": {
-            parameters: [
-                {
-                    name: "id",
-                    in: "path",
-                    required: true,
-                    description: "",
-                    schema: {
-                        type: "string"
-                    }
-                }
-            ],
-            get: {
-                tags: ["Beacons"]
-            },
-            put: {
-                tags: ["Beacons"],
-                requestBody: {
-                    required: true,
-                    content: {
-                        "application/json": {
-                            schema: {
-                                type: "object",
-                                required: ["name", "desc"],
-                                properties: {
-                                    name: {
-                                        type: "string",
-                                        example: "Barák"
-                                    },
-                                    desc: {
-                                        type: "string",
-                                        example: "V kuchyni"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            delete: {
-                tags: ["Beacons"]
             }
         },
         "/organization/people": {
