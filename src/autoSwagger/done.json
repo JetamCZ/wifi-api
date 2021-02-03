@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1612373572574
+          "example": 1612378332317
          }
         }
        }
@@ -24,6 +24,17 @@
   }
  },
  "/localization/{id}": {
+  "parameters": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "description": "",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ],
   "get": {
    "tags": [
     "Localization"
@@ -102,22 +113,22 @@
             },
             "x": {
              "type": "number",
-             "example": 412.2102529006779
+             "example": 688
             },
             "y": {
              "type": "number",
-             "example": 141.34375
+             "example": 180
             },
             "f": {
              "type": "number",
-             "example": 1
+             "example": 0
             },
             "custom": {
              "type": "object",
              "properties": {
               "fingerPrint": {
                "type": "string",
-               "example": "601824743480fc1dbe5de48c"
+               "example": "6018281d84a2081728b69fd3"
               }
              }
             },
@@ -128,19 +139,19 @@
               "properties": {
                "_id": {
                 "type": "string",
-                "example": "600ccd7b68a68a5798f6e8db"
+                "example": "600d9e3f9069915cc838811d"
                },
                "name": {
                 "type": "string",
-                "example": "Pokoj 2"
+                "example": "Kuchyň"
                },
                "f": {
                 "type": "number",
-                "example": 1
+                "example": 0
                },
                "color": {
                 "type": "string",
-                "example": "#886C25"
+                "example": "#3C34E9"
                }
               }
              }
@@ -160,11 +171,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 244
+              "example": 257
              },
              "date": {
               "type": "string",
-              "example": "2021-02-03T17:32:50.403Z"
+              "example": "2021-02-03T18:52:10.419Z"
              }
             }
            }
@@ -246,6 +257,106 @@
              "type": "string",
              "example": "#32a852"
             }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "/devices/{id}": {
+  "parameters": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "description": "",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ],
+  "get": {
+   "tags": [
+    "Devices"
+   ],
+   "responses": {
+    "200": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "_id": {
+          "type": "string",
+          "example": "5ffd51c84411eb4b040df3f9"
+         },
+         "organizationId": {
+          "type": "string",
+          "example": "5ff9c17a236b1f7080d2fde0"
+         },
+         "userId": {
+          "type": "string",
+          "example": "5ff9c1d0236b1f7080d2fde2"
+         },
+         "mac": {
+          "type": "string",
+          "example": "58:00:e3:ca:99:01"
+         },
+         "name": {
+          "type": "string",
+          "example": "Matěj NTB"
+         },
+         "meets": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "_id": {
+             "type": "string",
+             "example": "5fe77cd25ab0e3710c882943"
+            },
+            "deviceKey": {
+             "type": "string",
+             "example": "100000000d456a21"
+            },
+            "organizationId": {
+             "type": "string",
+             "example": "5fe3ea6abdb5d55da09d709b"
+            },
+            "name": {
+             "type": "string",
+             "example": "Ant3"
+            },
+            "desc": {
+             "type": "string",
+             "example": "kuchyň - RPI 4GB"
+            },
+            "lastSeenDate": {
+             "type": "string",
+             "example": "2021-02-03T18:52:11.423Z"
+            },
+            "rssi": {
+             "type": "number",
+             "example": -74
+            }
+           }
+          }
+         },
+         "user": {
+          "type": "object",
+          "properties": {
+           "name": {
+            "type": "string",
+            "example": "Karel Novák"
+           },
+           "email": {
+            "type": "string",
+            "example": "d@d"
            }
           }
          }

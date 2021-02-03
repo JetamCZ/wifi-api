@@ -36,21 +36,21 @@ class LocalizationController {
                     deviceKey: {$in: beaconsIds},
                     mac: {$in: devicesMacs},
                     date: {$gt: extDate}
-                })
+                }).lean()
             } else {
                 return await meetModel.find({
                     deviceKey: {$in: beaconsIds},
                     date: {$gt: extDate}
-                })
+                }).lean()
             }
         } else {
             if (devicesMacs) {
                 return await meetModel.find({
                     mac: {$in: devicesMacs},
                     date: {$gt: extDate}
-                })
+                }).lean()
             } else {
-                return await meetModel.find({date: {$gt: extDate}})
+                return await meetModel.find({date: {$gt: extDate}}).lean()
             }
         }
     }
@@ -75,20 +75,18 @@ class LocalizationController {
 
     async locationData(beaconsIds, devicesMacs) {
         const meets = await this._getMeets(beaconsIds, devicesMacs)
+
         let devices = {}
 
-        meets.forEach((meet) => {
-            delete meet.mac
-
-            if (devices[meet.mac]) {
-                devices[meet.mac].meets.push(meet)
-            } else {
-                devices[meet.mac] = {
-                    meets: []
-                }
-                devices[meet.mac].meets.push(meet)
+        for(const meet of meets) {
+            if(!devices[meet.mac]) {
+                devices[meet.mac] = {meets: []}
             }
-        })
+
+            devices[meet.mac].meets.push(meet)
+
+            delete meet.mac
+        }
 
         for (const [key, value] of Object.entries(devices)) {
             value.meets = value.meets.sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))

@@ -1,4 +1,7 @@
 const DeviceController = require("../../controllers/DeviceController")
+const LocalizationController = require("../../controllers/LocalizationController")
+const UserController = require("../../controllers/UserController")
+const OrganizationController = require("../../controllers/OrganizationController")
 
 module.exports = {
     get: async (req, res) => {
@@ -9,7 +12,22 @@ module.exports = {
             return
         }
 
-        device.data = {}
+        const meets = await LocalizationController._getMeets(null, device.mac)
+        const deviceMeets = []
+
+        for(const meet of meets) {
+            const m = await OrganizationController.getOrgBeaconByKey(meet.deviceKey, device.organizationId)
+            m.rssi = meet.rssi
+            deviceMeets.push(m)
+        }
+
+        device.meets = deviceMeets
+
+        const user = await UserController.getUser(device.userId)
+        device.user = {
+            name: user.name,
+            email: user.email
+        }
 
         res.json(device)
     },

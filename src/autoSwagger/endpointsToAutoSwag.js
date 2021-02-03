@@ -5,8 +5,35 @@ module.exports = {
         }
     },
     "/localization/{id}": {
+        parameters: [
+            {
+                name: "id",
+                in: "path",
+                required: true,
+                description: "",
+                schema: {
+                    type: "string"
+                }
+            }
+        ],
         get: {
             tags: ["Localization"]
+        }
+    },
+    "/devices/{id}": {
+        parameters: [
+            {
+                name: "id",
+                in: "path",
+                required: true,
+                description: "",
+                schema: {
+                    type: "string"
+                }
+            }
+        ],
+        get: {
+            tags: ["Devices"]
         }
     }
 }

@@ -167,11 +167,11 @@ class OrganizationController {
         return orgbeacon
     }
 
-    async getOrgBeaconByKey(deviceKey) {
+    async getOrgBeaconByKey(deviceKey, organizationId) {
         const orgBeaconModel = db.getModel("OrgBeacon")
         const beaconModel = db.getModel("Beacon")
 
-        const orgbeacon = await orgBeaconModel.findOne({ deviceKey }).lean()
+        const orgbeacon = await orgBeaconModel.findOne({ deviceKey, organizationId }).lean()
 
         const beacon = await beaconModel.findOne({
             deviceKey: orgbeacon.deviceKey
