@@ -26,7 +26,9 @@ class Trilateration {
                         x: pos.x,
                         y: pos.y,
                         f: 0,
-                        custom: {}
+                        custom: {
+                            deviceCalcData
+                        }
                     })
                 }
             }
