@@ -163,7 +163,7 @@ class LocalizationController {
 
     async populateDeviceNames(localization) {
         for (const device of localization.devices) {
-            device.name = (await DeviceController.getDeviceByMac(device.mac))?.name || ""
+            device.name = (await DeviceController.getDeviceByMac(device.mac, localization.organizationId))?.name || ""
         }
 
         return localization

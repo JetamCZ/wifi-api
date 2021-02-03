@@ -16,8 +16,8 @@ class DeviceController {
         return await this.model.findById(id).lean()
     }
 
-    async getDeviceByMac(mac) {
-        return await this.model.findOne({ mac }).lean()
+    async getDeviceByMac(mac, organizationId) {
+        return await this.model.findOne({ mac, organizationId }).lean()
     }
 
     async deleteByID(id) {
