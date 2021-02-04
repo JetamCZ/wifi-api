@@ -12,6 +12,10 @@ class UserController {
             throw new Error("user must have password")
         }
 
+        if(await this.model.findOne({email: user.email})) {
+            throw new Error("Email duplicity")
+        }
+
         const invitation = await OrganizationController.useCode(inv)
 
         const newUser = await new this.model({
