@@ -46,7 +46,7 @@ class Trilateration {
             }
         }
 
-        return this.calc(dx+0.3)
+        return this.calc(data, dx+0.3, maxDx)
     }
 
     async localize(localization, localizationData) {
@@ -66,7 +66,7 @@ class Trilateration {
             }
 
             if(deviceCalcData.length > 2) {
-                const pos = this.calc(data, 1, 50)
+                const pos = this.calc(deviceCalcData, 1, 50)
 
                 if(pos) {
                     successfullyLocatedDevices.push({
