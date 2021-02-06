@@ -1,7 +1,5 @@
 module.exports = {
-    definitions: {
-
-    },
+    definitions: {},
     paths: {
         "/check-logged": {
             get: {
@@ -80,6 +78,6 @@ module.exports = {
                     }
                 }
             }
-        },
+        }
     }
 }

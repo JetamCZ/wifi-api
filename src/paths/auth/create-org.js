@@ -16,7 +16,7 @@ module.exports = {
 
             res.json(org)
         } catch (e) {
-            if(e.message === "INVALID_REG_KEY") {
+            if (e.message === "INVALID_REG_KEY") {
                 res.status(403).json({})
             } else {
                 res.status(500).json({})

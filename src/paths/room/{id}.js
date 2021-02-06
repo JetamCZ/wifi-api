@@ -1,5 +1,5 @@
-const RoomController = require('../../controllers/RoomController')
-const LocalizationController = require('../../controllers/LocalizationController')
+const RoomController = require("../../controllers/RoomController")
+const LocalizationController = require("../../controllers/LocalizationController")
 
 module.exports = {
     put: async (req, res) => {

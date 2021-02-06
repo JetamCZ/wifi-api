@@ -55,7 +55,7 @@ module.exports = {
             }
         ],
         get: {
-            tags: ["Localization"],
-        },
-    },
+            tags: ["Localization"]
+        }
+    }
 }

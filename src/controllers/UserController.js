@@ -12,7 +12,7 @@ class UserController {
             throw new Error("user must have password")
         }
 
-        if(await this.model.findOne({email: user.email})) {
+        if (await this.model.findOne({ email: user.email })) {
             throw new Error("Email duplicity")
         }
 
@@ -82,7 +82,7 @@ class UserController {
             return
         }
 
-        if(!(await this.getUser(userId)).organizationId === organizationId) {
+        if (!(await this.getUser(userId)).organizationId === organizationId) {
             throw new Error("User is not in your organization")
             return
         }

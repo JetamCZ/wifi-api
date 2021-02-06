@@ -8,12 +8,12 @@ const http = require("http")
 const rateLimit = require("express-rate-limit")
 const uncaught = require("uncaught")
 const SocketManager = require("./controllers/SocketManager")
-const io = require('@pm2/io')
+const io = require("@pm2/io")
 
 const meter = io.meter({
-    name      : 'req/min',
-    samples   : 1,
-    timeframe : 60
+    name: "req/min",
+    samples: 1,
+    timeframe: 60
 })
 
 uncaught.start()
@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
     next()
 })
 
-const fr = require('./utils/fr')
+const fr = require("./utils/fr")
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(fr.getSwaggerMegaFile()))
 
 app.use((req, res, next) => {

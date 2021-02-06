@@ -18,8 +18,7 @@ module.exports = {
 
             res.json({ user, token })
         } catch (e) {
-            res.status(403).json( "Wrong Invitation code!")
+            res.status(403).json("Wrong Invitation code!")
         }
-
     }
 }

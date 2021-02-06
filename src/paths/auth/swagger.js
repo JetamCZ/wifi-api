@@ -1,7 +1,5 @@
 module.exports = {
-    definitions: {
-
-    },
+    definitions: {},
     paths: {
         "/auth/register": {
             post: {
@@ -30,7 +28,8 @@ module.exports = {
                                     properties: {
                                         token: {
                                             type: "string",
-                                            example:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                                            example:
+                                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                                         },
                                         user: {
                                             $ref: "#/definitions/BaseUser"
@@ -173,6 +172,6 @@ module.exports = {
                     }
                 }
             }
-        },
+        }
     }
 }

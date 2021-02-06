@@ -11,29 +11,29 @@ module.exports = {
                 },
                 organizationId: {
                     type: "string",
-                    example: "5ff9c17a236b1f7080d2fde0",
+                    example: "5ff9c17a236b1f7080d2fde0"
                 },
                 userId: {
                     type: "string",
-                    example: "5ff9c17a236b1f7080d2fde0",
+                    example: "5ff9c17a236b1f7080d2fde0"
                 },
                 mac: {
                     type: "string",
-                    example: "58:00:00:00:00:00",
+                    example: "58:00:00:00:00:00"
                 },
                 name: {
                     type: "string",
-                    example: "NTB",
+                    example: "NTB"
                 },
                 user: {
                     $ref: "#/definitions/UserDefault"
                 },
-                "lastSeenDate": {
+                lastSeenDate: {
                     type: "string",
                     example: "2021-02-03T13:41:39.670Z"
                 }
             }
-        },
+        }
     },
     paths: {
         "/devices": {
@@ -74,7 +74,7 @@ module.exports = {
                                     userId: {
                                         type: "string",
                                         example: "5ffcd0626270ec2da06d6586"
-                                    },
+                                    }
                                 }
                             }
                         }

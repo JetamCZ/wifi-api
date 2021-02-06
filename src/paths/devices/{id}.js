@@ -15,7 +15,7 @@ module.exports = {
         const meets = await LocalizationController._getMeets(null, device.mac)
         const deviceMeets = []
 
-        for(const meet of meets) {
+        for (const meet of meets) {
             const m = await OrganizationController.getOrgBeaconByKey(meet.deviceKey, device.organizationId)
             m.rssi = meet.rssi
             deviceMeets.push(m)

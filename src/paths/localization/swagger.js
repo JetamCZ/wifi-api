@@ -79,7 +79,7 @@ module.exports = {
                         }
                     }
                 }
-            },
+            }
         },
         "/localization/{id}": {
             parameters: [
@@ -130,9 +130,9 @@ module.exports = {
                                             maxItems: 2,
                                             minItems: 2,
                                             items: {
-                                                type: "number",
+                                                type: "number"
                                             },
-                                            example: [0,0]
+                                            example: [0, 0]
                                         }
                                     },
                                     f: {
@@ -276,6 +276,6 @@ module.exports = {
                     }
                 }
             }
-        },
+        }
     }
 }

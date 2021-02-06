@@ -19,26 +19,28 @@ class OrganizationController {
     }
 
     async validKey(key) {
-        const regKey = await this.regKeyModel.findOne({code: key, is_used: false}).lean()
+        const regKey = await this.regKeyModel.findOne({ code: key, is_used: false }).lean()
 
-        if(!regKey) {
-            throw new Error({type: "INVALID_REG_KEY"})
+        if (!regKey) {
+            throw new Error({ type: "INVALID_REG_KEY" })
         }
     }
 
     async useRegKey(key, orgId) {
-        const regKey = await this.regKeyModel.findOne({code: key, is_used: false}).lean()
+        const regKey = await this.regKeyModel.findOne({ code: key, is_used: false }).lean()
 
-        if(!regKey) {
+        if (!regKey) {
             throw new Error("INVALID_REG_KEY")
         }
 
-        await this.regKeyModel.findOneAndUpdate({code: key, is_used: false}, {
-            is_used: true,
-            usedDate: new Date(),
-            usedBy: orgId
-        })
-
+        await this.regKeyModel.findOneAndUpdate(
+            { code: key, is_used: false },
+            {
+                is_used: true,
+                usedDate: new Date(),
+                usedBy: orgId
+            }
+        )
     }
 
     async gerOrgById(id) {

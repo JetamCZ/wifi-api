@@ -10,7 +10,7 @@ class SocketManager {
 
     init(httpServer) {
         const io = socketIo(httpServer, {
-            transport : ['websocket'],
+            transport: ["websocket"],
             cors: {
                 origin: "*",
                 methods: ["GET", "POST"]

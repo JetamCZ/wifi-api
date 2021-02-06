@@ -22,8 +22,8 @@ module.exports = {
                     example: "565894516478"
                 },
                 desc: {
-                        type: "string",
-                        example: "desc"
+                    type: "string",
+                    example: "desc"
                 },
                 lastSeenDate: {
                     type: "string",
@@ -31,9 +31,7 @@ module.exports = {
                 },
                 devices: {
                     type: "array",
-                    items: {
-
-                    }
+                    items: {}
                 }
             },
             required: ["name"]
@@ -72,7 +70,7 @@ module.exports = {
                 },
                 organizationId: {
                     type: "string",
-                    example:  "5ff9c17a236b1f7080d2fde0"
+                    example: "5ff9c17a236b1f7080d2fde0"
                 }
             }
         },
@@ -93,7 +91,7 @@ module.exports = {
                     type: "string",
                     example: "info@puhony.eu",
                     format: "email"
-                },
+                }
             }
         },
         OrganizationDefault: {
@@ -106,8 +104,8 @@ module.exports = {
                 },
                 name: {
                     type: "string",
-                    example: "Delta SŠIE",
-                },
+                    example: "Delta SŠIE"
+                }
             }
         },
         RegisterUser: {
@@ -136,7 +134,5 @@ module.exports = {
             }
         }
     },
-    paths: {
-
-    }
+    paths: {}
 }

@@ -1,4 +1,4 @@
-const getType = require('get-object-type');
+const getType = require("get-object-type")
 
 const getTypes = (obj) => {
     let res = null
@@ -7,34 +7,34 @@ const getTypes = (obj) => {
         case "Object":
             res = {
                 type: "object",
-                properties: {},
+                properties: {}
             }
 
             for (const [key, value] of Object.entries(obj)) {
                 res.properties[key] = getTypes(value)
             }
-            break;
+            break
         case "Array":
             res = {
                 type: "array",
-                items: obj[0] ? getTypes(obj[0]) : {},
+                items: obj[0] ? getTypes(obj[0]) : {}
             }
-            break;
+            break
         case "Number":
             res = {
                 type: "number",
                 example: obj
             }
-            break;
+            break
         case "String":
             res = {
                 type: "string",
                 example: obj
             }
-            break;
+            break
         default:
             throw new Error("Unknown type")
-            break;
+            break
     }
 
     return res

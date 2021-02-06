@@ -17,7 +17,7 @@ class LocalizationController {
     }
 
     async getOrgAll(organizationId) {
-        return await this.model.find({organizationId}).lean()
+        return await this.model.find({ organizationId }).lean()
     }
 
     async getById(id) {
@@ -32,25 +32,31 @@ class LocalizationController {
 
         if (beaconsIds) {
             if (devicesMacs) {
-                return await meetModel.find({
-                    deviceKey: {$in: beaconsIds},
-                    mac: {$in: devicesMacs},
-                    date: {$gt: extDate}
-                }).lean()
+                return await meetModel
+                    .find({
+                        deviceKey: { $in: beaconsIds },
+                        mac: { $in: devicesMacs },
+                        date: { $gt: extDate }
+                    })
+                    .lean()
             } else {
-                return await meetModel.find({
-                    deviceKey: {$in: beaconsIds},
-                    date: {$gt: extDate}
-                }).lean()
+                return await meetModel
+                    .find({
+                        deviceKey: { $in: beaconsIds },
+                        date: { $gt: extDate }
+                    })
+                    .lean()
             }
         } else {
             if (devicesMacs) {
-                return await meetModel.find({
-                    mac: {$in: devicesMacs},
-                    date: {$gt: extDate}
-                }).lean()
+                return await meetModel
+                    .find({
+                        mac: { $in: devicesMacs },
+                        date: { $gt: extDate }
+                    })
+                    .lean()
             } else {
-                return await meetModel.find({date: {$gt: extDate}}).lean()
+                return await meetModel.find({ date: { $gt: extDate } }).lean()
             }
         }
     }
@@ -78,9 +84,9 @@ class LocalizationController {
 
         let devices = {}
 
-        for(const meet of meets) {
-            if(!devices[meet.mac]) {
-                devices[meet.mac] = {meets: []}
+        for (const meet of meets) {
+            if (!devices[meet.mac]) {
+                devices[meet.mac] = { meets: [] }
             }
 
             devices[meet.mac].meets.push(meet)
@@ -109,13 +115,13 @@ class LocalizationController {
     }
 
     async getByPlan(id) {
-        return await this.model.find({planId: id}).lean()
+        return await this.model.find({ planId: id }).lean()
     }
 
     async delete(localizationId) {
         const fingerprintModel = db.getModel("Fingerprint")
 
-        await fingerprintModel.deleteMany({localizationId})
+        await fingerprintModel.deleteMany({ localizationId })
 
         await this.model.findByIdAndRemove(localizationId)
     }
@@ -177,7 +183,10 @@ class LocalizationController {
 
     populateDevicesRooms(devices, rooms) {
         for (const device of devices) {
-            device.rooms = RoomController.getRoomByPoint(rooms.filter(r => r.f === device.f), [device.x, device.y])
+            device.rooms = RoomController.getRoomByPoint(
+                rooms.filter((r) => r.f === device.f),
+                [device.x, device.y]
+            )
         }
 
         return devices
@@ -204,10 +213,10 @@ class LocalizationController {
 
         switch (localization.type) {
             case "NEAREST_FINGERPRINT":
-                localization.devices = await NearestFingerPrint.localize(localization._id, localizationDevices) || []
+                localization.devices = (await NearestFingerPrint.localize(localization._id, localizationDevices)) || []
                 break
             case "TRILATERATION":
-                localization.devices = await Trilateration.localize(localization, localizationDevices) || []
+                localization.devices = (await Trilateration.localize(localization, localizationDevices)) || []
                 break
             default:
                 break
@@ -239,8 +248,6 @@ class LocalizationController {
             await CacheController.store("loc." + localization.organizationId + "." + localization._id, localization)
         }
     }
-
-
 }
 
 const PlanController = require("./PlanController")

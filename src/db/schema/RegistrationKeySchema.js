@@ -2,7 +2,7 @@ const { Schema } = require("mongoose")
 
 const RegistrationKeySchema = new Schema({
     usedBy: {
-        type: String,
+        type: String
     },
     code: {
         type: String,

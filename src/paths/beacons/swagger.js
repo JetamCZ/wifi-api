@@ -1,7 +1,5 @@
 module.exports = {
-    definitions: {
-
-    },
+    definitions: {},
     paths: {
         "/beacons": {
             get: {
@@ -100,6 +98,6 @@ module.exports = {
             delete: {
                 tags: ["Beacons"]
             }
-        },
+        }
     }
 }

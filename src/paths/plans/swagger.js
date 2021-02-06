@@ -1,7 +1,5 @@
 module.exports = {
-    definitions: {
-
-    },
+    definitions: {},
     paths: {
         "/plans": {
             get: {
@@ -10,51 +8,51 @@ module.exports = {
                     200: {
                         content: {
                             "application/json": {
-                                schema:
-                                    {
-                                        "type":"array",
-                                        "items":{
-                                            "type":"object",
-                                            "properties":{
-                                                "_id":{
-                                                    "type":"string",
-                                                    "example":"5ff9da5f236b1f7080d2fdeb"
-                                                },
-                                                "floors":{
-                                                    "type":"array",
-                                                    "items":{
-                                                        "type":"object",
-                                                        "properties":{
-                                                            "_id":{
-                                                                "type":"string",
-                                                                "example":"5ff9da5f236b1f708 0d2fdec"
-                                                            },
-                                                            "name":{
-                                                                "type":"string",
-                                                                "example":"přízemí"
-                                                            },
-                                                            "image":{
-                                                                "type":"string",
-                                                                "example":"https://img-wifi.puhony.eu/plans/OEgBLNGTxvXkX0HCaIq3ZWeapKn3cCKU8FMhJjav1610209872470.png"
-                                                            },
-                                                            "floor":{
-                                                                "type":"number",
-                                                                "example":0
-                                                            }
+                                schema: {
+                                    type: "array",
+                                    items: {
+                                        type: "object",
+                                        properties: {
+                                            _id: {
+                                                type: "string",
+                                                example: "5ff9da5f236b1f7080d2fdeb"
+                                            },
+                                            floors: {
+                                                type: "array",
+                                                items: {
+                                                    type: "object",
+                                                    properties: {
+                                                        _id: {
+                                                            type: "string",
+                                                            example: "5ff9da5f236b1f708 0d2fdec"
+                                                        },
+                                                        name: {
+                                                            type: "string",
+                                                            example: "přízemí"
+                                                        },
+                                                        image: {
+                                                            type: "string",
+                                                            example:
+                                                                "https://img-wifi.puhony.eu/plans/OEgBLNGTxvXkX0HCaIq3ZWeapKn3cCKU8FMhJjav1610209872470.png"
+                                                        },
+                                                        floor: {
+                                                            type: "number",
+                                                            example: 0
                                                         }
                                                     }
-                                                },
-                                                "name":{
-                                                    "type":"string",
-                                                    "example":"Barák"
-                                                },
-                                                "organizationId":{
-                                                    "type":"string",
-                                                    "example":"5ff9c17a236b1f7080d2fde0"
                                                 }
+                                            },
+                                            name: {
+                                                type: "string",
+                                                example: "Barák"
+                                            },
+                                            organizationId: {
+                                                type: "string",
+                                                example: "5ff9c17a236b1f7080d2fde0"
                                             }
                                         }
                                     }
+                                }
                             }
                         }
                     }
@@ -122,43 +120,44 @@ module.exports = {
                         content: {
                             "application/json": {
                                 schema: {
-                                    "type":"object",
-                                    "properties":{
-                                        "_id":{
-                                            "type":"string",
-                                            "example":"5ff9da5f236b1f7080d2fdeb"
+                                    type: "object",
+                                    properties: {
+                                        _id: {
+                                            type: "string",
+                                            example: "5ff9da5f236b1f7080d2fdeb"
                                         },
-                                        "floors":{
-                                            "type":"array",
-                                            "items":{
-                                                "type":"object",
-                                                "properties":{
-                                                    "_id":{
-                                                        "type":"string",
-                                                        "example":"5ff9da5f236b1f7080d2fdec"
+                                        floors: {
+                                            type: "array",
+                                            items: {
+                                                type: "object",
+                                                properties: {
+                                                    _id: {
+                                                        type: "string",
+                                                        example: "5ff9da5f236b1f7080d2fdec"
                                                     },
-                                                    "name":{
-                                                        "type":"string",
-                                                        "example":"přízemí"
+                                                    name: {
+                                                        type: "string",
+                                                        example: "přízemí"
                                                     },
-                                                    "image":{
-                                                        "type":"string",
-                                                        "example":"https://img-wifi.puhony.eu/plans/OEgBLNGTxvXkX0HCaIq3ZWeapKn3cCKU8FMhJjav1610209872470.png"
+                                                    image: {
+                                                        type: "string",
+                                                        example:
+                                                            "https://img-wifi.puhony.eu/plans/OEgBLNGTxvXkX0HCaIq3ZWeapKn3cCKU8FMhJjav1610209872470.png"
                                                     },
-                                                    "floor":{
-                                                        "type":"number",
-                                                        "example":0
+                                                    floor: {
+                                                        type: "number",
+                                                        example: 0
                                                     }
                                                 }
                                             }
                                         },
-                                        "name":{
-                                            "type":"string",
-                                            "example":"Barák"
+                                        name: {
+                                            type: "string",
+                                            example: "Barák"
                                         },
-                                        "organizationId":{
-                                            "type":"string",
-                                            "example":"5ff9c17a236b1f7080d2fde0"
+                                        organizationId: {
+                                            type: "string",
+                                            example: "5ff9c17a236b1f7080d2fde0"
                                         }
                                     }
                                 }
@@ -170,6 +169,6 @@ module.exports = {
             delete: {
                 tags: ["Plans"]
             }
-        },
+        }
     }
 }
