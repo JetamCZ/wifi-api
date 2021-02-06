@@ -169,7 +169,7 @@ class LocalizationController {
 
     async populateDeviceNames(localization) {
         for (const device of localization.devices) {
-            const dev = await DeviceController.getDeviceByMac(device.mac, localization.organizationId))
+            const dev = await DeviceController.getDeviceByMac(device.mac, localization.organizationId)
             device.name = dev?.name || ""
             device._id = dev?._id || ""
         }
