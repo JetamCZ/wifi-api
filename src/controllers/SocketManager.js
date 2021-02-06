@@ -9,7 +9,15 @@ class SocketManager {
     }
 
     init(httpServer) {
-        const io = socketIo(httpServer)
+        const io = socketIo(httpServer, {
+            transport : ['websocket'],
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        })
+
+        console.log("SOCKET server started")
 
         io.on("connection", async (socket) => {
             socket.emit("handshake", "Welcome")
