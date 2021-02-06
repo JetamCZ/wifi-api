@@ -57,5 +57,10 @@ module.exports = {
         get: {
             tags: ["Localization"]
         }
+    },
+    "/history/beacons": {
+        get: {
+            tags: ["History"]
+        }
     }
 }

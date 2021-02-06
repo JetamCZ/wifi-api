@@ -6,7 +6,7 @@ const fs = require("fs")
 const endpoints = require("./endpointsToAutoSwag")
 
 const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZjljMWQwMjM2YjFmNzA4MGQyZmRlMiIsImVtYWlsIjoiZEBkIiwibmFtZSI6IkthcmVsIE5vdsOhayJ9LCJvcmdhbml6YXRpb24iOnsiX2lkIjoiNWZmOWMxN2EyMzZiMWY3MDgwZDJmZGUwIiwibmFtZSI6IkRFTFRBIFPFoElFIn0sImlhdCI6MTYxMjM1NjMxMSwiZXhwIjoxNjEyNDQyNzExfQ.tKcWqQ2br1e4sNhh3DvWGpFV2-W64BCC9cg4sypX26o"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZjljMWQwMjM2YjFmNzA4MGQyZmRlMiIsImVtYWlsIjoiZEBkIiwibmFtZSI6IkthcmVsIE5vdsOhayJ9LCJvcmdhbml6YXRpb24iOnsiX2lkIjoiNWZmOWMxN2EyMzZiMWY3MDgwZDJmZGUwIiwibmFtZSI6IkRFTFRBIFPFoElFIn0sImlhdCI6MTYxMjE5MDk1OSwiZXhwIjoxNjEzMDU0OTU5fQ.-d7WwVHf-KHUXY59moSiHm_FfwNA4Q0NqHQugiCsiPE"
 
 const replacePaths = {
     "/localization/{id}": "/localization/5ffcc2946270ec2da06d653e",

@@ -19,6 +19,8 @@ const CacheSchema = require("./schema/CacheSchema")
 const RoomSchema = require("./schema/RoomSchema")
 const RegistrationKeySchema = require("./schema/RegistrationKeySchema")
 
+const HistoryBeaconSchema = require("./schema/HistoryBeaconSchema")
+
 class DB {
     constructor() {
         this.models = {}
@@ -73,6 +75,7 @@ class DB {
         this.models.Cache = mongoose.model("Cache", CacheSchema)
         this.models.Room = mongoose.model("Room", RoomSchema)
         this.models.RegistrationKey = mongoose.model("RegistrationKey", RegistrationKeySchema)
+        this.models.HistoryBeacon = mongoose.model("HistoryBeacon", HistoryBeaconSchema)
     }
 
     getModel(collectionName) {

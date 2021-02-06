@@ -9,6 +9,7 @@
         "start": "node src/app.js",
         "format": "prettier --write .",
         "runComputing": "node src/computingNode.js",
+        "runHistory": "node src/historyNode.js",
         "runAutoSwag": "node src/autoSwagger/app.js"
     },
     "author": "",
