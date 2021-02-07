@@ -15,7 +15,7 @@ class HistoryController {
         const beacons = await this.beaconModel.find().lean()
 
         const activityThreshold = new Date()
-        activityThreshold.setSeconds(activityThreshold.getSeconds() - 30)
+        activityThreshold.setSeconds(activityThreshold.getSeconds() - 60)
 
         for (const orgBeacon of orgBeacons) {
             const beaconActive = beacons.find(b => b.deviceKey === orgBeacon.deviceKey)?.lastSeenDate >= activityThreshold ?? false
@@ -27,7 +27,7 @@ class HistoryController {
     async saveStateBeacon(orgBeaconId, online) {
         const lastHistory = await this.beaconHistoryModel.findOne({orgBeaconId}, {}, {sort: {"date": 1}}).lean()
 
-        if ((!lastHistory && online) || (lastHistory?.active !== online)) {
+        if ((!lastHistory && online) || (lastHistory?.active.toString() !== online.toString())) {
             await new this.beaconHistoryModel({
                 orgBeaconId,
                 date: new Date(),
@@ -194,6 +194,8 @@ class HistoryController {
             delete action._id
             delete action.orgBeaconId
         }
+
+        return groups
 
         for (const [key, value] of Object.entries(groups)) {
             const events = []

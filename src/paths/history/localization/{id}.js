@@ -10,7 +10,7 @@ module.exports = {
             return
         }
 
-        const history = await HistoryController.getLocalizationHistory(req.params.id)
+        const history = await HistoryController.getLocalizationHistory(req.params.id, true)
         res.json(history)
     }
 }

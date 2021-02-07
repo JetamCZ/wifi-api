@@ -36,6 +36,15 @@ class PlanController {
 
         return this.model.findByIdAndDelete(id)
     }
+
+    async rename(id, name) {
+        const plan = await this.model.findById(id)
+
+        plan.name = name
+        plan.save()
+
+        return plan
+    }
 }
 
 module.exports = new PlanController()

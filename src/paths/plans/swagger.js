@@ -166,6 +166,26 @@ module.exports = {
                     }
                 }
             },
+            put: {
+                tags: ["Plans"],
+                requestBody: {
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                required: ["name"],
+                                properties: {
+                                    name: {
+                                        type: "string",
+                                        example: "Barák"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             delete: {
                 tags: ["Plans"]
             }

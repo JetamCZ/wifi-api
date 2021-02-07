@@ -12,6 +12,18 @@ module.exports = {
 
         res.json(plan)
     },
+    put: async (req, res) => {
+        const plan = await PlanController.getById(req.params.id)
+
+        if (req.user.organization._id !== plan.organizationId) {
+            res.status(403).send()
+            return
+        }
+
+        await PlanController.rename(req.params.id, req.body.name)
+
+        res.json(plan)
+    },
     delete: async (req, res) => {
         const plan = await PlanController.getById(req.params.id)
 

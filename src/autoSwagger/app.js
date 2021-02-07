@@ -43,7 +43,17 @@ try {
             }
         }
 
-        fs.writeFileSync("./src/autoSwagger/done.json", JSON.stringify(endpoints, null, " "))
+        let text = JSON.stringify(endpoints, null, " ")
+
+        /*
+        text = text.toString()
+            .replaceAll(/..\:..\:..\:..\:..\:../gm, "00:00:00:00:00:00")
+
+        console.log(typeof text)
+
+         */
+
+        fs.writeFileSync("./src/autoSwagger/done.json", text)
     })
 } catch (err) {
     console.log("ERR", err)
