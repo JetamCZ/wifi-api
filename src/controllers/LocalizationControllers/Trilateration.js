@@ -41,7 +41,7 @@ class Trilateration {
         if (intersection.length >= 2) {
             for (const point of intersection) {
                 if (this.isPointInCircle([data[2].x, data[2].y, data[2].distance * dx], point)) {
-                    return point
+                    return [...point, dx]
                 }
             }
         }
