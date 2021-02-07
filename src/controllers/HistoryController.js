@@ -194,9 +194,7 @@ class HistoryController {
             delete action._id
             delete action.orgBeaconId
         }
-
-        return groups
-
+        
         for (const [key, value] of Object.entries(groups)) {
             const events = []
             let event = null
