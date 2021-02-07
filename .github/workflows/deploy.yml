@@ -27,3 +27,4 @@ jobs:
             cd /root/wifi-api/src
             pm2 restart main_app --update-env
             pm2 restart com_app --update-env
+            pm2 restart history_app --update-env
