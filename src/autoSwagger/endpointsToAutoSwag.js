@@ -62,5 +62,21 @@ module.exports = {
         get: {
             tags: ["History"]
         }
+    },
+    "/history/localization/{id}": {
+        parameters: [
+            {
+                name: "id",
+                in: "path",
+                required: true,
+                description: "",
+                schema: {
+                    type: "string"
+                }
+            }
+        ],
+        get: {
+            tags: ["History"]
+        }
     }
 }

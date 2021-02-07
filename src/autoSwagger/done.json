@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1612625516621
+          "example": 1612657702494
          }
         }
        }
@@ -93,7 +93,7 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-05T07:45:21.021Z"
+             "example": "2021-02-07T00:28:16.866Z"
             }
            }
           }
@@ -113,11 +113,11 @@
             },
             "x": {
              "type": "number",
-             "example": 449.04315711050174
+             "example": 480.677403852736
             },
             "y": {
              "type": "number",
-             "example": 571.5625
+             "example": 73.125
             },
             "f": {
              "type": "number",
@@ -128,7 +128,7 @@
              "properties": {
               "fingerPrint": {
                "type": "string",
-               "example": "5ffd92cb78813f498c2dedd6"
+               "example": "601823f23480fc1dbe5ddc01"
               }
              }
             },
@@ -139,11 +139,11 @@
               "properties": {
                "_id": {
                 "type": "string",
-                "example": "600ccda768a68a5798f6e8dc"
+                "example": "600ccd7b68a68a5798f6e8db"
                },
                "name": {
                 "type": "string",
-                "example": "WC"
+                "example": "Pokoj 2"
                },
                "f": {
                 "type": "number",
@@ -151,7 +151,7 @@
                },
                "color": {
                 "type": "string",
-                "example": "#253791"
+                "example": "#886C25"
                }
               }
              }
@@ -159,6 +159,10 @@
             "name": {
              "type": "string",
              "example": "Matěj NTB"
+            },
+            "_id": {
+             "type": "string",
+             "example": "5ffd51c84411eb4b040df3f9"
             }
            }
           }
@@ -171,11 +175,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 248
+              "example": 221
              },
              "date": {
               "type": "string",
-              "example": "2021-02-06T15:31:55.416Z"
+              "example": "2021-02-07T00:28:20.393Z"
              }
             }
            }
@@ -338,11 +342,11 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-06T15:31:56.200Z"
+             "example": "2021-02-07T00:28:21.652Z"
             },
             "rssi": {
              "type": "number",
-             "example": -78
+             "example": -74
             }
            }
           }
@@ -387,7 +391,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5fe774af8f014f2cfc317825"
+             "example": "5ff9d9ef236b1f7080d2fde7"
             },
             "deviceKey": {
              "type": "string",
@@ -395,21 +399,112 @@
             },
             "organizationId": {
              "type": "string",
-             "example": "5fe3ea6abdb5d55da09d709b"
+             "example": "5ff9c17a236b1f7080d2fde0"
             },
             "name": {
              "type": "string",
-             "example": "Ant4"
+             "example": "Pokoj"
             },
             "desc": {
              "type": "string",
-             "example": "Pokojíček"
+             "example": ""
             }
            }
           },
           "activities": {
            "type": "array",
-           "items": {}
+           "items": {
+            "type": "object",
+            "properties": {
+             "from": {
+              "type": "string",
+              "example": "2021-02-06T16:26:00.284Z"
+             },
+             "to": {
+              "type": "string",
+              "example": "2021-02-07T00:28:23.022Z"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "/history/localization/{id}": {
+  "parameters": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "description": "",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ],
+  "get": {
+   "tags": [
+    "History"
+   ],
+   "responses": {
+    "200": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "deviceId": {
+           "type": "string",
+           "example": "5ffd51c84411eb4b040df3f9"
+          },
+          "device": {
+           "type": "object",
+           "properties": {
+            "_id": {
+             "type": "string",
+             "example": "5ffd51c84411eb4b040df3f9"
+            },
+            "organizationId": {
+             "type": "string",
+             "example": "5ff9c17a236b1f7080d2fde0"
+            },
+            "userId": {
+             "type": "string",
+             "example": "5ff9c1d0236b1f7080d2fde2"
+            },
+            "mac": {
+             "type": "string",
+             "example": "58:00:e3:ca:99:01"
+            },
+            "name": {
+             "type": "string",
+             "example": "Matěj NTB"
+            }
+           }
+          },
+          "activities": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "from": {
+              "type": "string",
+              "example": "2021-02-06T23:35:00.257Z"
+             },
+             "to": {
+              "type": "string",
+              "example": "2021-02-07T00:00:20.297Z"
+             }
+            }
+           }
           }
          }
         }

@@ -10,7 +10,8 @@ const token =
 
 const replacePaths = {
     "/localization/{id}": "/localization/5ffcc2946270ec2da06d653e",
-    "/devices/{id}": "/devices/5ffd51c84411eb4b040df3f9"
+    "/devices/{id}": "/devices/5ffd51c84411eb4b040df3f9",
+    "/history/localization/{id}": "/history/localization/5ffcc2946270ec2da06d653e"
 }
 
 try {

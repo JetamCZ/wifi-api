@@ -7,6 +7,11 @@ module.exports = {
 
         const localization = await CacheController.get(id)
 
+        if (req.user.organization._id !== localization.organizationId) {
+            res.status(403).send()
+            return
+        }
+
         res.json(localization)
     },
     delete: async (req, res) => {

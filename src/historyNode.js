@@ -20,4 +20,17 @@ const beaconsHistory = new CronJob(
     "Europe/Prague"
 )
 
+const localizationHistory = new CronJob(
+    "*/5 * * * * *",
+    async () => {
+        console.log('History localizations mapping', new Date().toString())
+
+        await HistoryController.mapLocalizations()
+    },
+    null,
+    true,
+    "Europe/Prague"
+)
+
+localizationHistory.start()
 beaconsHistory.start()

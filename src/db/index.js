@@ -20,6 +20,7 @@ const RoomSchema = require("./schema/RoomSchema")
 const RegistrationKeySchema = require("./schema/RegistrationKeySchema")
 
 const HistoryBeaconSchema = require("./schema/HistoryBeaconSchema")
+const HistoryLocalizationDeviceSchema = require("./schema/HistoryLocalizationDeviceSchema")
 
 class DB {
     constructor() {
@@ -76,6 +77,7 @@ class DB {
         this.models.Room = mongoose.model("Room", RoomSchema)
         this.models.RegistrationKey = mongoose.model("RegistrationKey", RegistrationKeySchema)
         this.models.HistoryBeacon = mongoose.model("HistoryBeacon", HistoryBeaconSchema)
+        this.models.HistoryLocalizationDevice = mongoose.model("HistoryLocalizationDevice", HistoryLocalizationDeviceSchema)
     }
 
     getModel(collectionName) {
