@@ -24,7 +24,7 @@ class Trilateration {
         return points.filter((p) => p[0] && p[1])
     }
 
-    calc(data, dx, maxDx = 50) {
+    calc(data, dx, maxDx = 50, step = 0.1) {
         if (data.length < 2) {
             return null
         }
@@ -47,7 +47,7 @@ class Trilateration {
             }
         }
 
-        return this.calc(data, dx + 0.3, maxDx)
+        return this.calc(data, dx + step, maxDx, step)
     }
 
     async localize(localization, localizationData) {
@@ -67,7 +67,7 @@ class Trilateration {
             }
 
             if (deviceCalcData.length > 2) {
-                const pos = this.calc(deviceCalcData, 1, 500)
+                const pos = this.calc(deviceCalcData, 1, 1000, 0.3)
 
                 if (pos) {
                     successfullyLocatedDevices.push({
