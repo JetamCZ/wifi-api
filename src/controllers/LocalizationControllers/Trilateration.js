@@ -67,7 +67,7 @@ class Trilateration {
             }
 
             if (deviceCalcData.length > 2) {
-                const pos = this.calc(deviceCalcData, 1, 200)
+                const pos = this.calc(deviceCalcData, 1, 500)
 
                 if (pos) {
                     successfullyLocatedDevices.push({
