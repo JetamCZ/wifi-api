@@ -30,6 +30,7 @@ class Trilateration {
         }
 
         if (dx >= maxDx) {
+            console.log("MAX DX calc: "+dx)
             return null
         }
 
@@ -66,7 +67,7 @@ class Trilateration {
             }
 
             if (deviceCalcData.length > 2) {
-                const pos = this.calc(deviceCalcData, 1, 50)
+                const pos = this.calc(deviceCalcData, 1, 200)
 
                 if (pos) {
                     successfullyLocatedDevices.push({
