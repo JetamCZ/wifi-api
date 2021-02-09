@@ -25,10 +25,12 @@ class HistoryController {
     }
 
     async saveStateBeacon(orgBeaconId, online) {
-        const lastHistory = await this.beaconHistoryModel.findOne({orgBeaconId}, {}, {sort: {"date": 1}}).lean()
+        const lastHistory = await this.beaconHistoryModel.findOne({orgBeaconId}, {}, {sort: {"date": -1}}).lean()
+
+        console.log(lastHistory, online)
 
         if ((!lastHistory && online) || (lastHistory?.active.toString() !== online.toString())) {
-            await new this.beaconHistoryModel({
+            const a = await new this.beaconHistoryModel({
                 orgBeaconId,
                 date: new Date(),
                 active: online
@@ -85,7 +87,7 @@ class HistoryController {
         const lastHistory = await this.localizationDeviceHistoryModel.findOne({
             localizationId,
             deviceId
-        }, {}, {sort: {"date": 1}}).lean()
+        }, {}, {sort: {"date": -1}}).lean()
 
         if ((!lastHistory) && active || (lastHistory?.active !== active) || (JSON.stringify(lastHistory?.rooms ?? []) !== JSON.stringify(rooms))) {
             new this.localizationDeviceHistoryModel({
@@ -194,7 +196,7 @@ class HistoryController {
             delete action._id
             delete action.orgBeaconId
         }
-        
+
         for (const [key, value] of Object.entries(groups)) {
             const events = []
             let event = null

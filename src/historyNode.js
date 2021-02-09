@@ -21,7 +21,7 @@ const beaconsHistory = new CronJob(
 )
 
 const localizationHistory = new CronJob(
-    "*/5 * * * * *",
+    "0,30 * * * * *",
     async () => {
         console.log('History localizations mapping', new Date().toString())
 
