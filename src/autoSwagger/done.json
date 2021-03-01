@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1612657702494
+          "example": 1614631482564
          }
         }
        }
@@ -48,11 +48,11 @@
         "properties": {
          "_id": {
           "type": "string",
-          "example": "5ffcc2946270ec2da06d653e"
+          "example": "60206249b697774c304f8318"
          },
          "name": {
           "type": "string",
-          "example": "Demo"
+          "example": "Dům - fingerprinty"
          },
          "type": {
           "type": "string",
@@ -65,7 +65,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5ffcc2946270ec2da06d653f"
+             "example": "60206249b697774c304f8319"
             },
             "deviceKey": {
              "type": "string",
@@ -73,11 +73,11 @@
             },
             "x": {
              "type": "number",
-             "example": 716
+             "example": 896
             },
             "y": {
              "type": "number",
-             "example": 60
+             "example": 512
             },
             "f": {
              "type": "number",
@@ -85,22 +85,22 @@
             },
             "name": {
              "type": "string",
-             "example": "Pokoj"
+             "example": "ANT-4"
             },
             "desc": {
              "type": "string",
-             "example": ""
+             "example": "Velká pracovna"
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-07T00:28:16.866Z"
+             "example": "2021-03-01T20:44:39.942Z"
             }
            }
           }
          },
          "organizationId": {
           "type": "string",
-          "example": "5ff9c17a236b1f7080d2fde0"
+          "example": "601fef860bf79818d8da346d"
          },
          "devices": {
           "type": "array",
@@ -113,11 +113,11 @@
             },
             "x": {
              "type": "number",
-             "example": 480.677403852736
+             "example": 805
             },
             "y": {
              "type": "number",
-             "example": 73.125
+             "example": 179
             },
             "f": {
              "type": "number",
@@ -128,7 +128,7 @@
              "properties": {
               "fingerPrint": {
                "type": "string",
-               "example": "601823f23480fc1dbe5ddc01"
+               "example": "60207477829f5b04a8f8f5c8"
               }
              }
             },
@@ -139,11 +139,11 @@
               "properties": {
                "_id": {
                 "type": "string",
-                "example": "600ccd7b68a68a5798f6e8db"
+                "example": "602074aa829f5b04a8f8f5cd"
                },
                "name": {
                 "type": "string",
-                "example": "Pokoj 2"
+                "example": "Pokojíček"
                },
                "f": {
                 "type": "number",
@@ -151,18 +151,18 @@
                },
                "color": {
                 "type": "string",
-                "example": "#886C25"
+                "example": "#91C268"
                }
               }
              }
             },
             "name": {
              "type": "string",
-             "example": "Matěj NTB"
+             "example": "NTB"
             },
             "_id": {
              "type": "string",
-             "example": "5ffd51c84411eb4b040df3f9"
+             "example": "6020ecfb080fc40564914fb0"
             }
            }
           }
@@ -175,11 +175,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 221
+              "example": 335
              },
              "date": {
               "type": "string",
-              "example": "2021-02-07T00:28:20.393Z"
+              "example": "2021-03-01T20:44:40.368Z"
              }
             }
            }
@@ -190,7 +190,7 @@
           "properties": {
            "_id": {
             "type": "string",
-            "example": "5ff9da5f236b1f7080d2fdeb"
+            "example": "601ff0cb0bf79818d8da3473"
            },
            "floors": {
             "type": "array",
@@ -199,15 +199,15 @@
              "properties": {
               "_id": {
                "type": "string",
-               "example": "5ff9da5f236b1f7080d2fdec"
+               "example": "601ff0cb0bf79818d8da3474"
               },
               "name": {
                "type": "string",
-               "example": "přízemí"
+               "example": "Přízemí"
               },
               "image": {
                "type": "string",
-               "example": "https://img-wifi.puhony.eu/plans/OEgBLNGTxvXkX0HCaIq3ZWeapKn3cCKU8FMhJjav1610209872470.png"
+               "example": "https://img-wifi.puhony.eu/plans/6ejNK3NcBTj7KPKVXcg1jOrDtxS52sunY8YnymLi1612705972205.png"
               },
               "floor": {
                "type": "number",
@@ -218,11 +218,11 @@
            },
            "name": {
             "type": "string",
-            "example": "Barák"
+            "example": "Dům"
            },
            "organizationId": {
             "type": "string",
-            "example": "5ff9c17a236b1f7080d2fde0"
+            "example": "601fef860bf79818d8da346d"
            }
           }
          },
@@ -233,7 +233,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "600c802f64f8c313fc539163"
+             "example": "602074aa829f5b04a8f8f5cd"
             },
             "polygon": {
              "type": "array",
@@ -241,17 +241,13 @@
               "type": "array",
               "items": {
                "type": "number",
-               "example": 688
+               "example": 685.5
               }
              }
             },
             "name": {
              "type": "string",
-             "example": "Pokoj"
-            },
-            "localizationId": {
-             "type": "string",
-             "example": "5ffcc2946270ec2da06d653e"
+             "example": "Pokojíček"
             },
             "f": {
              "type": "number",
@@ -259,7 +255,11 @@
             },
             "color": {
              "type": "string",
-             "example": "#32a852"
+             "example": "#91C268"
+            },
+            "localizationId": {
+             "type": "string",
+             "example": "60206249b697774c304f8318"
             }
            }
           }
@@ -297,15 +297,15 @@
         "properties": {
          "_id": {
           "type": "string",
-          "example": "5ffd51c84411eb4b040df3f9"
+          "example": "6020ecfb080fc40564914fb0"
          },
          "organizationId": {
           "type": "string",
-          "example": "5ff9c17a236b1f7080d2fde0"
+          "example": "601fef860bf79818d8da346d"
          },
          "userId": {
           "type": "string",
-          "example": "5ff9c1d0236b1f7080d2fde2"
+          "example": "601fef960bf79818d8da346f"
          },
          "mac": {
           "type": "string",
@@ -313,7 +313,7 @@
          },
          "name": {
           "type": "string",
-          "example": "Matěj NTB"
+          "example": "NTB"
          },
          "meets": {
           "type": "array",
@@ -322,31 +322,31 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5ff9da1a236b1f7080d2fdea"
+             "example": "601fefd70bf79818d8da3470"
             },
             "deviceKey": {
              "type": "string",
-             "example": "00000000298f6e70"
+             "example": "00000000c05f6f00"
             },
             "organizationId": {
              "type": "string",
-             "example": "5ff9c17a236b1f7080d2fde0"
+             "example": "601fef860bf79818d8da346d"
             },
             "name": {
              "type": "string",
-             "example": "Chodba"
+             "example": "ANT-4"
             },
             "desc": {
              "type": "string",
-             "example": ""
+             "example": "Velká pracovna"
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-02-07T00:28:21.652Z"
+             "example": "2021-03-01T20:44:39.942Z"
             },
             "rssi": {
              "type": "number",
-             "example": -74
+             "example": -71
             }
            }
           }
@@ -356,11 +356,11 @@
           "properties": {
            "name": {
             "type": "string",
-            "example": "Karel Novák"
+            "example": "Matěj Půhoný"
            },
            "email": {
             "type": "string",
-            "example": "d@d"
+            "example": "m@m"
            }
           }
          }
@@ -391,7 +391,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5ff9d9ef236b1f7080d2fde7"
+             "example": "601fefd70bf79818d8da3470"
             },
             "deviceKey": {
              "type": "string",
@@ -399,15 +399,15 @@
             },
             "organizationId": {
              "type": "string",
-             "example": "5ff9c17a236b1f7080d2fde0"
+             "example": "601fef860bf79818d8da346d"
             },
             "name": {
              "type": "string",
-             "example": "Pokoj"
+             "example": "ANT-4"
             },
             "desc": {
              "type": "string",
-             "example": ""
+             "example": "Velká pracovna"
             }
            }
           },
@@ -418,11 +418,11 @@
             "properties": {
              "from": {
               "type": "string",
-              "example": "2021-02-06T16:26:00.284Z"
+              "example": "2021-02-09T10:19:30.142Z"
              },
              "to": {
               "type": "string",
-              "example": "2021-02-07T00:28:23.022Z"
+              "example": "2021-02-09T16:50:30.087Z"
              }
             }
            }
@@ -463,30 +463,30 @@
          "properties": {
           "deviceId": {
            "type": "string",
-           "example": "5ffd51c84411eb4b040df3f9"
+           "example": "601ff22a0bf79818d8da347b"
           },
           "device": {
            "type": "object",
            "properties": {
             "_id": {
              "type": "string",
-             "example": "5ffd51c84411eb4b040df3f9"
+             "example": "601ff22a0bf79818d8da347b"
             },
             "organizationId": {
              "type": "string",
-             "example": "5ff9c17a236b1f7080d2fde0"
+             "example": "601fef860bf79818d8da346d"
             },
             "userId": {
              "type": "string",
-             "example": "5ff9c1d0236b1f7080d2fde2"
+             "example": "601fef960bf79818d8da346f"
             },
             "mac": {
              "type": "string",
-             "example": "58:00:e3:ca:99:01"
+             "example": "f2:ec:8d:a5:22:dc"
             },
             "name": {
              "type": "string",
-             "example": "Matěj NTB"
+             "example": "Matěj telefon - WTF"
             }
            }
           },
@@ -497,12 +497,188 @@
             "properties": {
              "from": {
               "type": "string",
-              "example": "2021-02-06T23:35:00.257Z"
+              "example": "2021-02-15T19:35:31.653Z"
+             },
+             "rooms": {
+              "type": "array",
+              "items": {}
              },
              "to": {
               "type": "string",
-              "example": "2021-02-07T00:00:20.297Z"
+              "example": "2021-02-15T19:36:00.672Z"
              }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "/organization/now": {
+  "get": {
+   "tags": [
+    "Organization"
+   ],
+   "responses": {
+    "200": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "warnings": {
+          "type": "array",
+          "items": {}
+         },
+         "people": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "_id": {
+             "type": "string",
+             "example": "601fef960bf79818d8da346f"
+            },
+            "name": {
+             "type": "string",
+             "example": "Matěj Půhoný"
+            },
+            "email": {
+             "type": "string",
+             "example": "m@m"
+            },
+            "lastSeen": {
+             "type": "string",
+             "example": "2021-03-01T20:44:49.659Z"
+            }
+           }
+          }
+         },
+         "localizations": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "_id": {
+             "type": "string",
+             "example": "60206249b697774c304f8318"
+            },
+            "name": {
+             "type": "string",
+             "example": "Dům - fingerprinty"
+            },
+            "deviceCount": {
+             "type": "number",
+             "example": 2
+            }
+           }
+          }
+         },
+         "localizations2": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "_id": {
+             "type": "string",
+             "example": "601ff111320df036e49d3cec"
+            },
+            "uniqueId": {
+             "type": "string",
+             "example": "loc.601fef860bf79818d8da346d.601ff10f0bf79818d8da347a"
+            },
+            "data": {
+             "type": "object",
+             "properties": {
+              "_id": {
+               "type": "string",
+               "example": "601ff10f0bf79818d8da347a"
+              },
+              "name": {
+               "type": "string",
+               "example": "Where is Waldo?"
+              },
+              "type": {
+               "type": "string",
+               "example": "WALDO"
+              },
+              "beacons": {
+               "type": "array",
+               "items": {}
+              },
+              "organizationId": {
+               "type": "string",
+               "example": "601fef860bf79818d8da346d"
+              },
+              "devices": {
+               "type": "array",
+               "items": {}
+              },
+              "customLocalizationData": {
+               "type": "object",
+               "properties": {
+                "caclulatingTimes": {
+                 "type": "object",
+                 "properties": {
+                  "total": {
+                   "type": "number",
+                   "example": 122
+                  },
+                  "date": {
+                   "type": "string",
+                   "example": "2021-02-07T16:41:45.139Z"
+                  }
+                 }
+                }
+               }
+              },
+              "plan": {
+               "type": "object",
+               "properties": {
+                "floors": {
+                 "type": "array",
+                 "items": {
+                  "type": "object",
+                  "properties": {
+                   "floor": {
+                    "type": "number",
+                    "example": 1
+                   },
+                   "image": {
+                    "type": "string",
+                    "example": "/img/waldo/4d38b9260a5a8b8a67e3caa8da7b68a5.jpg"
+                   },
+                   "name": {
+                    "type": "string",
+                    "example": "Fruits"
+                   }
+                  }
+                 }
+                },
+                "name": {
+                 "type": "string",
+                 "example": "Where is waldo?"
+                },
+                "organizationId": {
+                 "type": "string",
+                 "example": "?"
+                }
+               }
+              },
+              "rooms": {
+               "type": "array",
+               "items": {}
+              }
+             }
+            },
+            "date": {
+             "type": "string",
+             "example": "2021-02-07T16:41:45.140Z"
             }
            }
           }
