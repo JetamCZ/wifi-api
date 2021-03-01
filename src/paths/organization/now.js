@@ -1,11 +1,13 @@
 const OrganizationController = require("../../controllers/OrganizationController")
 const Time = require("../../utils/Time")
 const LocalizationController = require("../../controllers/LocalizationController")
+const PeopleHelperController = require("../../controllers/PeopleHelperController")
+
 
 module.exports = {
     get: async (req, res) => {
         const beacons = await OrganizationController.getOrgBeacons(req.user.organization._id);
-        const people = await OrganizationController.getAllPeopleWithLastActivity(req.user.organization._id)
+        const people = await PeopleHelperController.getAllPeopleWithLastActivity(req.user.organization._id)
         const localizations = await LocalizationController.getLocalizaionsOverallInfo(req.user.organization._id)
 
         const data = {

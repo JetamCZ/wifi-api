@@ -1,10 +1,10 @@
 const OrganizationController = require("../../controllers/OrganizationController")
-const UserController = require("../../controllers/UserController")
+const PeopleHelperController = require("../../controllers/PeopleHelperController")
 const Random = require("../../utils/Random")
 
 module.exports = {
     get: async (req, res) => {
-        const people = await OrganizationController.getAllPeopleWithLastActivity(req.user.organization._id)
+        const people = await PeopleHelperController.getAllPeopleWithLastActivity(req.user.organization._id)
 
         res.json(people)
     }
