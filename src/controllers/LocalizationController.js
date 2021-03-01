@@ -250,6 +250,11 @@ class LocalizationController {
             await CacheController.store("loc." + localization.organizationId + "." + localization._id, localization)
         }
     }
+
+    async getLocalizaionsOverallInfo(orgId) {
+        const modelCache = db.getModel("Cache")
+        return modelCache.find({"data.organizationId": orgId}).lean()
+    }
 }
 
 const PlanController = require("./PlanController")

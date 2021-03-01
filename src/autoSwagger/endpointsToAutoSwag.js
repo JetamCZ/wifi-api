@@ -78,5 +78,10 @@ module.exports = {
         get: {
             tags: ["History"]
         }
+    },
+    "/organization/now": {
+        get: {
+            tags: ["Organization"]
+        }
     }
 }

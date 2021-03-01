@@ -118,6 +118,20 @@ class OrganizationController {
         return await userModel.find({ organizationId: orgId }).lean()
     }
 
+    async getAllPeopleWithLastActivity(orgId) {
+        const people = await this.getAllPeople(orgId)
+
+        for (let i = 0; i < people.length; i++) {
+            people[i].lastSeen = await UserController.getLastActivity(people[i]._id)
+
+            delete people[i].settings
+            delete people[i].password
+            delete people[i].organizationId
+        }
+
+        return people
+    }
+
     async connectBeaconToOrg(deviceKey, organizationId, name, desc) {
         const orgBeaconModel = db.getModel("OrgBeacon")
 
@@ -207,5 +221,8 @@ class OrganizationController {
         return await deviceModel.find({ organizationId: id }).lean()
     }
 }
+
+
+const UserController = require("./UserController")
 
 module.exports = new OrganizationController()

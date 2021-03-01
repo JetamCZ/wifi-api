@@ -237,8 +237,56 @@ class HistoryController {
         return result
     }
 
+    async cleanupOldData() {
+        const dateLocs = new Date()
+        dateLocs.setDate(dateLocs.getDate() - 14)
+        await db.getModel("HistoryLocalizationDevice").deleteMany({ date: { $lt: dateLocs } })
 
-    //TODO Remove old data (after 2 months)
+        const dateHistory = new Date()
+        dateHistory.setDate(dateLocs.getDate() - 45)
+        await db.getModel("HistoryBeacon").deleteMany({ date: { $lt: dateHistory } })
+    }
+
+    async removeRoomsData() {
+        const cleanDate = new Date()
+        cleanDate.setDate(cleanDate.getDate() - 7)
+
+        //Clear data rooms
+        await db.getModel("HistoryLocalizationDevice").updateMany({
+            date: {$lt: cleanDate},
+        }, {
+            rooms: []
+        })
+
+        const devices = await db.getModel("HistoryLocalizationDevice").find({
+            date: {$lt: cleanDate},
+        })
+
+        const uniqueDevices = [...new Set(devices.map(item => item.deviceId))];
+
+        for(const device of uniqueDevices) {
+            const deviceBeacons = devices.filter(dev => dev.deviceId === device)
+            const deviceUniqueLoc = [...new Set(deviceBeacons.map(item => item.localizationId))];
+
+            for(const loc of deviceUniqueLoc) {
+                const data = devices.filter(dev => dev.deviceId === device && dev.localizationId === loc)
+
+                let last = null
+                let c = 0
+                for (const block of data) {
+                    if(last && last?.active === block.active) {
+                        block.delete()
+                        c++
+                    }
+
+                    last = block
+                }
+
+                console.log({loc, device, "count": c})
+            }
+        }
+    }
+
 }
 
 const LocalizationController = require("./LocalizationController")
