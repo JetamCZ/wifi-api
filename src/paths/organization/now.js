@@ -18,7 +18,6 @@ module.exports = {
                     deviceCount: loc.data.devices.length ?? 0
                 }
             }),
-            "localizations2": localizations
         }
 
         data.warnings =beacons.filter(b => Time.diffInSeconds(b.lastSeenDate) > 60).map(b => "Maják \""+b.name+ "\" ("+b.desc+") je offline!")

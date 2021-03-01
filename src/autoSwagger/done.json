@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1614631482564
+          "example": 1614634041354
          }
         }
        }
@@ -93,7 +93,7 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-03-01T20:44:39.942Z"
+             "example": "2021-03-01T21:27:15.676Z"
             }
            }
           }
@@ -109,7 +109,7 @@
            "properties": {
             "mac": {
              "type": "string",
-             "example": "58:00:e3:ca:99:01"
+             "example": "f2:ec:8d:a5:22:dc"
             },
             "x": {
              "type": "number",
@@ -158,11 +158,11 @@
             },
             "name": {
              "type": "string",
-             "example": "NTB"
+             "example": "Matěj telefon - WTF"
             },
             "_id": {
              "type": "string",
-             "example": "6020ecfb080fc40564914fb0"
+             "example": "601ff22a0bf79818d8da347b"
             }
            }
           }
@@ -175,11 +175,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 335
+              "example": 447
              },
              "date": {
               "type": "string",
-              "example": "2021-03-01T20:44:40.368Z"
+              "example": "2021-03-01T21:27:20.613Z"
              }
             }
            }
@@ -342,11 +342,11 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-03-01T20:44:39.942Z"
+             "example": "2021-03-01T21:27:20.506Z"
             },
             "rssi": {
              "type": "number",
-             "example": -71
+             "example": -66
             }
            }
           }
@@ -554,7 +554,7 @@
             },
             "lastSeen": {
              "type": "string",
-             "example": "2021-03-01T20:44:49.659Z"
+             "example": "2021-03-01T21:27:26.957Z"
             }
            }
           }
@@ -575,110 +575,6 @@
             "deviceCount": {
              "type": "number",
              "example": 2
-            }
-           }
-          }
-         },
-         "localizations2": {
-          "type": "array",
-          "items": {
-           "type": "object",
-           "properties": {
-            "_id": {
-             "type": "string",
-             "example": "601ff111320df036e49d3cec"
-            },
-            "uniqueId": {
-             "type": "string",
-             "example": "loc.601fef860bf79818d8da346d.601ff10f0bf79818d8da347a"
-            },
-            "data": {
-             "type": "object",
-             "properties": {
-              "_id": {
-               "type": "string",
-               "example": "601ff10f0bf79818d8da347a"
-              },
-              "name": {
-               "type": "string",
-               "example": "Where is Waldo?"
-              },
-              "type": {
-               "type": "string",
-               "example": "WALDO"
-              },
-              "beacons": {
-               "type": "array",
-               "items": {}
-              },
-              "organizationId": {
-               "type": "string",
-               "example": "601fef860bf79818d8da346d"
-              },
-              "devices": {
-               "type": "array",
-               "items": {}
-              },
-              "customLocalizationData": {
-               "type": "object",
-               "properties": {
-                "caclulatingTimes": {
-                 "type": "object",
-                 "properties": {
-                  "total": {
-                   "type": "number",
-                   "example": 122
-                  },
-                  "date": {
-                   "type": "string",
-                   "example": "2021-02-07T16:41:45.139Z"
-                  }
-                 }
-                }
-               }
-              },
-              "plan": {
-               "type": "object",
-               "properties": {
-                "floors": {
-                 "type": "array",
-                 "items": {
-                  "type": "object",
-                  "properties": {
-                   "floor": {
-                    "type": "number",
-                    "example": 1
-                   },
-                   "image": {
-                    "type": "string",
-                    "example": "/img/waldo/4d38b9260a5a8b8a67e3caa8da7b68a5.jpg"
-                   },
-                   "name": {
-                    "type": "string",
-                    "example": "Fruits"
-                   }
-                  }
-                 }
-                },
-                "name": {
-                 "type": "string",
-                 "example": "Where is waldo?"
-                },
-                "organizationId": {
-                 "type": "string",
-                 "example": "?"
-                }
-               }
-              },
-              "rooms": {
-               "type": "array",
-               "items": {}
-              }
-             }
-            },
-            "date": {
-             "type": "string",
-             "example": "2021-02-07T16:41:45.140Z"
             }
            }
           }
