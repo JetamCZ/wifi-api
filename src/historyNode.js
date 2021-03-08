@@ -32,11 +32,9 @@ const localizationHistory = new CronJob(
     "Europe/Prague"
 )
 
-const localizationHistory = new CronJob(
+const localizationHistoryCleanup = new CronJob(
     "0 */10 * * * *",
     async () => {
-        console.log('Minute now')
-
         await HistoryController.cleanupOldData()
         await HistoryController.removeRoomsData()
     },
@@ -47,4 +45,4 @@ const localizationHistory = new CronJob(
 
 localizationHistory.start()
 beaconsHistory.start()
-localizationHistory.start()
+localizationHistoryCleanup.start()
