@@ -16,9 +16,13 @@ class OrganizationController {
         }).save()
 
         return code
-    }
+    };
 
     async validKey(key) {
+        if(key === process.env.DELTA_KEY) {
+            return true
+        }
+
         const regKey = await this.regKeyModel.findOne({ code: key, is_used: false }).lean()
 
         if (!regKey) {
@@ -27,10 +31,14 @@ class OrganizationController {
     }
 
     async useRegKey(key, orgId) {
-        const regKey = await this.regKeyModel.findOne({ code: key, is_used: false }).lean()
+        if(key === process.env.DELTA_KEY) {
+            return true
+        } else {
+            const regKey = await this.regKeyModel.findOne({ code: key, is_used: false }).lean()
 
-        if (!regKey) {
-            throw new Error("INVALID_REG_KEY")
+            if (!regKey) {
+                throw new Error("INVALID_REG_KEY")
+            }
         }
 
         await this.regKeyModel.findOneAndUpdate(
