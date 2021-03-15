@@ -3,7 +3,8 @@ const { Schema } = require("mongoose")
 const UserSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        min: 3
     },
     organizationId: {
         type: String,
@@ -11,7 +12,9 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        min: 3
     },
     password: {
         type: String,

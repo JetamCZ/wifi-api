@@ -70,6 +70,10 @@ class UserController {
         return user
     }
 
+    async updateUser(id, name, email) {
+        const user = await this.model.findByIdAndUpdate(id, {email, name})
+    }
+
     async removeUser(id) {
         return await this.model.findByIdAndRemove(id)
     }
