@@ -13,7 +13,7 @@
         "properties": {
          "time": {
           "type": "number",
-          "example": 1614634041354
+          "example": 1615795174082
          }
         }
        }
@@ -48,7 +48,7 @@
         "properties": {
          "_id": {
           "type": "string",
-          "example": "60206249b697774c304f8318"
+          "example": "000000000000000000000000"
          },
          "name": {
           "type": "string",
@@ -65,7 +65,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "60206249b697774c304f8319"
+             "example": "000000000000000000000000"
             },
             "deviceKey": {
              "type": "string",
@@ -93,14 +93,14 @@
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-03-01T21:27:15.676Z"
+             "example": "2021-03-08T07:22:34.147Z"
             }
            }
           }
          },
          "organizationId": {
           "type": "string",
-          "example": "601fef860bf79818d8da346d"
+          "example": "000000000000000000000000"
          },
          "devices": {
           "type": "array",
@@ -109,7 +109,7 @@
            "properties": {
             "mac": {
              "type": "string",
-             "example": "f2:ec:8d:a5:22:dc"
+             "example": "00:00:00:00:00:00"
             },
             "x": {
              "type": "number",
@@ -128,7 +128,7 @@
              "properties": {
               "fingerPrint": {
                "type": "string",
-               "example": "60207477829f5b04a8f8f5c8"
+               "example": "000000000000000000000000"
               }
              }
             },
@@ -139,7 +139,7 @@
               "properties": {
                "_id": {
                 "type": "string",
-                "example": "602074aa829f5b04a8f8f5cd"
+                "example": "000000000000000000000000"
                },
                "name": {
                 "type": "string",
@@ -162,7 +162,7 @@
             },
             "_id": {
              "type": "string",
-             "example": "601ff22a0bf79818d8da347b"
+             "example": "000000000000000000000000"
             }
            }
           }
@@ -175,11 +175,11 @@
             "properties": {
              "total": {
               "type": "number",
-              "example": 447
+              "example": 490
              },
              "date": {
               "type": "string",
-              "example": "2021-03-01T21:27:20.613Z"
+              "example": "2021-03-08T07:22:35.526Z"
              }
             }
            }
@@ -190,7 +190,7 @@
           "properties": {
            "_id": {
             "type": "string",
-            "example": "601ff0cb0bf79818d8da3473"
+            "example": "000000000000000000000000"
            },
            "floors": {
             "type": "array",
@@ -199,7 +199,7 @@
              "properties": {
               "_id": {
                "type": "string",
-               "example": "601ff0cb0bf79818d8da3474"
+               "example": "000000000000000000000000"
               },
               "name": {
                "type": "string",
@@ -222,7 +222,7 @@
            },
            "organizationId": {
             "type": "string",
-            "example": "601fef860bf79818d8da346d"
+            "example": "000000000000000000000000"
            }
           }
          },
@@ -233,7 +233,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "602074aa829f5b04a8f8f5cd"
+             "example": "000000000000000000000000"
             },
             "polygon": {
              "type": "array",
@@ -259,7 +259,7 @@
             },
             "localizationId": {
              "type": "string",
-             "example": "60206249b697774c304f8318"
+             "example": "000000000000000000000000"
             }
            }
           }
@@ -297,19 +297,19 @@
         "properties": {
          "_id": {
           "type": "string",
-          "example": "6020ecfb080fc40564914fb0"
+          "example": "000000000000000000000000"
          },
          "organizationId": {
           "type": "string",
-          "example": "601fef860bf79818d8da346d"
+          "example": "000000000000000000000000"
          },
          "userId": {
           "type": "string",
-          "example": "601fef960bf79818d8da346f"
+          "example": "000000000000000000000000"
          },
          "mac": {
           "type": "string",
-          "example": "58:00:e3:ca:99:01"
+          "example": "00:00:00:00:00:00"
          },
          "name": {
           "type": "string",
@@ -322,31 +322,31 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "601fefd70bf79818d8da3470"
+             "example": "000000000000000000000000"
             },
             "deviceKey": {
              "type": "string",
-             "example": "00000000c05f6f00"
+             "example": "00000000889cd176"
             },
             "organizationId": {
              "type": "string",
-             "example": "601fef860bf79818d8da346d"
+             "example": "000000000000000000000000"
             },
             "name": {
              "type": "string",
-             "example": "ANT-4"
+             "example": "ANT-2"
             },
             "desc": {
              "type": "string",
-             "example": "Velká pracovna"
+             "example": "Chodba - nahoře"
             },
             "lastSeenDate": {
              "type": "string",
-             "example": "2021-03-01T21:27:20.506Z"
+             "example": "2021-03-15T07:59:31.507Z"
             },
             "rssi": {
              "type": "number",
-             "example": -66
+             "example": -86
             }
            }
           }
@@ -391,23 +391,23 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "601fefd70bf79818d8da3470"
+             "example": "000000000000000000000000"
             },
             "deviceKey": {
              "type": "string",
-             "example": "00000000c05f6f00"
+             "example": "00000000889cd176"
             },
             "organizationId": {
              "type": "string",
-             "example": "601fef860bf79818d8da346d"
+             "example": "000000000000000000000000"
             },
             "name": {
              "type": "string",
-             "example": "ANT-4"
+             "example": "ANT-2"
             },
             "desc": {
              "type": "string",
-             "example": "Velká pracovna"
+             "example": "Chodba - nahoře"
             }
            }
           },
@@ -418,11 +418,11 @@
             "properties": {
              "from": {
               "type": "string",
-              "example": "2021-02-09T10:19:30.142Z"
+              "example": "2021-02-12T00:01:30.085Z"
              },
              "to": {
               "type": "string",
-              "example": "2021-02-09T16:50:30.087Z"
+              "example": "2021-02-12T04:49:30.171Z"
              }
             }
            }
@@ -463,26 +463,26 @@
          "properties": {
           "deviceId": {
            "type": "string",
-           "example": "601ff22a0bf79818d8da347b"
+           "example": "000000000000000000000000"
           },
           "device": {
            "type": "object",
            "properties": {
             "_id": {
              "type": "string",
-             "example": "601ff22a0bf79818d8da347b"
+             "example": "000000000000000000000000"
             },
             "organizationId": {
              "type": "string",
-             "example": "601fef860bf79818d8da346d"
+             "example": "000000000000000000000000"
             },
             "userId": {
              "type": "string",
-             "example": "601fef960bf79818d8da346f"
+             "example": "000000000000000000000000"
             },
             "mac": {
              "type": "string",
-             "example": "f2:ec:8d:a5:22:dc"
+             "example": "00:00:00:00:00:00"
             },
             "name": {
              "type": "string",
@@ -497,15 +497,35 @@
             "properties": {
              "from": {
               "type": "string",
-              "example": "2021-02-15T19:35:31.653Z"
+              "example": "2021-03-08T11:41:02.223Z"
              },
              "rooms": {
               "type": "array",
-              "items": {}
+              "items": {
+               "type": "object",
+               "properties": {
+                "_id": {
+                 "type": "string",
+                 "example": "000000000000000000000000"
+                },
+                "name": {
+                 "type": "string",
+                 "example": "Pokojíček"
+                },
+                "f": {
+                 "type": "number",
+                 "example": 1
+                },
+                "color": {
+                 "type": "string",
+                 "example": "#680C6C"
+                }
+               }
+              }
              },
              "to": {
               "type": "string",
-              "example": "2021-02-15T19:36:00.672Z"
+              "example": "2021-03-08T13:47:00.523Z"
              }
             }
            }
@@ -542,7 +562,7 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "601fef960bf79818d8da346f"
+             "example": "000000000000000000000000"
             },
             "name": {
              "type": "string",
@@ -554,7 +574,7 @@
             },
             "lastSeen": {
              "type": "string",
-             "example": "2021-03-01T21:27:26.957Z"
+             "example": "2021-03-15T07:59:44.707Z"
             }
            }
           }
@@ -566,11 +586,11 @@
            "properties": {
             "_id": {
              "type": "string",
-             "example": "60206249b697774c304f8318"
+             "example": "000000000000000000000000"
             },
             "name": {
              "type": "string",
-             "example": "Dům - fingerprinty"
+             "example": "Dům - trilaterace"
             },
             "deviceCount": {
              "type": "number",

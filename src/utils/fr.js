@@ -43,7 +43,19 @@ class fr {
 
         mainFile.paths = { ...mainFile.paths, ...fl }
 
-        return mainFile
+        return this.censor(mainFile)
+    }
+
+    censor(object) {
+        let censor = JSON.stringify(object)
+
+        //Mac adressy
+        censor = censor.replace(/([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})/g, "00:00:00:00:00:00")
+
+        //Id objektů
+        censor = censor.replace(/([0-9a-f]{24})/g, "000000000000000000000000")
+
+        return JSON.parse(censor)
     }
 }
 
