@@ -13,4 +13,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Branch ${GITHUB_REF##*/}
-          echo test, and deploy your project.
+          echo PR ${GITHUB_REF}
