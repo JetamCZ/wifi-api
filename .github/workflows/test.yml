@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
-          echo Branch ${GITHUB_REF##*/}
+          echo Branch ${{ github.event.pull_request }}
           echo PR ${{ github.event.pull_request.number }}
