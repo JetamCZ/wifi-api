@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -13,4 +11,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Branch ${GITHUB_REF##*/}
-          echo PR ${GITHUB_REF}
+          echo PR ${{ github.event.pull_request.number }}
