@@ -215,10 +215,27 @@ class LocalizationController {
 
         switch (localization.type) {
             case "NEAREST_FINGERPRINT":
+                const fingerPrintss = await NearestFingerPrint._getFingerPrints(localization._id)
+
+                localization.customLocalizationData.fingerPrintsCount = fingerPrintss.length
+
                 localization.devices = (await NearestFingerPrint.localize(localization._id, localizationDevices)) || []
                 break
             case "TRILATERATION":
+
                 localization.devices = (await Trilateration.localize(localization, localizationDevices)) || []
+                break
+            case "BRAIN":
+                const fingerPrints = await NearestFingerPrint._getFingerPrints(localization._id)
+
+                localization.customLocalizationData.fingerPrintsCount = fingerPrints.length
+
+                if(localization.customLocalizationData.fingerPrintsCount <= 10) {
+                    localization.devices = (await NearestFingerPrint.localize(localization._id, localizationDevices)) || []
+                } else {
+                    localization.devices = (await Brain.localize(localization._id, localizationDevices, fingerPrints)) || []
+                }
+
                 break
             default:
                 break
@@ -264,5 +281,6 @@ const CacheController = require("./CacheController")
 const RoomController = require("./RoomController")
 const NearestFingerPrint = require("./LocalizationControllers/NearestFingerPrint")
 const Trilateration = require("./LocalizationControllers/Trilateration")
+const Brain = require("./LocalizationControllers/Brain")
 
 module.exports = new LocalizationController()

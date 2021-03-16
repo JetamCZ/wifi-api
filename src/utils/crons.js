@@ -37,7 +37,7 @@ class Crons {
 
                 await LocalizationController.localizeAll(socket)
 
-                console.log("Computed all locations: " + parseInt(new Date() - start) + "ms.")
+                console.log("Computed all locations: " + parseInt(new Date() - start) + "ms. ("+(parseFloat((new Date() - start)/1000))+"s)")
                 calcTime.set(parseInt(new Date() - start))
             },
             null,

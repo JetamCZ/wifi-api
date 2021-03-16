@@ -1,4 +1,5 @@
 const trilateration = require("node-trilateration")
+const distanceMapping = require("../../consts/distanceMapping")
 
 class Trilateration {
     isPointInCircle(circle, point) {
@@ -59,15 +60,19 @@ class Trilateration {
             for (const meet of value.meets) {
                 const beacon = localization.beacons.find((b) => b.deviceKey === meet.deviceKey)
 
+                const d = beacon.y +36.611
+
                 deviceCalcData.push({
                     x: beacon.x,
                     y: beacon.y,
-                    distance: meet.rssi * -1
+                    distance: distanceMapping[meet.rssi] ?? 0.10 //meet.rssi * -1
                 })
             }
 
+            deviceCalcData.sort((a, b) => (a.distance > b.distance) ? 1 : -1)
+
             if (deviceCalcData.length > 2) {
-                const pos = this.calc(deviceCalcData, 1, 1000, 0.3)
+                const pos = this.calc(deviceCalcData, 1, 10000, 5)
 
                 if (pos) {
                     successfullyLocatedDevices.push({

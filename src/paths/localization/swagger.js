@@ -17,6 +17,7 @@ module.exports = {
                 },
                 type: {
                     type: "string",
+                    enum: ["NEAREST_FINGERPRINT", "TRILATERATION", "BRAIN"],
                     example: "NEAREST_FINGERPRINT"
                 }
             }
