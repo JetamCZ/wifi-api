@@ -1,4 +1,4 @@
-const brain = require("brain.js")
+const brain = require("../../lib/brain-browser.min")
 
 class Brain {
     async localize(localizationId, localizationData, localizationFingerPrints) {
