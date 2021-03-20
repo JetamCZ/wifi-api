@@ -27,14 +27,14 @@ class NearestFingerPrint {
                     if (dataSignal) {
                         const diff = Math.abs(dataSignal.rssi - printmeet.rssi)
                         //console.log(printmeet.deviceKey, dataSignal.rssi, printmeet.rssi, diff)
-                        print.sum += diff
+                        print.sum += diff * Math.abs(dataSignal.rssi / 10)
                         print.count += 1
                     } else {
                         //console.log(printmeet.deviceKey, "?", printmeet.rssi, "?")
                     }
                 })
 
-                print.sum = print.sum / print.count
+                print.sum = print.sum
                 //console.log(print, value)
             })
 

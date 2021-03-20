@@ -46,6 +46,8 @@ class Trilateration {
                     return [...point, dx]
                 }
             }
+
+            return [...intersection[0], dx]
         }
 
         return this.calc(data, dx + step, maxDx, step)
@@ -65,7 +67,7 @@ class Trilateration {
                 deviceCalcData.push({
                     x: beacon.x,
                     y: beacon.y,
-                    distance: distanceMapping[meet.rssi] ?? 0.10 //meet.rssi * -1
+                    distance: distanceMapping[meet.rssi] * 0.1 ?? 0.10 //meet.rssi * -1
                 })
             }
 
