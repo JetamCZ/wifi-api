@@ -46,7 +46,9 @@ class Trilateration {
                     return [...point, dx]
                 }
             }
+        }
 
+        if(intersection.length >= 1 && dx+step >= maxDx) {
             return [...intersection[0], dx]
         }
 
