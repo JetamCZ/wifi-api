@@ -31,7 +31,7 @@ class Trilateration {
         }
 
         if (dx >= maxDx) {
-            console.log("MAX DX calc: "+dx)
+            console.log("MAX DX calc: "+dx, data)
             return null
         }
 
@@ -64,19 +64,21 @@ class Trilateration {
             for (const meet of value.meets) {
                 const beacon = localization.beacons.find((b) => b.deviceKey === meet.deviceKey)
 
-                const d = beacon.y +36.611
-
-                deviceCalcData.push({
+                deviceCalcData.length < 3 && deviceCalcData.push({
                     x: beacon.x,
                     y: beacon.y,
-                    distance: distanceMapping[meet.rssi] * 0.1 ?? 0.10 //meet.rssi * -1
+                    rssi: meet.rssi,
+                    distance: distanceMapping[meet.rssi] > 0 ? distanceMapping[meet.rssi] : 120
                 })
             }
+
+
+            console.log(deviceCalcData)
 
             deviceCalcData.sort((a, b) => (a.distance > b.distance) ? 1 : -1)
 
             if (deviceCalcData.length > 2) {
-                const pos = this.calc(deviceCalcData, 1, 10000, 5)
+                const pos = this.calc(deviceCalcData, 1, 1000, 1)
 
                 if (pos) {
                     successfullyLocatedDevices.push({
