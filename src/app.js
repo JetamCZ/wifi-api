@@ -64,7 +64,7 @@ app.use("/auth/create-org", apiLimiter)
 app.use((req, res, next) => {
     req.token = req.headers["authorization"] ? req.headers["authorization"].split(" ")[1] : ""
 
-    if (!req.path.includes("/auth") && req.path !== "/beacon" && req.path !== "/data") {
+    if (!req.path.includes("/auth") && req.path !== "/beacon" && req.path !== "/data" && req.path !== "/ping") {
         if (req.token) {
             try {
                 const data = jwt.verify(req.token, process.env.JWT_TOKEN)

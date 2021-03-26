@@ -30,7 +30,7 @@ class Crons {
 
         //Cron Every 5seconds
         const localizationComputes = new CronJob(
-            "*/5 * * * * *",
+            process.env.COMPUTING_CRON,
             async () => {
                 const start = new Date()
                 console.log("CRON", "Compute locations")

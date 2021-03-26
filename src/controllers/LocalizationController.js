@@ -265,6 +265,8 @@ class LocalizationController {
             })
 
             await CacheController.store("loc." + localization.organizationId + "." + localization._id, localization)
+
+            //const oldCache = await CacheController.get("loc." + localization.organizationId + "." + localization._id)
         }
     }
 

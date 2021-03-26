@@ -72,8 +72,7 @@ class Trilateration {
                 })
             }
 
-
-            console.log(deviceCalcData)
+            //console.log(deviceCalcData)
 
             deviceCalcData.sort((a, b) => (a.distance > b.distance) ? 1 : -1)
 

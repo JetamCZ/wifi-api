@@ -27,7 +27,7 @@ class HistoryController {
     async saveStateBeacon(orgBeaconId, online) {
         const lastHistory = await this.beaconHistoryModel.findOne({orgBeaconId}, {}, {sort: {"date": -1}}).lean()
 
-        console.log(lastHistory, online)
+        //console.log(lastHistory, online)
 
         if ((!lastHistory && online) || (lastHistory?.active.toString() !== online.toString())) {
             const a = await new this.beaconHistoryModel({
@@ -239,17 +239,17 @@ class HistoryController {
 
     async cleanupOldData() {
         const dateLocs = new Date()
-        dateLocs.setDate(dateLocs.getDate() - 14)
+        dateLocs.setDate(dateLocs.getDate() - 8)
         await db.getModel("HistoryLocalizationDevice").deleteMany({ date: { $lt: dateLocs } })
 
         const dateHistory = new Date()
-        dateHistory.setDate(dateLocs.getDate() - 45)
+        dateHistory.setDate(dateLocs.getDate() - 14)
         await db.getModel("HistoryBeacon").deleteMany({ date: { $lt: dateHistory } })
     }
 
     async removeRoomsData() {
         const cleanDate = new Date()
-        cleanDate.setDate(cleanDate.getDate() - 7)
+        cleanDate.setDate(cleanDate.getDate() - 2)
 
         //Clear data rooms
         await db.getModel("HistoryLocalizationDevice").updateMany({
@@ -282,7 +282,7 @@ class HistoryController {
                     last = block
                 }
 
-                console.log({loc, device, "count": c})
+                //console.log({loc, device, "count": c})
             }
         }
     }
